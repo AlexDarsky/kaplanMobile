@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface kaplanViewController : UIViewController
+@interface kaplanViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+{
+    
+}
+@property (strong, nonatomic) IBOutlet UIView *MainView;
+@property (strong, nonatomic) IBOutlet UITableView *NavBackTableView;
+@property (strong, nonatomic) IBOutlet UIScrollView *NewsScrollView;
 
 @end

@@ -9,6 +9,11 @@
 #import "kaplanViewController.h"
 
 @interface kaplanViewController ()
+{
+    UIViewController *currentMainController;
+    BOOL carTableShowing;
+    CGFloat currentTranslate;
+}
 
 @end
 

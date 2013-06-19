@@ -18,6 +18,12 @@
 		60A0DCB917724E7D004F6211 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A0DCB817724E7D004F6211 /* Default-568h@2x.png */; };
 		60A0DCBC17724E7D004F6211 /* kaplanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A0DCBB17724E7D004F6211 /* kaplanViewController.m */; };
 		60A0DCBF17724E7D004F6211 /* kaplanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A0DCBD17724E7D004F6211 /* kaplanViewController.xib */; };
+		60A0DCC91772555D004F6211 /* homepage1.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A0DCC51772555D004F6211 /* homepage1.png */; };
+		60A0DCCA1772555D004F6211 /* homepage2.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A0DCC61772555D004F6211 /* homepage2.png */; };
+		60A0DCCB1772555D004F6211 /* homepage3.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A0DCC71772555D004F6211 /* homepage3.png */; };
+		60A0DCCC1772555D004F6211 /* homepage4.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A0DCC81772555D004F6211 /* homepage4.png */; };
+		60A0DCD3177256F5004F6211 /* kaplanMingXiaoBoLanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A0DCD1177256F5004F6211 /* kaplanMingXiaoBoLanViewController.m */; };
+		60A0DCD4177256F5004F6211 /* kaplanMingXiaoBoLanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A0DCD2177256F5004F6211 /* kaplanMingXiaoBoLanViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +43,13 @@
 		60A0DCBA17724E7D004F6211 /* kaplanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = kaplanViewController.h; sourceTree = "<group>"; };
 		60A0DCBB17724E7D004F6211 /* kaplanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = kaplanViewController.m; sourceTree = "<group>"; };
 		60A0DCBE17724E7D004F6211 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/kaplanViewController.xib; sourceTree = "<group>"; };
+		60A0DCC51772555D004F6211 /* homepage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homepage1.png; sourceTree = "<group>"; };
+		60A0DCC61772555D004F6211 /* homepage2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homepage2.png; sourceTree = "<group>"; };
+		60A0DCC71772555D004F6211 /* homepage3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homepage3.png; sourceTree = "<group>"; };
+		60A0DCC81772555D004F6211 /* homepage4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homepage4.png; sourceTree = "<group>"; };
+		60A0DCD0177256F5004F6211 /* kaplanMingXiaoBoLanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kaplanMingXiaoBoLanViewController.h; sourceTree = "<group>"; };
+		60A0DCD1177256F5004F6211 /* kaplanMingXiaoBoLanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kaplanMingXiaoBoLanViewController.m; sourceTree = "<group>"; };
+		60A0DCD2177256F5004F6211 /* kaplanMingXiaoBoLanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanMingXiaoBoLanViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +96,11 @@
 		60A0DCA817724E7D004F6211 /* kaplanMobile */ = {
 			isa = PBXGroup;
 			children = (
+				60A0DCCF177256CB004F6211 /* SchoolsView */,
+				60A0DCCE177256B4004F6211 /* MainView */,
+				60A0DCCD17725562004F6211 /* ADImages */,
 				60A0DCB117724E7D004F6211 /* kaplanAppDelegate.h */,
 				60A0DCB217724E7D004F6211 /* kaplanAppDelegate.m */,
-				60A0DCBA17724E7D004F6211 /* kaplanViewController.h */,
-				60A0DCBB17724E7D004F6211 /* kaplanViewController.m */,
-				60A0DCBD17724E7D004F6211 /* kaplanViewController.xib */,
 				60A0DCA917724E7D004F6211 /* Supporting Files */,
 			);
 			path = kaplanMobile;
@@ -105,6 +118,37 @@
 				60A0DCB817724E7D004F6211 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		60A0DCCD17725562004F6211 /* ADImages */ = {
+			isa = PBXGroup;
+			children = (
+				60A0DCC51772555D004F6211 /* homepage1.png */,
+				60A0DCC61772555D004F6211 /* homepage2.png */,
+				60A0DCC71772555D004F6211 /* homepage3.png */,
+				60A0DCC81772555D004F6211 /* homepage4.png */,
+			);
+			name = ADImages;
+			sourceTree = "<group>";
+		};
+		60A0DCCE177256B4004F6211 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				60A0DCBA17724E7D004F6211 /* kaplanViewController.h */,
+				60A0DCBB17724E7D004F6211 /* kaplanViewController.m */,
+				60A0DCBD17724E7D004F6211 /* kaplanViewController.xib */,
+			);
+			name = MainView;
+			sourceTree = "<group>";
+		};
+		60A0DCCF177256CB004F6211 /* SchoolsView */ = {
+			isa = PBXGroup;
+			children = (
+				60A0DCD0177256F5004F6211 /* kaplanMingXiaoBoLanViewController.h */,
+				60A0DCD1177256F5004F6211 /* kaplanMingXiaoBoLanViewController.m */,
+				60A0DCD2177256F5004F6211 /* kaplanMingXiaoBoLanViewController.xib */,
+			);
+			name = SchoolsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +208,11 @@
 				60A0DCB717724E7D004F6211 /* Default@2x.png in Resources */,
 				60A0DCB917724E7D004F6211 /* Default-568h@2x.png in Resources */,
 				60A0DCBF17724E7D004F6211 /* kaplanViewController.xib in Resources */,
+				60A0DCC91772555D004F6211 /* homepage1.png in Resources */,
+				60A0DCCA1772555D004F6211 /* homepage2.png in Resources */,
+				60A0DCCB1772555D004F6211 /* homepage3.png in Resources */,
+				60A0DCCC1772555D004F6211 /* homepage4.png in Resources */,
+				60A0DCD4177256F5004F6211 /* kaplanMingXiaoBoLanViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +226,7 @@
 				60A0DCAF17724E7D004F6211 /* main.m in Sources */,
 				60A0DCB317724E7D004F6211 /* kaplanAppDelegate.m in Sources */,
 				60A0DCBC17724E7D004F6211 /* kaplanViewController.m in Sources */,
+				60A0DCD3177256F5004F6211 /* kaplanMingXiaoBoLanViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
