@@ -7,13 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SideBarSelectedDelegate.h"
+#import "DownloadManager.h"
 
-@interface kaplanViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface kaplanViewController : UIViewController<SideBarSelectDelegate,UIScrollViewDelegate,DownloadManagerDelegate>
 {
-    
+    UIScrollView *sv;
+    UIPageControl *page;
+    NSMutableArray *demoArray;
+    int TimeNum;
+    BOOL Tend;
+    DownloadManager *download;
 }
 @property (strong, nonatomic) IBOutlet UIView *MainView;
-@property (strong, nonatomic) IBOutlet UITableView *NavBackTableView;
-@property (strong, nonatomic) IBOutlet UIScrollView *NewsScrollView;
-
+@property (strong, nonatomic) IBOutlet UIView *NavBackView;
+@property (strong,nonatomic) UITabBarController *tabBarController;
+@property (strong,nonatomic) UINavigationController *evalutionNavCon;
+@property (strong,nonatomic) UINavigationController *SchoolsViewNavCon;
+@property (strong,nonatomic) UINavigationController *NewsViewNavCon;
+-(IBAction)showBackView:(id)sender;
 @end

@@ -16,8 +16,19 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[kaplanViewController alloc] initWithNibName:@"kaplanViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
+    if ([[UIScreen mainScreen] bounds].size.height>480.00) {
+        NSLog(@"the Device size is 这是四寸屏");
+        self.viewController = [[kaplanViewController alloc] initWithNibName:@"kaplanViewController_4" bundle:nil];
+        
+    }
+    else{
+        NSLog(@"the Device size is 这是3.5寸屏");
+        self.viewController = [[kaplanViewController alloc] initWithNibName:@"kaplanViewController" bundle:nil];
+
+    }
+    
+
+       self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
