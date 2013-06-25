@@ -14,6 +14,8 @@
 		60064BA71774F2C700CF850F /* kaplanNewsListChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60064BA51774F2C700CF850F /* kaplanNewsListChildViewController.m */; };
 		60064BA81774F2C700CF850F /* kaplanNewsListChildViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60064BA61774F2C700CF850F /* kaplanNewsListChildViewController.xib */; };
 		609783A617754058002D1D11 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 609783A517754058002D1D11 /* line.png */; };
+		609A7A321779233D00C106F2 /* kaplanSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 609A7A301779233D00C106F2 /* kaplanSettingViewController.m */; };
+		609A7A331779233D00C106F2 /* kaplanSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 609A7A311779233D00C106F2 /* kaplanSettingViewController.xib */; };
 		609F84F91773816A006903E4 /* btn_inquiry.png in Resources */ = {isa = PBXBuildFile; fileRef = 609F84F81773816A006903E4 /* btn_inquiry.png */; };
 		609F84FC1773876F006903E4 /* rolling_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 609F84FA1773876F006903E4 /* rolling_selected.png */; };
 		609F84FD1773876F006903E4 /* rolling_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 609F84FB1773876F006903E4 /* rolling_unselected.png */; };
@@ -82,6 +84,9 @@
 		60064BA51774F2C700CF850F /* kaplanNewsListChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kaplanNewsListChildViewController.m; sourceTree = "<group>"; };
 		60064BA61774F2C700CF850F /* kaplanNewsListChildViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanNewsListChildViewController.xib; sourceTree = "<group>"; };
 		609783A517754058002D1D11 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
+		609A7A2F1779233D00C106F2 /* kaplanSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kaplanSettingViewController.h; sourceTree = "<group>"; };
+		609A7A301779233D00C106F2 /* kaplanSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kaplanSettingViewController.m; sourceTree = "<group>"; };
+		609A7A311779233D00C106F2 /* kaplanSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanSettingViewController.xib; sourceTree = "<group>"; };
 		609F84F81773816A006903E4 /* btn_inquiry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_inquiry.png; sourceTree = "<group>"; };
 		609F84FA1773876F006903E4 /* rolling_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rolling_selected.png; sourceTree = "<group>"; };
 		609F84FB1773876F006903E4 /* rolling_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rolling_unselected.png; sourceTree = "<group>"; };
@@ -187,6 +192,16 @@
 			name = Child;
 			sourceTree = "<group>";
 		};
+		609A7A2E1779232200C106F2 /* SettingView */ = {
+			isa = PBXGroup;
+			children = (
+				609A7A2F1779233D00C106F2 /* kaplanSettingViewController.h */,
+				609A7A301779233D00C106F2 /* kaplanSettingViewController.m */,
+				609A7A311779233D00C106F2 /* kaplanSettingViewController.xib */,
+			);
+			name = SettingView;
+			sourceTree = "<group>";
+		};
 		609FD55517735B51006FEB45 /* Child */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,6 +283,7 @@
 		60A0DCA817724E7D004F6211 /* kaplanMobile */ = {
 			isa = PBXGroup;
 			children = (
+				609A7A2E1779232200C106F2 /* SettingView */,
 				60A028201774ABFB006399F6 /* FFViews */,
 				609FD55717735C16006FEB45 /* CommonResource */,
 				60A87BA117734C50008EDF24 /* Evalution */,
@@ -500,6 +516,7 @@
 				609783A617754058002D1D11 /* line.png in Resources */,
 				60A1BBFA1778A97300BAA50B /* btn_back2.png in Resources */,
 				60A1BBFC1778B09300BAA50B /* SanDomenico.jpg in Resources */,
+				609A7A331779233D00C106F2 /* kaplanSettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +540,7 @@
 				60064B9B1774E3E900CF850F /* kaplanMingXiaoBoLanViewController.m in Sources */,
 				60064BA11774E43000CF850F /* kaplanMingXiaoDetailPlanViewController.m in Sources */,
 				60064BA71774F2C700CF850F /* kaplanNewsListChildViewController.m in Sources */,
+				609A7A321779233D00C106F2 /* kaplanSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

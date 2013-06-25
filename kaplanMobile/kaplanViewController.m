@@ -15,6 +15,7 @@
 #import "kaplanEvalutionViewController.h"
 #import "DownloadManager.h"
 #import "NSURL+Download.h"
+#import "kaplanSettingViewController.h"
 #define kDocumentFolder					[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
 @class kaplanEvalutionViewController;
 @interface kaplanViewController ()
@@ -32,7 +33,7 @@
 static kaplanViewController *kaplanRootViewCon;
 @synthesize MainView,NavBackView;
 @synthesize tabBarController;
-@synthesize evalutionNavCon,SchoolsViewNavCon,NewsViewNavCon;
+@synthesize evalutionNavCon,SchoolsViewNavCon,NewsViewNavCon,kaplanSettingViewCon;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -62,17 +63,25 @@ static kaplanViewController *kaplanRootViewCon;
     
     kaplanSereachMainViewController *kaplanSereachMainViewCon=[[kaplanSereachMainViewController alloc] initWithNibName:@"kaplanSereachMainViewController" bundle:nil];
     kaplanSereachMainViewCon.SereachDelegate=self;
+    
     kaplanAboutViewController *kaplanAboutViewCon=[[kaplanAboutViewController alloc] initWithNibName:@"kaplanAboutViewController" bundle:nil];
+    
     kaplanNewsListViewController *kaplanNewsListViewCon=[[kaplanNewsListViewController alloc] initWithNibName:@"kaplanNewsListViewController" bundle:nil];
     kaplanNewsListViewCon.NewsListDelegate=self;
     NewsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanNewsListViewCon];
     NewsViewNavCon.navigationBarHidden=YES;
+    
     kaplanEvalutionViewController *kaplanEvalutionViewCon=[[kaplanEvalutionViewController alloc] initWithNibName:@"kaplanEvalutionViewController" bundle:nil];
     kaplanEvalutionViewCon.evalutionDelgate=self;
+    
     evalutionNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanEvalutionViewCon];
     evalutionNavCon.navigationBarHidden=YES;
+    
     kaplanMingXiaoBoLanViewController *kaplanMingXiaoBoLanViewCon = [[kaplanMingXiaoBoLanViewController alloc] initWithNibName:@"kaplanMingXiaoBoLanViewController" bundle:nil];
     kaplanMingXiaoBoLanViewCon.MingXiaoBoLanDelegate=self;
+    
+    kaplanSettingViewCon=[[kaplanSettingViewController alloc] initWithNibName:@"kaplanSettingViewController" bundle:nil];
+    kaplanSettingViewCon.settingDelegate=self;
     SchoolsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanMingXiaoBoLanViewCon];
     SchoolsViewNavCon.navigationBarHidden=YES;
     
@@ -81,6 +90,7 @@ static kaplanViewController *kaplanRootViewCon;
     if (kaplanRootViewCon) {
         kaplanRootViewCon=nil;
     }
+    self.tabBarController.navigationController.navigationBarHidden=YES;
     kaplanRootViewCon=self;
     backViewShowing=NO;
     self.backViewController=tabBarController;
@@ -260,8 +270,20 @@ static kaplanViewController *kaplanRootViewCon;
 }
 - (IBAction)turnToSetting:(id)sender
 {
+    CATransition *transition = [CATransition animation];
+    transition.duration = 1.0f;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = @"cube";
+    transition.subtype = kCATransitionFromRight;
+    transition.delegate = self;
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+    
+
+    [self.navigationController pushViewController:kaplanSettingViewCon animated:YES];
+        /*
     NSURL *url=[NSURL URLWithString:@"http://music.baidu.com/data/music/file?link=http://zhangmenshiting.baidu.com/data2/music/42911424/4015334072000320.mp3?xcode=36921517c1d51441e93e8edf4c3ce7091ae285f61fcd240c"];
 	[url downloadWithDelegate:self Title:@"目标文件" WithToFileName:[kDocumentFolder stringByAppendingPathComponent:@"2.mp3"]];
+     */
 
 }
 

@@ -26,6 +26,7 @@
         // Custom initialization
         self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_inside"]];
         CustomNavBar.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"topbar"]];
+        [self.CustomNavBar layer].shadowPath =[UIBezierPath bezierPathWithRect:self.CustomNavBar.bounds].CGPath;
         self.CustomNavBar.layer.shadowColor=[[UIColor blackColor] CGColor];
         self.CustomNavBar.layer.shadowOffset=CGSizeMake(0,0);
         self.CustomNavBar.layer.shadowRadius=10.0;

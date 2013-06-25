@@ -11,24 +11,26 @@
 #import "kaplanViewController.h"
 
 @implementation kaplanAppDelegate
+@synthesize mainNavagationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    kaplanViewController *kaplanViewCon=NULL;
     if ([[UIScreen mainScreen] bounds].size.height>480.00) {
         NSLog(@"the Device size is 这是四寸屏");
-        self.viewController = [[kaplanViewController alloc] initWithNibName:@"kaplanViewController_4" bundle:nil];
+       kaplanViewCon = [[kaplanViewController alloc] initWithNibName:@"kaplanViewController_4" bundle:nil];
         
     }
     else{
         NSLog(@"the Device size is 这是3.5寸屏");
-        self.viewController = [[kaplanViewController alloc] initWithNibName:@"kaplanViewController" bundle:nil];
+        kaplanViewCon = [[kaplanViewController alloc] initWithNibName:@"kaplanViewController" bundle:nil];
 
     }
-    
-
-       self.window.rootViewController = self.viewController;
+    mainNavagationController=[[UINavigationController alloc] initWithRootViewController:kaplanViewCon];
+    mainNavagationController.navigationBarHidden=YES;
+    self.window.rootViewController = self.mainNavagationController;
     [self.window makeKeyAndVisible];
     return YES;
 }

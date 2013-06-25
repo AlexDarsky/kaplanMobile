@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SideBarSelectedDelegate.h"
 #import "DownloadManager.h"
+#import "kaplanSettingViewController.h"
 
 @interface kaplanViewController : UIViewController<SideBarSelectDelegate,UIScrollViewDelegate,DownloadManagerDelegate>
 {
@@ -25,5 +26,6 @@
 @property (strong,nonatomic) UINavigationController *evalutionNavCon;
 @property (strong,nonatomic) UINavigationController *SchoolsViewNavCon;
 @property (strong,nonatomic) UINavigationController *NewsViewNavCon;
+@property (strong,nonatomic) kaplanSettingViewController *kaplanSettingViewCon;
 -(IBAction)showBackView:(id)sender;
 @end
