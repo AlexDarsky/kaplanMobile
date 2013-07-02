@@ -11,6 +11,7 @@
 
 @interface kaplanNewsListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 {
+    NSMutableArray *newsidArray;
     NSMutableArray *newsTitleArray;
     NSMutableArray *newsPreArray;
     NSMutableArray *newsImageArray;

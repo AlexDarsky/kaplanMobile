@@ -9,6 +9,7 @@
 #import "kaplanMingXiaoBoLanViewController.h"
 #import "kaplanViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "kaplanServerHelper.h"
 
 @interface kaplanMingXiaoBoLanViewController ()
 
@@ -34,29 +35,47 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.SearchView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bottom_bar.png"]];
-        self.SearchTextField.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"input"]];
-        self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_inside.png"]];
-        self.CustomNavBar.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"topbar"]];
-         [self.CustomNavBar layer].shadowPath =[UIBezierPath bezierPathWithRect:self.CustomNavBar.bounds].CGPath;
-        self.CustomNavBar.layer.shadowColor=[[UIColor blackColor] CGColor];
-        self.CustomNavBar.layer.shadowOffset=CGSizeMake(0,0);
-        self.CustomNavBar.layer.shadowRadius=10.0;
-        self.CustomNavBar.layer.shadowOpacity=1.0;
+
 
     }
     return self;
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES];
+    if ([schoolIDArray count]==0) {
+        kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+        NSArray *tmpArray=[[NSArray alloc] initWithArray:[serverHelper getSchoolListAtPage:1]];
+        for (NSDictionary *tmpDic in tmpArray) {
+            [schoolsArrayCH addObject:[tmpDic objectForKey:@"schoolCnName"]];
+            [schoolIDArray addObject:[tmpDic objectForKey:@"id"]];
+            [schoolArrayEN addObject:@"ENGLISH"];
+        }
+        [self.schoolsTableView reloadData];
+    }
+    
+}
 - (void)viewDidLoad
 {
-  
+      [super viewDidLoad];
     //self.searchView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bottom_bar.png"]];
     //self.searchFied.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"input"]];
-        schoolsArrayCH=[[NSMutableArray alloc] initWithObjects:@"贝勒大学",@"东北大学",@"福蒙特大学",@"玛瑞斯学院",@"斯蒂文斯理工学院",@"德保大学",nil];
-   
-    schoolArrayEN=[[NSMutableArray alloc] initWithObjects:@"abc",@"bcd",@"cde",@"abc",@"adf", @"deg",nil];
-    [super viewDidLoad];
+    schoolsArrayCH=[[NSMutableArray alloc] initWithCapacity:0];
+           self.SearchView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bottom_bar"]];
+    schoolArrayEN=[[NSMutableArray alloc] initWithCapacity:0];
+    schoolIDArray=[[NSMutableArray alloc] initWithCapacity:0];
+    self.SearchView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bottom_bar"]];
+    self.SearchTextField.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"input"]];
+    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_inside.png"]];
+    self.CustomNavBar.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"topbar"]];
+    [self.navigationController setNavigationBarHidden:YES];
+    
+    [self.CustomNavBar layer].shadowPath =[UIBezierPath bezierPathWithRect:self.CustomNavBar.bounds].CGPath;
+    self.CustomNavBar.layer.shadowColor=[[UIColor blackColor] CGColor];
+    self.CustomNavBar.layer.shadowOffset=CGSizeMake(0,0);
+    self.CustomNavBar.layer.shadowRadius=10.0;
+    self.CustomNavBar.layer.shadowOpacity=1.0;
+
    
 }
 
@@ -124,6 +143,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
       kaplanMingXiaoDetailPlanViewController *kdetailPlanViewController=[[kaplanMingXiaoDetailPlanViewController alloc] init];
+    
     [kdetailPlanViewController reloadSchoolDetail:nil withEN:nil withDes:nil withIcon:nil];
     [self.navigationController pushViewController:kdetailPlanViewController animated:YES];
     

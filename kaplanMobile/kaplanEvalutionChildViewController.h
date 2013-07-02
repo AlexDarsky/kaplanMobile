@@ -10,9 +10,8 @@
 
 @interface kaplanEvalutionChildViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
-    NSMutableArray *cityArray;
-    NSMutableArray *educationArray;
-    NSMutableArray *destinationArray;
+    NSMutableArray *nameArray;
+    NSMutableArray *IDArray;
     int selectMode;
 }
 @property (strong) id evalutionChildDelegate;

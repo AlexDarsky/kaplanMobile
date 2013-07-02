@@ -13,6 +13,7 @@
 {
     NSMutableArray *schoolsArrayCH;
     NSMutableArray *schoolArrayEN;
+    NSMutableArray *schoolIDArray;
 
 }
 @property (strong) id MingXiaoBoLanDelegate;

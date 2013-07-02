@@ -11,6 +11,7 @@
 @interface kaplanEvalutionViewController : UIViewController
 {
     kaplanEvalutionChildViewController *evalutionChildViewController;
+    int cityID,degreeID,countryID;
 }
 
 @property(strong) id evalutionDelgate;
@@ -23,7 +24,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *userNumber;
 
 - (IBAction)goToChildViewCon:(id)sender;
--(void)setCity:(NSString*)city;
--(void)setEducation:(NSString*)education;
--(void)setDestination:(NSString*)destination;
+-(void)setCity:(NSString*)city andID:(int)idNumber;
+-(void)setEducation:(NSString*)education andID:(int)idNumber;
+-(void)setDestination:(NSString*)destination andID:(int)idNumber;
 @end

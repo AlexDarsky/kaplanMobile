@@ -10,6 +10,8 @@
 #import "kaplanViewController.h"
 #import "kaplanNewsListChildViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SVProgressHUD.h"
+#import "kaplanServerHelper.h"
 
 @interface kaplanNewsListViewController ()
 
@@ -31,10 +33,9 @@
         self.CustomNavBar.layer.shadowOffset=CGSizeMake(0,0);
         self.CustomNavBar.layer.shadowRadius=10.0;
         self.CustomNavBar.layer.shadowOpacity=1.0;
-        newsTitleArray=[[NSMutableArray alloc] initWithObjects:@"习近平同团中央新一届领导班子成员集体谈话",@"我国婴幼儿奶粉将试行药店专柜销售",@"赵红霞受审哭求雷政富作证：两人最初有感情", nil];
-        newsPreArray=[[NSMutableArray alloc] initWithObjects:@"中共中央总书记、国家主席、中央军委主席习近平20日下午在中南海同团中央新一届领导班子成员集体谈话并发表重要讲话强调，代表广大青年，赢得广大青年，依靠广大青年，是我们党不断从胜利走向胜利的重要保证。",@"今年5月31日，婴幼儿奶粉问题上了国务院常务会议，并以国务院名义对提升国产婴幼儿配方奶粉的质量和安全做出了全面、具体部署。",@"重庆市渝北区法院20日开庭审理肖烨等6人利用不雅视频敲诈勒索案，因涉及个人隐私，法院对此案进行不公开审理。鉴于涉案人数众多、案情复杂，法院预计该案庭审两天。", nil];
+       
             }
-    newsImageArray=[[NSMutableArray alloc] initWithObjects:@"new1.jpg",@"",@"", nil];
+   
     return self;
 }
 
@@ -42,6 +43,35 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.navigationController setNavigationBarHidden:YES];
+    newsidArray=[[NSMutableArray alloc] initWithCapacity:0];
+    newsTitleArray=[[NSMutableArray alloc] initWithCapacity:0];
+    newsPreArray=[[NSMutableArray alloc]initWithCapacity:0];
+    newsImageArray=[[NSMutableArray alloc] initWithCapacity:0];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES];
+    if ([newsTitleArray count]<=0) {
+        // [SVProgressHUD showWithStatus:@"载入中，请稍等"];
+        kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+        NSArray *loadArray=[[NSArray alloc] initWithArray:[serverHelper LoadListAtPage:1]];
+        for (NSDictionary *newInfo in loadArray) {
+            [newsidArray addObject:[newInfo objectForKey:@"id"]];
+            [newsTitleArray addObject:[newInfo objectForKey:@"title"]];
+            if ([newInfo objectForKey:@"intro"]!=nil) {
+                [newsPreArray addObject:[newInfo objectForKey:@"intro"]]; 
+            }else
+            {NSLog(@"intro NULL");
+            [newsPreArray addObject:@"NULL"];
+            }
+            [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
+        }
+        [self.NewsTableView beginUpdates];
+        [self.NewsTableView reloadData];
+        [self.NewsTableView endUpdates];
+       // [SVProgressHUD dismissWithSuccess:@"读取完成"];
+    }
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -72,10 +102,15 @@
     newTitle.text=[newsTitleArray objectAtIndex:indexPath.row];
     [newTitle setNumberOfLines:0];
     [cell.contentView addSubview:newTitle];
-    if ([newsImageArray objectAtIndex:indexPath.row]!=@"") {
+    if (![[newsImageArray objectAtIndex:indexPath.row]isEqualToString:@""]) {
         UIImageView *newImg=[[UIImageView alloc] initWithFrame:CGRectMake(40, 35, 66, 45)];
-       [ newImg setImage:[UIImage imageNamed:[newsImageArray objectAtIndex:indexPath.row]]];
+        NSString *url=[newsImageArray objectAtIndex:indexPath.row];
         [cell.contentView addSubview:newImg];
+        UIImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
+                       {
+                           [newImg setImage:image];
+                       }, ^(void){
+                       });
         UIFont *font = [UIFont fontWithName:@"Arial" size:12];
         UILabel *newPre=[[UILabel alloc] initWithFrame:CGRectMake(120, 20, 160, 90)];
         newPre.lineBreakMode=NSLineBreakByCharWrapping;
@@ -86,8 +121,8 @@
         newPre.backgroundColor=[UIColor clearColor];
         [cell.contentView addSubview:newPre];
         UIImageView *customSeparator=[[UIImageView alloc] initWithFrame:CGRectMake(14, 97, 282, 1)];
-        customSeparator.image=[UIImage imageNamed:@"line"];
         [cell.contentView addSubview:customSeparator];
+        
     }else
     {
      UIFont *font = [UIFont fontWithName:@"Arial" size:12];
@@ -111,16 +146,30 @@
     NSLog(@"yahoo!!");
     kaplanNewsListChildViewController *newsChild=[kaplanNewsListChildViewController sharekaplanNewsListChildViewController];
     [self.navigationController pushViewController:newsChild animated:YES];
-    [newsChild reloadNewInfomation:[newsTitleArray objectAtIndex:indexPath.row] text:[newsPreArray objectAtIndex:indexPath.row] andImage:[UIImage imageNamed:[newsImageArray objectAtIndex:indexPath.row]]];
-
-    
+    //[newsChild reloadNewInfomation:[newsTitleArray objectAtIndex:indexPath.row] text:[newsPreArray objectAtIndex:indexPath.row] andImage:[newsImageArray objectAtIndex:indexPath.row]];
+    [newsChild reloadNewInfomation:[newsTitleArray objectAtIndex:indexPath.row] text:@"<div><br />	基材苛在要  在</div><br /><div><br />	夺苛</div>" andImage:[newsImageArray objectAtIndex:indexPath.row]];
     
 }
 - (IBAction)bactToMainView:(id)sender
 {
     [NewsListDelegate showBackView:nil];
 }
-
+void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^errorBlock)(void) )
+{
+    dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ), ^(void)
+                   {
+                       NSData * data = [[NSData alloc] initWithContentsOfURL:URL] ;
+                       UIImage * image = [[UIImage alloc] initWithData:data];
+                       dispatch_async( dispatch_get_main_queue(), ^(void){
+                           if( image != nil )
+                           {
+                               imageBlock( image );
+                           } else {
+                               errorBlock();
+                           }
+                       });
+                   });
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -34,9 +34,15 @@
     }
     return self;
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES];
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:YES];
 }
 #pragma mark - tableview datasource
 
@@ -115,7 +121,7 @@
         {
             UIButton *backBtn=[[UIButton alloc]initWithFrame:CGRectMake(30, 20, 239, 31)];
             [backBtn addTarget:self action:@selector(backToParentView:) forControlEvents:UIControlEventTouchUpInside];
-            [backBtn setImage:[UIImage imageNamed:@"btn_back2"] forState:UIControlStateNormal];
+            [backBtn setImage:[UIImage imageNamed:@"btn_back1_s1"] forState:UIControlStateNormal];
             [cell.contentView addSubview:backBtn];
         }
             

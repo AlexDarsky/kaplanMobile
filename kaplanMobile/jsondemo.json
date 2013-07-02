@@ -1,0 +1,22 @@
+{
+  total: "2", 
+  maxPage: "1", 
+  page: "1", 
+  perPage: "10", 
+  newsList: [
+    {
+      id: "1697", 
+      title: "测试内容2", 
+      picUrl: "/File/info/2013/20130624095753_741.jpg", 
+      linkUrl: "", 
+      intro: ""
+    }, 
+    {
+      id: "1696", 
+      title: "测试图片文章", 
+      picUrl: "/File/info/2013/20130624095333_639.jpg", 
+      linkUrl: "", 
+      intro: "<div><br />	基材苛在要  在</div><br /><div><br />	夺苛</div>"
+    }
+  ]
+}

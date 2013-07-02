@@ -12,4 +12,8 @@
 
 @property (strong, nonatomic) IBOutlet UIView *CustomNavBar;
 @property (strong)id settingDelegate;
+@property (weak, nonatomic) IBOutlet UIButton *checkDataBase;
+
+-(IBAction)pushToAboutUS:(id)sender;
+- (IBAction)updateDataBase:(id)sender;
 @end

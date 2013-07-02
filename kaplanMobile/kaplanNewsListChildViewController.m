@@ -15,7 +15,7 @@
 @implementation kaplanNewsListChildViewController
 static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController = nil;
 @synthesize tableView,CustomNavBar;
-@synthesize newsTextView,newsTitleLabel,newsImageView;
+@synthesize newsImageURL,newsTitleLabel,newsWebView;
 +(kaplanNewsListChildViewController*)sharekaplanNewsListChildViewController
 {
     if (sharekaplanNewsListChildViewController == nil) {
@@ -38,10 +38,9 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
         newsTitleLabel=[[UILabel alloc] initWithFrame:CGRectMake(60, 10, 200, 20)];
         newsTitleLabel.textColor=[UIColor whiteColor];
         newsTitleLabel.backgroundColor=[UIColor clearColor];
-        newsTextView=[[UITextView alloc] init];
-        newsTextView.backgroundColor=[UIColor clearColor];
-        newsTextView.textColor=[UIColor whiteColor];
-        newsImageView=[[UIImage alloc] init];
+        newsWebView=[[UIWebView alloc] init];
+        newsWebView.backgroundColor=[UIColor clearColor];
+
     }
     return self;
 }
@@ -53,12 +52,12 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
 
 
 }
--(void)reloadNewInfomation:(NSString*)title text:(NSString*)newText andImage:(UIImage*)newsImage
+-(void)reloadNewInfomation:(NSString*)title text:(NSString*)newText andImage:(NSString*)newsImage
 {
     NSLog(@"will reload");
     [self.newsTitleLabel setText:title];
-    [self.newsTextView setText:newText];
-    self.newsImageView=newsImage;
+    [self.newsWebView loadHTMLString:newText baseURL:nil];
+    self.newsImageURL=newsImage;
     [self.tableView reloadData];
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -96,17 +95,25 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
         
     }else
     {
-        if (self.newsImageView!=nil) {
+        if (![self.newsImageURL isEqualToString:@"NULL"]) {
             UIImageView *newIV=[[UIImageView alloc] initWithFrame:CGRectMake(60, 10, 235, 131)];
-            [newIV setImage:self.newsImageView];
+            NSString *url=self.newsImageURL;
             [cell.contentView addSubview:newIV];
-            self.newsTextView.frame=CGRectMake(60, 160, 235, 220);
-            [cell.contentView addSubview:self.newsTextView];
+            newImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
+                           {
+                               [newIV setImage:image];
+                           }, ^(void){
+                           });
+
+            self.newsWebView.frame=CGRectMake(60, 160, 235, 200);
+            [cell.contentView addSubview:self.newsWebView];
+           
             
         }else
         {
-            self.newsTextView.frame=CGRectMake(60, 10, 235, 220);
-            [cell.contentView addSubview:self.newsTextView];
+            self.newsWebView.frame=CGRectMake(60, 10, 235, 200);
+            [cell.contentView addSubview:self.newsWebView];
+     
         }
         UIImageView *customSeparator=[[UIImageView alloc] initWithFrame:CGRectMake(14, 380, 282, 1)];
         customSeparator.image=[UIImage imageNamed:@"line"];
@@ -120,7 +127,22 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
-
+void newImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^errorBlock)(void) )
+{
+    dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ), ^(void)
+                   {
+                       NSData * data = [[NSData alloc] initWithContentsOfURL:URL] ;
+                       UIImage * image = [[UIImage alloc] initWithData:data];
+                       dispatch_async( dispatch_get_main_queue(), ^(void){
+                           if( image != nil )
+                           {
+                               imageBlock( image );
+                           } else {
+                               errorBlock();
+                           }
+                       });
+                   });
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

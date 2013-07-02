@@ -9,13 +9,15 @@
 #import "kaplanSettingViewController.h"
 #import "kaplanViewController.h"
 #import <QuartzCore/QuartzCore.h>
-
+#import "kaplanAboutViewController.h"
+#import "kaplanServerHelper.h"
 @interface kaplanSettingViewController ()
 
 @end
 
 @implementation kaplanSettingViewController
 @synthesize settingDelegate;
+@synthesize checkDataBase;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,16 +34,34 @@
     }
     return self;
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.navigationController setNavigationBarHidden:YES];
+
 }
 - (IBAction)updateDataBase:(id)sender
 {
-    
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/init.aspx?action=init&app=0"];
+    kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+    [serverHelper updateSQLite];
+}
+- (IBAction)backToMainView:(id)sender
+{
+    [settingDelegate showBackView:nil];
+}
+-(IBAction)pushToAboutUS:(id)sender
+{
+    kaplanAboutViewController *kaplanAboutViewCon=[kaplanAboutViewController sharekaplanAboutViewController];
+    [self.navigationController pushViewController:kaplanAboutViewCon animated:YES];
+}
+- (IBAction)testDemo:(id)sender
+{
+    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/school.aspx?action=loadlist&id=239"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
@@ -49,26 +69,11 @@
     NSHTTPURLResponse* urlResponse = nil;
     NSError *error = [[NSError alloc] init];
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
-    NSDictionary *initDic = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
-    [[NSUserDefaults standardUserDefaults] setObject:initDic forKey:@"appInfo"];
-    
-    UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"httpRequest" message:@"getJson" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
-
+    NSDictionary *tmpDic = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
+    if (tmpDic==nil) {
+        NSLog(@"!!!!!!!");
+    }
 }
-- (IBAction)backToMainView:(id)sender
-{
-    CATransition *transition = [CATransition animation];
-    transition.duration = 1.0f;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = @"cube";
-    transition.subtype = kCATransitionFromLeft;
-    transition.delegate = self;
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -77,6 +82,7 @@
 
 - (void)viewDidUnload {
     [self setCustomNavBar:nil];
+    [self setCheckDataBase:nil];
     [super viewDidUnload];
 }
 @end

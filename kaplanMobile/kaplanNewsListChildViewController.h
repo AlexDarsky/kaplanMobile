@@ -16,9 +16,9 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UILabel *newsTitleLabel;
-@property (strong, nonatomic) UITextView *newsTextView;
-@property (strong, nonatomic) UIImage *newsImageView;
+@property (strong, nonatomic) UIWebView *newsWebView;
+@property (strong, nonatomic) NSString  *newsImageURL;
 +(kaplanNewsListChildViewController*)sharekaplanNewsListChildViewController;
--(void)reloadNewInfomation:(NSString*)title text:(NSString*)newText andImage:(UIImage*)newsImage;
+-(void)reloadNewInfomation:(NSString*)title text:(NSString*)newText andImage:(NSString*)newsImage;
 
 @end

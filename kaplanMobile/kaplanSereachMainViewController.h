@@ -12,6 +12,7 @@
 {
     NSMutableArray *schoolNameCN;
     NSMutableArray *schoolNameEN;
+    NSMutableArray *degreeArray;
     int searchMode;
 }
 
@@ -20,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UIView *SearchView;
 @property (strong, nonatomic) IBOutlet UIButton *searchBtn2;
 @property (strong, nonatomic) IBOutlet UIButton *searchBtn1;
+@property (strong, nonatomic) IBOutlet UIButton *searchBtn3;
 @property (retain, nonatomic) IBOutlet UITableView *DisplayTableView;
 @property (strong, nonatomic) IBOutlet UITextField *SearchTextField;
 

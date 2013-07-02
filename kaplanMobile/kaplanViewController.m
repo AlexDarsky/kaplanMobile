@@ -16,6 +16,7 @@
 #import "DownloadManager.h"
 #import "NSURL+Download.h"
 #import "kaplanSettingViewController.h"
+#import "kaplanServerHelper.h"
 #define kDocumentFolder					[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
 @class kaplanEvalutionViewController;
 @interface kaplanViewController ()
@@ -31,9 +32,10 @@
 @implementation kaplanViewController
 
 static kaplanViewController *kaplanRootViewCon;
-@synthesize MainView,NavBackView;
+@synthesize NavBackView,MainScrollView;
 @synthesize tabBarController;
-@synthesize evalutionNavCon,SchoolsViewNavCon,NewsViewNavCon,kaplanSettingViewCon;
+@synthesize evalutionNavCon,SchoolsViewNavCon,NewsViewNavCon,kaplanSettingViewCon,SettingViewNavCon;
+@synthesize appVersionID,dbVerID;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -56,16 +58,18 @@ static kaplanViewController *kaplanRootViewCon;
     }
     return self;
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES];
 
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self.navigationController setNavigationBarHidden:YES];
+
     kaplanSereachMainViewController *kaplanSereachMainViewCon=[[kaplanSereachMainViewController alloc] initWithNibName:@"kaplanSereachMainViewController" bundle:nil];
     kaplanSereachMainViewCon.SereachDelegate=self;
-    
-    kaplanAboutViewController *kaplanAboutViewCon=[[kaplanAboutViewController alloc] initWithNibName:@"kaplanAboutViewController" bundle:nil];
-    
     kaplanNewsListViewController *kaplanNewsListViewCon=[[kaplanNewsListViewController alloc] initWithNibName:@"kaplanNewsListViewController" bundle:nil];
     kaplanNewsListViewCon.NewsListDelegate=self;
     NewsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanNewsListViewCon];
@@ -82,11 +86,13 @@ static kaplanViewController *kaplanRootViewCon;
     
     kaplanSettingViewCon=[[kaplanSettingViewController alloc] initWithNibName:@"kaplanSettingViewController" bundle:nil];
     kaplanSettingViewCon.settingDelegate=self;
+    SettingViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanSettingViewCon];
+    
     SchoolsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanMingXiaoBoLanViewCon];
     SchoolsViewNavCon.navigationBarHidden=YES;
     
     self.tabBarController=[[UITabBarController alloc] init];
-    self.tabBarController.viewControllers=[NSArray arrayWithObjects:kaplanSereachMainViewCon,kaplanAboutViewCon,NewsViewNavCon,evalutionNavCon,SchoolsViewNavCon,nil];
+    self.tabBarController.viewControllers=[NSArray arrayWithObjects:kaplanSereachMainViewCon,SettingViewNavCon,NewsViewNavCon,evalutionNavCon,SchoolsViewNavCon,nil];
     if (kaplanRootViewCon) {
         kaplanRootViewCon=nil;
     }
@@ -94,26 +100,56 @@ static kaplanViewController *kaplanRootViewCon;
     kaplanRootViewCon=self;
     backViewShowing=NO;
     self.backViewController=tabBarController;
-    [self.MainView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_index" ]]];
+    [self.MainScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_index" ]]];
     [self addChildViewController:self.backViewController];
     [self.NavBackView addSubview:self.backViewController.view];
     [self hideTabBar];
     [NSTimer scheduledTimerWithTimeInterval:1 target: self selector: @selector(handleTimer:)  userInfo:nil  repeats: YES];
     page=[[UIPageControl alloc] initWithFrame:CGRectMake(240, 110, 38,36)];
-    sv=[[UIScrollView alloc] initWithFrame:CGRectMake(10, 55, 300, 88)];
-    sv.backgroundColor=[UIColor clearColor];
+    if ([[UIScreen mainScreen] bounds].size.height>480.00) {
+       
+        sv=[[UIScrollView alloc] initWithFrame:CGRectMake(10, [[UIScreen mainScreen] bounds].size.height/10, 305, 134)];
+    }
+    else{
+     sv=[[UIScrollView alloc] initWithFrame:CGRectMake(10, [[UIScreen mainScreen] bounds].size.height/10+7, 305, 134)];
+    }
+    UIImageView *svBG=[[UIImageView alloc] initWithFrame:CGRectMake(sv.frame.origin.x-5, sv.frame.origin.y-4, 311, 144)];
+    [svBG setImage:[UIImage imageNamed:@"rolling"]];
     sv.showsHorizontalScrollIndicator=NO;
-    demoArray=[[NSMutableArray alloc] initWithObjects: @"homepage1.png",@"homepage2.png",@"homepage3.png",@"homepage4.png", nil];
+    sv.backgroundColor=[UIColor clearColor];
+    [MainScrollView layer].shadowPath =[UIBezierPath bezierPathWithRect:MainScrollView.bounds].CGPath;
+    self.MainScrollView.layer.shadowColor=[[UIColor blackColor] CGColor];
+    self.MainScrollView.layer.shadowOffset=CGSizeMake(0,0);
+    self.MainScrollView.layer.shadowRadius=10.0;
+    self.MainScrollView.layer.shadowOpacity=1.0;
+    kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+    NSMutableDictionary *initInfo=[[NSMutableDictionary alloc] initWithDictionary:[serverHelper checkForInitApp]];
+    topListArray=[[NSMutableArray alloc] initWithArray:[initInfo objectForKey:@"topList"]];
     sv.delegate=self;
-    [self AdImg:demoArray];
+    [self AdImg:topListArray];
     [self setCurrentPage:page.currentPage];
-    [self.MainView addSubview:sv];
-    [self.MainView addSubview:page];
-    [MainView layer].shadowPath =[UIBezierPath bezierPathWithRect:MainView.bounds].CGPath;
-    self.MainView.layer.shadowColor=[[UIColor blackColor] CGColor];
-    self.MainView.layer.shadowOffset=CGSizeMake(0,0);
-    self.MainView.layer.shadowRadius=10.0;
-    self.MainView.layer.shadowOpacity=1.0;
+    [self.MainScrollView addSubview:svBG];
+    //[self.MainScrollView addSubview:self.MainView];
+    [self.MainScrollView addSubview:sv];
+    [self.MainScrollView addSubview:page];
+    if (![[initInfo objectForKey:@"appVersion"] isEqualToString:self.appVersionID])
+    {
+        NSLog(@"%@,%@",[initInfo objectForKey:@"appVersion"],self.appVersionID);
+    }else
+        if (![[initInfo objectForKey:@"dbVerID"] isEqualToString:self.dbVerID]) {
+        UIActionSheet* mySheet = [[UIActionSheet alloc]
+                                  initWithTitle:@"数据库版本过旧"
+                                  delegate:self
+                                  cancelButtonTitle:@"Cancel"
+                                  destructiveButtonTitle:@"更新数据库"
+                                  otherButtonTitles:nil];
+        [mySheet showInView:self.view];
+
+        }else
+    {
+        [kaplanSettingViewCon.checkDataBase setUserInteractionEnabled:NO];
+    }
+    
 }
 
 #pragma sv
@@ -129,19 +165,60 @@ static kaplanViewController *kaplanRootViewCon;
     page.numberOfPages=[arr count];
     
     for ( int i=0; i<[arr count]; i++) {
-        // NSString *url=[arr objectAtIndex:i];
-        UIButton *img=[[UIButton alloc]initWithFrame:CGRectMake(320*i, 0, 300, 88)];
+        
+        NSDictionary *tmpDictionary=[[NSDictionary alloc] initWithDictionary:[arr objectAtIndex:i]];
+        UIButton *img=[[UIButton alloc]initWithFrame:CGRectMake(315*i, 0, 300, 134)];
         [img addTarget:self action:@selector(Action) forControlEvents:UIControlEventTouchUpInside];
         [sv addSubview:img];
-        [img setImage:[UIImage imageNamed:[arr objectAtIndex:i]] forState:UIControlStateNormal];
-        /*
-         UIImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
+         NSString *url=[NSString stringWithFormat:@"http://cd.douho.net%@",[tmpDictionary objectForKey:@"picUrl"]];
+         NewImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
          {
          [img setImage:image forState:UIControlStateNormal];
          }, ^(void){
-         });*/
+         });
     }
     
+}
+- (UIImage *)scaleToSize:(UIImage *)img size:(CGSize)newsize{
+    
+    // 创建一个bitmap的context
+    
+    // 并把它设置成为当前正在使用的context
+    
+    UIGraphicsBeginImageContext(newsize);
+    
+    // 绘制改变大小的图片
+    
+    [img drawInRect:CGRectMake(0, 0, newsize.width, newsize.height)];
+    
+    // 从当前context中创建一个改变大小后的图片
+    
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // 使当前的context出堆栈
+    
+    UIGraphicsEndImageContext();
+    
+    // 返回新的改变大小后的图片
+    
+    return scaledImage;
+    
+}
+void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^errorBlock)(void) )
+{
+    dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ), ^(void)
+                   {
+                       NSData * data = [[NSData alloc] initWithContentsOfURL:URL] ;
+                       UIImage * image = [[UIImage alloc] initWithData:data];
+                       dispatch_async( dispatch_get_main_queue(), ^(void){
+                           if( image != nil )
+                           {
+                               imageBlock( image );
+                           } else {
+                               errorBlock();
+                           }
+                       });
+                   });
 }
 -(void)Action
 {
@@ -195,14 +272,21 @@ static kaplanViewController *kaplanRootViewCon;
                  self.tabBarController.selectedIndex=4;
             }
                 break;
+            case 6:{
+                self.tabBarController.selectedIndex=1;
+            }
         }
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
         CGFloat translation = -305;
-        self.MainView.transform = CGAffineTransformMakeTranslation(translation, 0);
+        self.MainScrollView.transform = CGAffineTransformMakeTranslation(translation, 0);
         [UIView commitAnimations];
         backViewShowing=YES;
        // self.MainView.layer.shadowOpacity=1.0;
+        if ([sender tag]==2) {
+            [kaplanSettingViewCon performSelector:@selector(pushToAboutUS:) withObject:nil afterDelay:1.0];
+
+        }
 
     }else
     {
@@ -210,7 +294,7 @@ static kaplanViewController *kaplanRootViewCon;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
         CGFloat translation = 0;
-        self.MainView.transform = CGAffineTransformMakeTranslation(translation, 0);
+        self.MainScrollView.transform = CGAffineTransformMakeTranslation(translation, 0);
         [UIView commitAnimations];
         backViewShowing=NO;
     }
@@ -270,21 +354,25 @@ static kaplanViewController *kaplanRootViewCon;
 }
 - (IBAction)turnToSetting:(id)sender
 {
-    CATransition *transition = [CATransition animation];
-    transition.duration = 1.0f;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = @"cube";
-    transition.subtype = kCATransitionFromRight;
-    transition.delegate = self;
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+    self.tabBarController.selectedIndex=1;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    CGFloat translation = -305;
+    self.MainScrollView.transform = CGAffineTransformMakeTranslation(translation, 0);
+    [UIView commitAnimations];
+    backViewShowing=YES;
+
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet
+
+didDismissWithButtonIndex:(NSInteger)buttonIndex
+
+{
     
-
-    [self.navigationController pushViewController:kaplanSettingViewCon animated:YES];
-        /*
-    NSURL *url=[NSURL URLWithString:@"http://music.baidu.com/data/music/file?link=http://zhangmenshiting.baidu.com/data2/music/42911424/4015334072000320.mp3?xcode=36921517c1d51441e93e8edf4c3ce7091ae285f61fcd240c"];
-	[url downloadWithDelegate:self Title:@"目标文件" WithToFileName:[kDocumentFolder stringByAppendingPathComponent:@"2.mp3"]];
-     */
-
+    if( buttonIndex != [actionSheet cancelButtonIndex]){
+        [kaplanSettingViewCon updateDataBase:nil];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -294,7 +382,8 @@ static kaplanViewController *kaplanRootViewCon;
 }
 
 - (void)viewDidUnload {
-    [self setMainView:nil];
+   // [self setMainView:nil];
+    [self setMainScrollView:nil];
     [super viewDidUnload];
 }
 @end

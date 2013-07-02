@@ -9,6 +9,7 @@
 #import "kaplanEvalutionChildViewController.h"
 #import "kaplanEvalutionViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "kaplanServerHelper.h"
 
 @interface kaplanEvalutionChildViewController ()
 
@@ -32,9 +33,8 @@
         self.childCustomNavBar.layer.shadowRadius=10.0;
         self.childCustomNavBar.layer.shadowOpacity=1.0;
        // childCustomNavBar.backgroundColor=[UIColor whiteColor];
-        cityArray=[[NSMutableArray alloc] initWithObjects:@"成都",@"北京",@"上海",@"深圳",@"天津",@"南京",@"湖南",@"辽宁",@"西藏",@"新疆", nil];
-        educationArray=[[NSMutableArray alloc] initWithObjects:@"初中",@"高中",@"大专",@"本科",@"硕士",nil];
-        destinationArray=[[NSMutableArray alloc] initWithObjects:@"美国",@"英国",@"澳大利亚",@"加拿大",@"意大利",@"法国",@"瑞士",@"新西兰",@"日本",@"韩国",@"泰国",@"新加坡", nil];
+        nameArray=[[NSMutableArray alloc] initWithCapacity:0];
+        IDArray=[[NSMutableArray alloc] initWithCapacity:0];
 
     }
     return self;
@@ -50,6 +50,51 @@
 {
     NSLog(@"ok!");
     selectMode=targetMode;
+    if ([nameArray count]>0)
+    {
+        [nameArray removeAllObjects];
+    }
+    if ([IDArray count]>0)
+    {
+        [IDArray removeAllObjects];
+    }
+    kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+    switch (selectMode) {
+        case 0:
+        {
+
+            NSArray *tmpArray=[[NSArray alloc] initWithArray:[serverHelper getCityLoadList]];
+                       for (NSDictionary *tmpDic in tmpArray)
+            {
+                [nameArray addObject:[tmpDic objectForKey:@"cityName"]];
+                [IDArray addObject:[tmpDic objectForKey:@"id"]];
+            }
+        }
+            break;
+        case 1:
+        {
+            NSArray *tmpArray=[[NSArray alloc] initWithArray:[serverHelper getClassLoadList]];
+            for (NSDictionary *tmpDic in tmpArray)
+            {
+                [nameArray addObject:[tmpDic objectForKey:@"classCName"]];
+                [IDArray addObject:[tmpDic objectForKey:@"id"]];
+            }
+        }
+
+            break;
+        case 2:
+        {
+            NSArray *tmpArray=[[NSArray alloc] initWithArray:[serverHelper getCountryList]];
+            for (NSDictionary *tmpDic in tmpArray)
+            {
+                [nameArray addObject:[tmpDic objectForKey:@"classCName"]];
+                [IDArray addObject:[tmpDic objectForKey:@"id"]];
+            }
+        }
+
+            break;
+    }
+
     [self.tableView reloadData];
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -57,19 +102,19 @@
     int number=0;
     switch (selectMode) {
         case 0:
-            number=[cityArray count];
+            
             modeLabel.text=@"所在地";
             break;
         case 1:
-            number=[educationArray count];
+
             modeLabel.text=@"现有学历";
             break;
         case 2:
-            number=[destinationArray count];
             modeLabel.text=@"意向留学国家";
             break;
 
     }
+    number=[IDArray count];
     return number;
 }
 
@@ -87,58 +132,30 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     
 
-    switch (selectMode) {
-        case 0:
-        {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-                
-                [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-                [cell.textLabel setTextColor:[UIColor greenColor]];
-                [cell.textLabel setText:[cityArray objectAtIndex:indexPath.row]];
-   
-
-        }
-            break;
-        case 1:
-        {
-           
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-                [cell.textLabel setTextColor:[UIColor greenColor]];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-                [cell.textLabel setText:[educationArray objectAtIndex:indexPath.row]];
-  
-
-        }
-            break;
-        case 2:
-        {
-            
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-                [cell.textLabel setTextColor:[UIColor greenColor]];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-                [cell.textLabel setText:[destinationArray objectAtIndex:indexPath.row]];
-
-
-        }
-            break;
-    }
-           return cell;
+    [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+    [cell.textLabel setTextColor:[UIColor greenColor]];
+    [cell.textLabel setText:[nameArray objectAtIndex:indexPath.row]];
+    return cell;
     
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSString *newString = [NSString stringWithFormat:@"%@",[IDArray objectAtIndex:indexPath.row]];
+
     switch (selectMode) {
         case 0:
-            [evalutionChildDelegate setCity:[cityArray objectAtIndex:indexPath.row]];
+            
+            [evalutionChildDelegate setCity:[nameArray objectAtIndex:indexPath.row] andID:[newString intValue] ];
             break;
         case 1:
-            [evalutionChildDelegate setEducation:[educationArray objectAtIndex:indexPath.row]];
+            [evalutionChildDelegate setEducation:[nameArray objectAtIndex:indexPath.row] andID:[newString intValue]];
 
             break;
         case 2:
-            [evalutionChildDelegate setDestination:[destinationArray objectAtIndex:indexPath.row]];
+            [evalutionChildDelegate setDestination:[nameArray objectAtIndex:indexPath.row] andID:[newString intValue]];
 
             break;
     }

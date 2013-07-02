@@ -9,6 +9,8 @@
 #import "kaplanSereachMainViewController.h"
 #import "kaplanViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "kaplanServerHelper.h"
+#import "kaplanSQLIteHelper.h"
 @interface kaplanSereachMainViewController ()
 
 @end
@@ -16,7 +18,7 @@
 @implementation kaplanSereachMainViewController
 @synthesize CustomNavBar;
 @synthesize SereachDelegate;
-@synthesize SearchView,searchBtn1,searchBtn2,SearchTextField,DisplayTableView;
+@synthesize SearchView,searchBtn1,searchBtn2,searchBtn3,SearchTextField,DisplayTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,14 +41,21 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    searchBtn1.selected=YES;
+    searchBtn3.selected=YES;
+    searchBtn1.selected=NO;
     searchBtn2.selected=NO;
     searchMode=0;
-    SearchTextField.placeholder=@"  请输入您要查询的专业";
+    SearchTextField.placeholder=@"  请输入您要查询的预科类型";
 
-    schoolNameCN=[[NSMutableArray alloc] initWithObjects:@"圣多明尼哥中学",@"圣泽维尔学院",@"斯卡特古德学校",@"史蒂文森中学",@"斯阔谷学院",@"夏威夷科学院", nil];
-    schoolNameEN=[[NSMutableArray alloc] initWithObjects:@"San Domenico",@"Academy of St.Xavier",@"Scattergood Friends",@"Stevenson School",@"Squaw Valley Academy",@"Hwai' i Preparatory", nil];
+    schoolNameCN=[[NSMutableArray alloc] initWithCapacity:0];
+    schoolNameEN=[[NSMutableArray alloc] initWithCapacity:0];
+    degreeArray=[[NSMutableArray alloc] initWithCapacity:0];
     
+    
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+
 }
 - (IBAction)backToMainView:(id)sender {
     [SereachDelegate showBackView:nil];
@@ -58,7 +67,7 @@
         {
             if (searchBtn1.selected!=YES) {
                 searchBtn1.selected=YES;
-                searchBtn2.selected=NO;
+                searchBtn2.selected=searchBtn3.selected=NO;
                 SearchTextField.placeholder=@"  请输入您要查询的专业";
                 searchMode=0;
             }
@@ -68,13 +77,22 @@
         {
             if (searchBtn2.selected!=YES) {
                 searchBtn2.selected=YES;
-                searchBtn1.selected=NO;
+                searchBtn1.selected=searchBtn3.selected=NO;
                 SearchTextField.placeholder=@"  请输入您要查询的院校名称";
                 searchMode=1;
             }
         }
             break;
+        case 2:
+        {
+            if (searchBtn3.selected!=YES) {
+                searchBtn3.selected=YES;
+                searchBtn1.selected=searchBtn2.selected=NO;
+                SearchTextField.placeholder=@"  请输入您要查询的预科类型";
+                searchMode=2;
+            }
 
+        }
     }
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -120,7 +138,47 @@
     NSLog(@"yahoo!!");
     
 }
-
+- (IBAction)queryFromDB:(id)sender
+{
+    if ([self.SearchTextField.text isEqualToString:@""]) {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"错误" message:@"请输入您要查询的内容。" delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+        [alert show];
+    }else
+    {
+        kaplanSQLIteHelper *SQLIteHelper=[kaplanSQLIteHelper sharekaplanSQLIteHelper];
+        [SQLIteHelper openDB];
+        NSMutableArray *tmpArray=[SQLIteHelper querySchoolsFromDB:self.SearchTextField.text];
+        if ([tmpArray count]>0)
+        {
+            [schoolNameCN removeAllObjects];
+            [schoolNameEN removeAllObjects];
+            [degreeArray removeAllObjects];
+            NSLog(@"%d",[tmpArray count]);
+            for (NSDictionary *tmpDic in tmpArray)
+            {
+                if (tmpDic!=nil) {
+                    [schoolNameCN addObject:[tmpDic objectForKey:@"c2"]];
+                    NSLog(@"CN2");
+                    [schoolNameEN addObject:[tmpDic objectForKey:@"c2"]];
+                    NSLog(@"EN2");
+                    [degreeArray addObject:[tmpDic objectForKey:@"c1"]];
+                    NSLog(@"addOK");
+                }else
+                    NSLog(@"fall");
+                
+            }
+            [self.DisplayTableView reloadData];
+        }else
+        {
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"错误" message:@"查询不要您所要查询的内容" delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }
+}
+- (IBAction)exitKeyboard:(id)sender {
+    [sender resignFirstResponder];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -129,6 +187,7 @@
 
 - (void)viewDidUnload {
     [self setDisplayTableView:nil];
+    [self setSearchBtn3:nil];
     [super viewDidUnload];
 }
 @end

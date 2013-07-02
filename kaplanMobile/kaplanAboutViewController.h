@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface kaplanAboutViewController : UIViewController
-
+@property (weak, nonatomic) IBOutlet UIView *CustomNavBar;
++(kaplanAboutViewController*)sharekaplanAboutViewController;
 @end
