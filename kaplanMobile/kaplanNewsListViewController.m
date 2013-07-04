@@ -117,7 +117,8 @@
         [newPre setNumberOfLines:2];
         [newPre setFont:font];
         newPre.textColor=[UIColor greenColor];
-        newPre.text=[newsPreArray objectAtIndex:indexPath.row];
+        NSString *preString=[NSString stringWithFormat:@"%@",[newsPreArray objectAtIndex:indexPath.row]];
+        newPre.text=[preString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
         newPre.backgroundColor=[UIColor clearColor];
         [cell.contentView addSubview:newPre];
         UIImageView *customSeparator=[[UIImageView alloc] initWithFrame:CGRectMake(14, 97, 282, 1)];
@@ -147,7 +148,8 @@
     kaplanNewsListChildViewController *newsChild=[kaplanNewsListChildViewController sharekaplanNewsListChildViewController];
     [self.navigationController pushViewController:newsChild animated:YES];
     //[newsChild reloadNewInfomation:[newsTitleArray objectAtIndex:indexPath.row] text:[newsPreArray objectAtIndex:indexPath.row] andImage:[newsImageArray objectAtIndex:indexPath.row]];
-    [newsChild reloadNewInfomation:[newsTitleArray objectAtIndex:indexPath.row] text:@"<div><br />	基材苛在要  在</div><br /><div><br />	夺苛</div>" andImage:[newsImageArray objectAtIndex:indexPath.row]];
+    //[newsChild reloadNewInfomation:[newsTitleArray objectAtIndex:indexPath.row] text:[newsPreArray objectAtIndex:indexPath.row] andImage:[newsImageArray objectAtIndex:indexPath.row]];
+    [newsChild reloadNewInfomationByID:[newsidArray objectAtIndex:indexPath.row]];
     
 }
 - (IBAction)bactToMainView:(id)sender

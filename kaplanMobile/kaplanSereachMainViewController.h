@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NIDropDown.h"
+
 
 @interface kaplanSereachMainViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
@@ -19,10 +21,13 @@
 @property (strong) id SereachDelegate;
 @property (strong, nonatomic) IBOutlet UIView *CustomNavBar;
 @property (strong, nonatomic) IBOutlet UIView *SearchView;
+@property (strong, nonatomic) IBOutlet UIView *SearchView2;
 @property (strong, nonatomic) IBOutlet UIButton *searchBtn2;
 @property (strong, nonatomic) IBOutlet UIButton *searchBtn1;
-@property (strong, nonatomic) IBOutlet UIButton *searchBtn3;
 @property (retain, nonatomic) IBOutlet UITableView *DisplayTableView;
 @property (strong, nonatomic) IBOutlet UITextField *SearchTextField;
-
+@property (strong, nonatomic) IBOutlet UIButton *degreedBtn;
+@property (strong, nonatomic) IBOutlet UIButton *schoolBtn;
+@property (strong, nonatomic) IBOutlet UIButton *classBtn;
+-(void)setText:(NSString*)textString For:(int)mode;
 @end

@@ -8,6 +8,7 @@
 
 #import "kaplanEvalutionChildViewController.h"
 #import "kaplanEvalutionViewController.h"
+#import "kaplanEvalutionGrandChildViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "kaplanServerHelper.h"
 
@@ -137,6 +138,9 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
     [cell.textLabel setTextColor:[UIColor greenColor]];
     [cell.textLabel setText:[nameArray objectAtIndex:indexPath.row]];
+    UIImageView *customSeparator=[[UIImageView alloc] initWithFrame:CGRectMake(14, 50, 282, 1)];
+    customSeparator.image=[UIImage imageNamed:@"line"];
+    [cell.contentView addSubview:customSeparator];
     return cell;
     
     
@@ -147,20 +151,30 @@
 
     switch (selectMode) {
         case 0:
-            
-            [evalutionChildDelegate setCity:[nameArray objectAtIndex:indexPath.row] andID:[newString intValue] ];
+        {
+            kaplanEvalutionGrandChildViewController *evalutionGrandChildViewController=[kaplanEvalutionGrandChildViewController sharekaplanEvalutionGrandChildViewController];
+            [self.navigationController pushViewController:evalutionGrandChildViewController animated:YES];
+            //grandChild.evalutionGrandChildDelegate=self;
+            [evalutionGrandChildViewController reloadListBySubId:[IDArray objectAtIndex:indexPath.row]];
+        }
             break;
         case 1:
             [evalutionChildDelegate setEducation:[nameArray objectAtIndex:indexPath.row] andID:[newString intValue]];
+             [self.navigationController popToRootViewControllerAnimated:YES];
 
             break;
         case 2:
             [evalutionChildDelegate setDestination:[nameArray objectAtIndex:indexPath.row] andID:[newString intValue]];
-
+            [self.navigationController popToRootViewControllerAnimated:YES];
             break;
     }
-    [self.navigationController popToRootViewControllerAnimated:YES];
+   
 
+}
+-(void)setSubCity:(NSString*)cityName :(NSString*)grandChildID
+{
+    NSLog(@"hahah");
+    [evalutionChildDelegate setCity:cityName andID:[grandChildID intValue]];
 }
 - (IBAction)backToParentViewCon:(id)sender
 {

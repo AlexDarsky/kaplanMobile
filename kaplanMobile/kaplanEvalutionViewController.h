@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "kaplanEvalutionChildViewController.h"
+#import "kaplanEvalutionGrandChildViewController.h"
 @interface kaplanEvalutionViewController : UIViewController
 {
     kaplanEvalutionChildViewController *evalutionChildViewController;
@@ -22,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *userName;
 @property (strong, nonatomic) IBOutlet UITextField *userEmail;
 @property (strong, nonatomic) IBOutlet UITextField *userNumber;
+@property (strong, nonatomic) kaplanEvalutionGrandChildViewController *grandChild;
 
 - (IBAction)goToChildViewCon:(id)sender;
 -(void)setCity:(NSString*)city andID:(int)idNumber;

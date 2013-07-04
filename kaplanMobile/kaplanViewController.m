@@ -17,6 +17,8 @@
 #import "NSURL+Download.h"
 #import "kaplanSettingViewController.h"
 #import "kaplanServerHelper.h"
+#import "kaplanSQLIteHelper.h"
+#import "animationImageView.h"
 #define kDocumentFolder					[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
 @class kaplanEvalutionViewController;
 @interface kaplanViewController ()
@@ -32,10 +34,9 @@
 @implementation kaplanViewController
 
 static kaplanViewController *kaplanRootViewCon;
-@synthesize NavBackView,MainScrollView;
+@synthesize NavBackView,MainView;
 @synthesize tabBarController;
-@synthesize evalutionNavCon,SchoolsViewNavCon,NewsViewNavCon,kaplanSettingViewCon,SettingViewNavCon;
-@synthesize appVersionID,dbVerID;
+@synthesize searchNavCon,evalutionNavCon,SchoolsViewNavCon,NewsViewNavCon,kaplanSettingViewCon,SettingViewNavCon;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -67,32 +68,73 @@ static kaplanViewController *kaplanRootViewCon;
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
+    downloadImgNumber=0;
+    kaplanSereachMainViewController *kaplanSereachMainViewCon=nil;
+    kaplanNewsListViewController *kaplanNewsListViewCon=nil;
+    kaplanEvalutionViewController *kaplanEvalutionViewCon=nil;
+    kaplanMingXiaoBoLanViewController *kaplanMingXiaoBoLanViewCon = nil;
+    kaplanSettingViewCon=nil;
 
-    kaplanSereachMainViewController *kaplanSereachMainViewCon=[[kaplanSereachMainViewController alloc] initWithNibName:@"kaplanSereachMainViewController" bundle:nil];
-    kaplanSereachMainViewCon.SereachDelegate=self;
-    kaplanNewsListViewController *kaplanNewsListViewCon=[[kaplanNewsListViewController alloc] initWithNibName:@"kaplanNewsListViewController" bundle:nil];
-    kaplanNewsListViewCon.NewsListDelegate=self;
-    NewsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanNewsListViewCon];
-    NewsViewNavCon.navigationBarHidden=YES;
-    
-    kaplanEvalutionViewController *kaplanEvalutionViewCon=[[kaplanEvalutionViewController alloc] initWithNibName:@"kaplanEvalutionViewController" bundle:nil];
-    kaplanEvalutionViewCon.evalutionDelgate=self;
-    
-    evalutionNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanEvalutionViewCon];
-    evalutionNavCon.navigationBarHidden=YES;
-    
-    kaplanMingXiaoBoLanViewController *kaplanMingXiaoBoLanViewCon = [[kaplanMingXiaoBoLanViewController alloc] initWithNibName:@"kaplanMingXiaoBoLanViewController" bundle:nil];
-    kaplanMingXiaoBoLanViewCon.MingXiaoBoLanDelegate=self;
-    
-    kaplanSettingViewCon=[[kaplanSettingViewController alloc] initWithNibName:@"kaplanSettingViewController" bundle:nil];
-    kaplanSettingViewCon.settingDelegate=self;
-    SettingViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanSettingViewCon];
-    
-    SchoolsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanMingXiaoBoLanViewCon];
-    SchoolsViewNavCon.navigationBarHidden=YES;
-    
+    if ([[UIScreen mainScreen] bounds].size.height>480.00)
+    {
+        kaplanSereachMainViewCon=[[kaplanSereachMainViewController alloc] initWithNibName:@"kaplanSereachMainViewController_4" bundle:nil];
+        kaplanSereachMainViewCon.SereachDelegate=self;
+        searchNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanSereachMainViewCon];
+        searchNavCon.navigationBarHidden=YES;
+        kaplanNewsListViewCon=[[kaplanNewsListViewController alloc] initWithNibName:@"kaplanNewsListViewController_4" bundle:nil];
+        kaplanNewsListViewCon.NewsListDelegate=self;
+        NewsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanNewsListViewCon];
+        NewsViewNavCon.navigationBarHidden=YES;
+        
+        kaplanEvalutionViewCon=[[kaplanEvalutionViewController alloc] initWithNibName:@"kaplanEvalutionViewController_4" bundle:nil];
+        kaplanEvalutionViewCon.evalutionDelgate=self;
+        
+        evalutionNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanEvalutionViewCon];
+        evalutionNavCon.navigationBarHidden=YES;
+        
+        kaplanMingXiaoBoLanViewCon = [[kaplanMingXiaoBoLanViewController alloc] initWithNibName:@"kaplanMingXiaoBoLanViewController_4" bundle:nil];
+        kaplanMingXiaoBoLanViewCon.MingXiaoBoLanDelegate=self;
+        
+        kaplanSettingViewCon=[[kaplanSettingViewController alloc] initWithNibName:@"kaplanSettingViewController_4" bundle:nil];
+        kaplanSettingViewCon.settingDelegate=self;
+        SettingViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanSettingViewCon];
+        
+        SchoolsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanMingXiaoBoLanViewCon];
+        SchoolsViewNavCon.navigationBarHidden=YES;
+        NSLog(@"the Device size is 这是四寸屏");
+    }
+    else{
+        NSLog(@"the Device size is 这是3.5寸屏");
+        kaplanSereachMainViewCon=[[kaplanSereachMainViewController alloc] initWithNibName:@"kaplanSereachMainViewController" bundle:nil];
+        kaplanSereachMainViewCon.SereachDelegate=self;
+        searchNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanSereachMainViewCon];
+        searchNavCon.navigationBarHidden=YES;
+        kaplanNewsListViewCon=[[kaplanNewsListViewController alloc] initWithNibName:@"kaplanNewsListViewController" bundle:nil];
+        kaplanNewsListViewCon.NewsListDelegate=self;
+        NewsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanNewsListViewCon];
+        NewsViewNavCon.navigationBarHidden=YES;
+        
+        kaplanEvalutionViewCon=[[kaplanEvalutionViewController alloc] initWithNibName:@"kaplanEvalutionViewController" bundle:nil];
+        kaplanEvalutionViewCon.evalutionDelgate=self;
+        
+        evalutionNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanEvalutionViewCon];
+        evalutionNavCon.navigationBarHidden=YES;
+        
+        kaplanMingXiaoBoLanViewCon = [[kaplanMingXiaoBoLanViewController alloc] initWithNibName:@"kaplanMingXiaoBoLanViewController" bundle:nil];
+        kaplanMingXiaoBoLanViewCon.MingXiaoBoLanDelegate=self;
+        
+        kaplanSettingViewCon=[[kaplanSettingViewController alloc] initWithNibName:@"kaplanSettingViewController" bundle:nil];
+        kaplanSettingViewCon.settingDelegate=self;
+        SettingViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanSettingViewCon];
+        
+        SchoolsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanMingXiaoBoLanViewCon];
+        SchoolsViewNavCon.navigationBarHidden=YES;
+        
+
+        }
+
     self.tabBarController=[[UITabBarController alloc] init];
-    self.tabBarController.viewControllers=[NSArray arrayWithObjects:kaplanSereachMainViewCon,SettingViewNavCon,NewsViewNavCon,evalutionNavCon,SchoolsViewNavCon,nil];
+    self.tabBarController.viewControllers=[NSArray arrayWithObjects:searchNavCon,SettingViewNavCon,NewsViewNavCon,evalutionNavCon,SchoolsViewNavCon,nil];
     if (kaplanRootViewCon) {
         kaplanRootViewCon=nil;
     }
@@ -100,12 +142,12 @@ static kaplanViewController *kaplanRootViewCon;
     kaplanRootViewCon=self;
     backViewShowing=NO;
     self.backViewController=tabBarController;
-    [self.MainScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_index" ]]];
+    [self.MainView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_index" ]]];
     [self addChildViewController:self.backViewController];
     [self.NavBackView addSubview:self.backViewController.view];
     [self hideTabBar];
     [NSTimer scheduledTimerWithTimeInterval:1 target: self selector: @selector(handleTimer:)  userInfo:nil  repeats: YES];
-    page=[[UIPageControl alloc] initWithFrame:CGRectMake(240, 110, 38,36)];
+    page=[[UIPageControl alloc] initWithFrame:CGRectMake(240, 160, 38,36)];
     if ([[UIScreen mainScreen] bounds].size.height>480.00) {
        
         sv=[[UIScrollView alloc] initWithFrame:CGRectMake(10, [[UIScreen mainScreen] bounds].size.height/10, 305, 134)];
@@ -117,51 +159,55 @@ static kaplanViewController *kaplanRootViewCon;
     [svBG setImage:[UIImage imageNamed:@"rolling"]];
     sv.showsHorizontalScrollIndicator=NO;
     sv.backgroundColor=[UIColor clearColor];
-    [MainScrollView layer].shadowPath =[UIBezierPath bezierPathWithRect:MainScrollView.bounds].CGPath;
-    self.MainScrollView.layer.shadowColor=[[UIColor blackColor] CGColor];
-    self.MainScrollView.layer.shadowOffset=CGSizeMake(0,0);
-    self.MainScrollView.layer.shadowRadius=10.0;
-    self.MainScrollView.layer.shadowOpacity=1.0;
-    kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+       kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
     NSMutableDictionary *initInfo=[[NSMutableDictionary alloc] initWithDictionary:[serverHelper checkForInitApp]];
     topListArray=[[NSMutableArray alloc] initWithArray:[initInfo objectForKey:@"topList"]];
     sv.delegate=self;
     [self AdImg:topListArray];
     [self setCurrentPage:page.currentPage];
-    [self.MainScrollView addSubview:svBG];
+    [self.MainView addSubview:svBG];
     //[self.MainScrollView addSubview:self.MainView];
-    [self.MainScrollView addSubview:sv];
-    [self.MainScrollView addSubview:page];
-    if (![[initInfo objectForKey:@"appVersion"] isEqualToString:self.appVersionID])
+    [self.MainView addSubview:sv];
+    [self.MainView addSubview:page];
+    [MainView layer].shadowPath =[UIBezierPath bezierPathWithRect:MainView.bounds].CGPath;
+    self.MainView.layer.shadowColor=[[UIColor blackColor] CGColor];
+    self.MainView.layer.shadowOffset=CGSizeMake(0,0);
+    self.MainView.layer.shadowRadius=10.0;
+    self.MainView.layer.shadowOpacity=1.0;
+;
+    if (![[initInfo objectForKey:@"appVersion"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]])
     {
-        NSLog(@"%@,%@",[initInfo objectForKey:@"appVersion"],self.appVersionID);
-    }else
-        if (![[initInfo objectForKey:@"dbVerID"] isEqualToString:self.dbVerID]) {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"更新信息" message:@"已有新版本，是否前往更新？" delegate:nil cancelButtonTitle:@"不，谢谢" otherButtonTitles:@"好的", nil];
+        [alert show];
+    }
+    else
+    {
+        kaplanSQLIteHelper *sqliteHelper =[kaplanSQLIteHelper sharekaplanSQLIteHelper];
+        if (![[initInfo objectForKey:@"dbVerID"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"dbVerID"]]||![sqliteHelper didDBexists]) {
         UIActionSheet* mySheet = [[UIActionSheet alloc]
-                                  initWithTitle:@"数据库版本过旧"
+                                  initWithTitle:@"数据库版本过旧或损坏"
                                   delegate:self
                                   cancelButtonTitle:@"Cancel"
                                   destructiveButtonTitle:@"更新数据库"
                                   otherButtonTitles:nil];
         [mySheet showInView:self.view];
-
         }else
     {
         [kaplanSettingViewCon.checkDataBase setUserInteractionEnabled:NO];
     }
-    
+    }
 }
 
 #pragma sv
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    page.currentPage=scrollView.contentOffset.x/320;
+    page.currentPage=scrollView.contentOffset.x/305;
     [self setCurrentPage:page.currentPage];
     
     
 }
 -(void)AdImg:(NSMutableArray*)arr{
-    [sv setContentSize:CGSizeMake(320*[arr count], 88)];
+    [sv setContentSize:CGSizeMake(305*[arr count], 88)];
     page.numberOfPages=[arr count];
     
     for ( int i=0; i<[arr count]; i++) {
@@ -173,7 +219,7 @@ static kaplanViewController *kaplanRootViewCon;
          NSString *url=[NSString stringWithFormat:@"http://cd.douho.net%@",[tmpDictionary objectForKey:@"picUrl"]];
          NewImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
          {
-         [img setImage:image forState:UIControlStateNormal];
+         [img setBackgroundImage:image forState:UIControlStateNormal];
          }, ^(void){
          });
     }
@@ -222,8 +268,10 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
 }
 -(void)Action
 {
+    /*
     UIAlertView *alerView=[[UIAlertView alloc] initWithTitle:@"我是广告君" message:@"现在还木有广告哦" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alerView show];
+    [alerView show];*/
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.douho.net"]];
 }
 - (void) setCurrentPage:(NSInteger)secondPage {
     
@@ -279,7 +327,7 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
         CGFloat translation = -305;
-        self.MainScrollView.transform = CGAffineTransformMakeTranslation(translation, 0);
+        self.MainView.transform = CGAffineTransformMakeTranslation(translation, 0);
         [UIView commitAnimations];
         backViewShowing=YES;
        // self.MainView.layer.shadowOpacity=1.0;
@@ -294,7 +342,7 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
         CGFloat translation = 0;
-        self.MainScrollView.transform = CGAffineTransformMakeTranslation(translation, 0);
+        self.MainView.transform = CGAffineTransformMakeTranslation(translation, 0);
         [UIView commitAnimations];
         backViewShowing=NO;
     }
@@ -358,7 +406,7 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5];
     CGFloat translation = -305;
-    self.MainScrollView.transform = CGAffineTransformMakeTranslation(translation, 0);
+    self.MainView.transform = CGAffineTransformMakeTranslation(translation, 0);
     [UIView commitAnimations];
     backViewShowing=YES;
 
@@ -382,8 +430,8 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 }
 
 - (void)viewDidUnload {
-   // [self setMainView:nil];
-    [self setMainScrollView:nil];
+    [self setMainView:nil];
+   // [self setMainScrollView:nil];
     [super viewDidUnload];
 }
 @end

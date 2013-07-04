@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "kaplanMingXiaoDetailPlanViewController.h"
 
-@interface kaplanMingXiaoBoLanViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface kaplanMingXiaoBoLanViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     NSMutableArray *schoolsArrayCH;
     NSMutableArray *schoolArrayEN;
     NSMutableArray *schoolIDArray;
+    NSMutableArray *displayCNArray;
+    NSMutableArray *displayENArray;
 
 }
 @property (strong) id MingXiaoBoLanDelegate;

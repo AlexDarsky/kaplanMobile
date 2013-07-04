@@ -15,8 +15,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+   
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"dbVerID"]==nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"dbVerID"];
+    };
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]==nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"1.1" forKey:@"appVersion"];
+    };
         if ([[UIScreen mainScreen] bounds].size.height>480.00) {
         NSLog(@"the Device size is 这是四寸屏");
        kaplanViewCon = [[kaplanViewController alloc] initWithNibName:@"kaplanViewController_4" bundle:nil];
@@ -27,10 +34,6 @@
         kaplanViewCon = [[kaplanViewController alloc] initWithNibName:@"kaplanViewController" bundle:nil];
 
     }
-    NSDictionary *appInfo=[[NSUserDefaults standardUserDefaults] objectForKey:@"appInfo"];
-    [kaplanViewCon setAppVersionID:[appInfo objectForKey:@"appVersion"]];
-    [kaplanViewCon setDbVerID:[appInfo objectForKey:@"dbVerID"]];
-
     self.window.rootViewController = self.kaplanViewCon;
     [self.window makeKeyAndVisible];
     return YES;

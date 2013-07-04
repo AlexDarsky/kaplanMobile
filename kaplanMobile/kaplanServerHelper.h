@@ -18,8 +18,11 @@
 -(void)updateSQLite;
 -(NSArray*)LoadListAtPage:(int)pageNum;
 -(NSArray*)getCityLoadList;
+-(NSArray*)getCityChildLoadList:(NSString*)subID;
 -(NSArray*)getClassLoadList;
 -(NSArray*)getCountryList;
 -(BOOL)sendEvalutionToServer:(NSString*)jsonString;
 -(NSArray*)getSchoolListAtPage:(int)pageNum;
+-(NSDictionary*)getSchoolDetail:(NSString*)schoolID;
+-(NSDictionary*)getNewDetailByID:(NSString*)newID;
 @end

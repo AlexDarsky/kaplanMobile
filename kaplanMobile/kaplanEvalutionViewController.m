@@ -17,7 +17,7 @@
 
 @implementation kaplanEvalutionViewController
 @synthesize CustomNavBar;
-@synthesize evalutionDelgate;
+@synthesize evalutionDelgate,grandChild;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,6 +49,9 @@
     // Do any additional setup after loading the view from its nib.
     evalutionChildViewController=[[kaplanEvalutionChildViewController alloc] initWithNibName:@"kaplanEvalutionChildViewController" bundle:nil];
     evalutionChildViewController.evalutionChildDelegate=self;
+    grandChild=[kaplanEvalutionGrandChildViewController sharekaplanEvalutionGrandChildViewController];
+    grandChild.evalutionGrandChildDelegate=self;
+    
 
 }
 - (IBAction)goToChildViewCon:(id)sender
@@ -86,12 +89,12 @@
 }
 -(void)setEducation:(NSString*)education andID:(int)idNumber
 {
-    [self.ChoiceEducationBtn.titleLabel setText:education];
+    [self.ChoiceEducationBtn.titleLabel setText:[NSString stringWithFormat:@"  %@",education]];
     degreeID=idNumber;
 }
 -(void)setDestination:(NSString*)destination andID:(int)idNumber
 {
-    [self.ChoiceCountryBtn.titleLabel setText:destination];
+    [self.ChoiceCountryBtn.titleLabel setText:[NSString stringWithFormat:@"  %@",destination]];
     countryID=idNumber;
 }
 - (IBAction)submitEvalution:(id)sender

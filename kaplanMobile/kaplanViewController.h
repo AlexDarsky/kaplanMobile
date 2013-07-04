@@ -17,20 +17,20 @@
     UIPageControl *page;
     NSMutableArray *topListArray;
     int TimeNum;
+    int downloadImgNumber;
     BOOL Tend;
  
     
 }
-@property (weak, nonatomic) IBOutlet UIScrollView *MainScrollView;
+@property (weak, nonatomic) IBOutlet UIView *MainView;
 //@property (strong, nonatomic) IBOutlet UIView *MainView;
 @property (strong, nonatomic) IBOutlet UIView *NavBackView;
 @property (strong,nonatomic) UITabBarController *tabBarController;
+@property (strong,nonatomic) UINavigationController *searchNavCon;
 @property (strong,nonatomic) UINavigationController *evalutionNavCon;
 @property (strong,nonatomic) UINavigationController *SchoolsViewNavCon;
 @property (strong,nonatomic) UINavigationController *NewsViewNavCon;
 @property (strong,nonatomic) UINavigationController *SettingViewNavCon;
 @property (strong,nonatomic) kaplanSettingViewController *kaplanSettingViewCon;
-@property (strong,nonatomic) NSString *dbVerID;
-@property (strong,nonatomic) NSString *appVersionID;
 -(IBAction)showBackView:(id)sender;
 @end

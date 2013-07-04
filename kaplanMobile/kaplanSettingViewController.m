@@ -18,6 +18,7 @@
 @implementation kaplanSettingViewController
 @synthesize settingDelegate;
 @synthesize checkDataBase;
+@synthesize testButton;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -30,6 +31,8 @@
         self.CustomNavBar.layer.shadowOffset=CGSizeMake(0,0);
         self.CustomNavBar.layer.shadowRadius=10.0;
         self.CustomNavBar.layer.shadowOpacity=1.0;
+        testButton.hidden=YES;
+        
 
     }
     return self;
@@ -61,7 +64,7 @@
 }
 - (IBAction)testDemo:(id)sender
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/school.aspx?action=loadlist&id=239"];
+    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/school.aspx?action=Detail&id=49&app=0"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];

@@ -20,5 +20,5 @@
 @property (strong, nonatomic) NSString  *newsImageURL;
 +(kaplanNewsListChildViewController*)sharekaplanNewsListChildViewController;
 -(void)reloadNewInfomation:(NSString*)title text:(NSString*)newText andImage:(NSString*)newsImage;
-
+-(void)reloadNewInfomationByID:(NSString *)newID;
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "kaplanEvalutionGrandChildViewController.h"
+@class kaplanEvalutionGrandChildViewController;
 @interface kaplanEvalutionChildViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray *nameArray;
@@ -19,5 +20,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *modeLabel;
 
+
 -(void)reloadListForMode:(int)targetMode;
+-(void)setSubCity:(NSString*)cityName :(NSString*)grandChildID;
 @end

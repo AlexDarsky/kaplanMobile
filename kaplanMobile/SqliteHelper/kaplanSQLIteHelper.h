@@ -18,5 +18,10 @@
 +(kaplanSQLIteHelper*)sharekaplanSQLIteHelper;
 -(void)openDB;
 -(void)queryDB:(NSString*)queryString;
+-(BOOL)didDBexists;
 -(NSMutableArray*)querySchoolsFromDB:(NSString*)queryString;
+-(NSMutableArray*)querySchoolsFromDBBy:(NSString*)parameter1 :(NSString*)parameter2 :(NSString*)parameter3;
+-(NSMutableArray*)querySchoolsFromDBBy:(NSString*)parameter1 :(NSString*)parameter2 :(NSString*)parameter3 forMode:(int)mode;
+-(NSMutableArray*)getSchoolAllClass:(NSString*)schoolName;
+-(NSMutableArray*)queryAllSchoolsByClass;
 @end

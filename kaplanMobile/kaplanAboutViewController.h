@@ -10,5 +10,6 @@
 
 @interface kaplanAboutViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIView *CustomNavBar;
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
 +(kaplanAboutViewController*)sharekaplanAboutViewController;
 @end

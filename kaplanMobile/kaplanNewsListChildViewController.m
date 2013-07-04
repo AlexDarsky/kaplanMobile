@@ -8,14 +8,16 @@
 
 #import "kaplanNewsListChildViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "kaplanServerHelper.h"
 @interface kaplanNewsListChildViewController ()
 
 @end
 
 @implementation kaplanNewsListChildViewController
-static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController = nil;
+
 @synthesize tableView,CustomNavBar;
 @synthesize newsImageURL,newsTitleLabel,newsWebView;
+static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController = nil;
 +(kaplanNewsListChildViewController*)sharekaplanNewsListChildViewController
 {
     if (sharekaplanNewsListChildViewController == nil) {
@@ -35,11 +37,12 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
         self.CustomNavBar.layer.shadowOffset=CGSizeMake(0,0);
         self.CustomNavBar.layer.shadowRadius=10.0;
         self.CustomNavBar.layer.shadowOpacity=1.0;
-        newsTitleLabel=[[UILabel alloc] initWithFrame:CGRectMake(60, 10, 200, 20)];
+        newsTitleLabel=[[UILabel alloc] initWithFrame:CGRectMake(80, 10, 200, 20)];
         newsTitleLabel.textColor=[UIColor whiteColor];
         newsTitleLabel.backgroundColor=[UIColor clearColor];
         newsWebView=[[UIWebView alloc] init];
         newsWebView.backgroundColor=[UIColor clearColor];
+        newsWebView.opaque = NO;
 
     }
     return self;
@@ -60,6 +63,16 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
     self.newsImageURL=newsImage;
     [self.tableView reloadData];
 }
+-(void)reloadNewInfomationByID:(NSString *)newID
+{
+    kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+    NSMutableDictionary *newDetail=[[NSMutableDictionary alloc] initWithDictionary:[serverHelper getNewDetailByID:newID]];
+    [self.newsTitleLabel setText:[newDetail objectForKey:@"title"]];
+    [self.newsWebView loadHTMLString:[newDetail objectForKey:@"newsText"] baseURL:nil];
+    self.newsImageURL=[newDetail objectForKey:@"picUrl"];
+    [self.tableView reloadData];
+
+}
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 2;
@@ -73,10 +86,10 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row==0) {
-        return 62.0;
+        return 52.0;
     }else
     {
-        return 381.0;
+        return 391.0;
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -85,11 +98,11 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     if (indexPath.row==0)
     {
-        UIImageView *iconImg=[[UIImageView alloc] initWithFrame:CGRectMake(40, 10, 15, 15)];
+        UIImageView *iconImg=[[UIImageView alloc] initWithFrame:CGRectMake(60, 10, 15, 15)];
         iconImg.image=[UIImage imageNamed:@"dot"];
         [cell.contentView addSubview:iconImg];
         [cell.contentView addSubview:newsTitleLabel];
-        UIImageView *customSeparator=[[UIImageView alloc] initWithFrame:CGRectMake(14, 61, 282, 1)];
+        UIImageView *customSeparator=[[UIImageView alloc] initWithFrame:CGRectMake(14, 52, 282, 1)];
         customSeparator.image=[UIImage imageNamed:@"line"];
         [cell.contentView addSubview:customSeparator];
         
@@ -97,20 +110,21 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
     {
         if (![self.newsImageURL isEqualToString:@"NULL"]) {
             UIImageView *newIV=[[UIImageView alloc] initWithFrame:CGRectMake(60, 10, 235, 131)];
-            NSString *url=self.newsImageURL;
+            NSString *url=[NSString stringWithFormat:@"http://cd.douho.net%@",self.newsImageURL];
             [cell.contentView addSubview:newIV];
             newImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
                            {
                                [newIV setImage:image];
                            }, ^(void){
                            });
-
             self.newsWebView.frame=CGRectMake(60, 160, 235, 200);
             [cell.contentView addSubview:self.newsWebView];
+
            
             
         }else
         {
+
             self.newsWebView.frame=CGRectMake(60, 10, 235, 200);
             [cell.contentView addSubview:self.newsWebView];
      
