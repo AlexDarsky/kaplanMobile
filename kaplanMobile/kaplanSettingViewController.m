@@ -19,6 +19,7 @@
 @synthesize settingDelegate;
 @synthesize checkDataBase;
 @synthesize testButton;
+@synthesize aboutViewController;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,6 +47,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.navigationController setNavigationBarHidden:YES];
+    if ([[UIScreen mainScreen] bounds].size.height>480.00)
+    {
+        aboutViewController=[[kaplanAboutViewController alloc] initWithNibName:@"kaplanAboutViewController_4" bundle:nil];
+    }else
+    {
+        aboutViewController=[[kaplanAboutViewController alloc] initWithNibName:@"kaplanAboutViewController" bundle:nil];
+    }
+    
 
 }
 - (IBAction)updateDataBase:(id)sender
@@ -59,8 +68,7 @@
 }
 -(IBAction)pushToAboutUS:(id)sender
 {
-    kaplanAboutViewController *kaplanAboutViewCon=[kaplanAboutViewController sharekaplanAboutViewController];
-    [self.navigationController pushViewController:kaplanAboutViewCon animated:YES];
+    [self.navigationController pushViewController:aboutViewController animated:YES];
 }
 - (IBAction)testDemo:(id)sender
 {

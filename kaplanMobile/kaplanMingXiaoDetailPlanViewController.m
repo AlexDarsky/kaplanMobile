@@ -383,19 +383,52 @@ void SchoolLogoFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (
 
 - (IBAction)shareBtn:(id)sender
 {
-    NSString *postText = [NSString stringWithFormat:@"我在 kaplan官方客户端上发现了 %@，%@",schoolNameCN,self.schoolTextView];
-    NSArray *activityItems = @[postText];
-    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems
-                                                                                     applicationActivities:nil];
-    activityController.excludedActivityTypes = (@[
-                                                UIActivityTypeAssignToContact,
-                                                UIActivityTypeMail,
-                                                UIActivityTypeMessage,
-                                                UIActivityTypePrint,
-                                                UIActivityTypeSaveToCameraRoll
-                                                ]);
+    UIMenuBarItem *menuItem1 = [[UIMenuBarItem alloc] initWithTitle:@"分享到微信" target:self image:[UIImage imageNamed:@"micro_messenger.png"] action:@selector(shareToWeiXin)];
+    NSMutableArray *items =
+    //[NSMutableArray arrayWithObjects:menuItem1, menuItem2, menuItem3,nil];
+    //[NSMutableArray arrayWithObjects:menuItem1, menuItem2, menuItem3,  menuItem4, menuItem5, menuItem6, nil];
+    [NSMutableArray arrayWithObjects:menuItem1,nil];
+
+    menuBar = [[UIMenuBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 240.0f) items:items];
+    //menuBar.layer.borderWidth = 1.f;
+    //menuBar.layer.borderColor = [[UIColor orangeColor] CGColor];
+    //menuBar.tintColor = [UIColor orangeColor];
+    menuBar.delegate = self;
     
-    [self presentViewController:activityController animated:YES completion:NULL];
+    //menuBar.items = [NSMutableArray arrayWithObjects:menuItem1, menuItem2, menuItem3,nil];
+    //menuBar.items = [NSMutableArray arrayWithObjects:menuItem1, menuItem2, menuItem3,  menuItem4, menuItem5, menuItem6, nil];
+    
+    menuBar.items = [NSMutableArray arrayWithObjects:menuItem1,nil];
+    
+    [menuBar show];
+
+}
+-(void)shareToWeiXin
+{
+     [menuBar dismiss];
+    if ([WXApi isWXAppInstalled] && [WXApi isWXAppSupportApi]) {
+        
+        WXMediaMessage *message = [WXMediaMessage message];
+        message.title = @"kaplan名校分享";
+        message.description =[NSString stringWithFormat:@"我在kaplan官方手机端上发现了 %@,%@",self.schoolNameCN,self.schoolTextView];
+        [message setThumbImage:[UIImage imageNamed:@"Icon"]];
+        WXAppExtendObject *appExt=[WXAppExtendObject object];
+        [appExt setExtInfo:[NSString stringWithFormat:@"我在kaplan官方手机端上发现了 %@,%@",self.schoolNameCN,self.schoolTextView]];
+        
+        message.mediaObject =appExt;
+        
+        SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+        req.bText = NO;
+        req.message = message;
+        req.scene = _scene;
+        
+        [WXApi sendReq:req];
+    }else{
+        UIAlertView *alView = [[UIAlertView alloc]initWithTitle:@"" message:@"你的iPhone上还没有安装微信,无法使用此功能，使用微信可以方便的把你喜欢的作品分享给好友。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"免费下载微信", nil];
+        [alView show];
+        
+    }
+    
 
 }
 -(void)openBrower

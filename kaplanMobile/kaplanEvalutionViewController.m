@@ -99,21 +99,30 @@
 }
 - (IBAction)submitEvalution:(id)sender
 {
-    NSString *submitString=[NSString stringWithFormat:@"{\"cityID\":\"%d\",\"degreeID\":\"%d\",\"countryID\":\"%d\",\"name\":\"%@\",\"email\":\"%@\",\"phone\":\"%@\"}",cityID,degreeID,countryID,self.userName.text,self.userEmail.text,self.userNumber.text];
-    NSDictionary *submitDic=[[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d",cityID],@"cityID",[NSString stringWithFormat:@"%d",degreeID],@"degreeID",[NSString stringWithFormat:@"%d",countryID],@"countryID",self.userName.text,@"name",self.userEmail.text,@"email",self.userNumber.text,@"phone", nil];
-    if ([NSJSONSerialization isValidJSONObject:submitDic]) {
-        kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
-        if ([serverHelper sendEvalutionToServer:submitString]) {
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"在线评估" message:@"保存评估资料成功，我们的顾问将会尽快将评估结果通知给您。" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alert show];
-        }else{
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"在线评估" message:@"保存评估资料失败。" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+
+    kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+    if ([serverHelper connectedToNetwork]) {
+        NSString *submitString=[NSString stringWithFormat:@"{\"cityID\":\"%d\",\"degreeID\":\"%d\",\"countryID\":\"%d\",\"name\":\"%@\",\"email\":\"%@\",\"phone\":\"%@\"}",cityID,degreeID,countryID,self.userName.text,self.userEmail.text,self.userNumber.text];
+        NSDictionary *submitDic=[[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d",cityID],@"cityID",[NSString stringWithFormat:@"%d",degreeID],@"degreeID",[NSString stringWithFormat:@"%d",countryID],@"countryID",self.userName.text,@"name",self.userEmail.text,@"email",self.userNumber.text,@"phone", nil];
+        if ([NSJSONSerialization isValidJSONObject:submitDic]) {
+            
+            if ([serverHelper sendEvalutionToServer:submitString]) {
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"在线评估" message:@"保存评估资料成功，我们的顾问将会尽快将评估结果通知给您。" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }else{
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"在线评估" message:@"保存评估资料失败。" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }
+        }else
+        {
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"错误" message:@"评估失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
             [alert show];
         }
+
     }else
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"错误" message:@"评估失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-    [alert show];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"错误" message:@"网络连接失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
     }
 }
 - (void)didReceiveMemoryWarning

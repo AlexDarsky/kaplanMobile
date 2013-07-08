@@ -411,41 +411,48 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">24</int>
 						<reference key="object" ref="115488913"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="928453364"/>
 						<string key="objectName">btn_subjects</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">25</int>
 						<reference key="object" ref="49013171"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="928453364"/>
 						<string key="objectName">btn_about</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">26</int>
 						<reference key="object" ref="135705527"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="928453364"/>
 						<string key="objectName">btn_evalution</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">27</int>
 						<reference key="object" ref="450759211"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="928453364"/>
 						<string key="objectName">btn_news</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">30</int>
 						<reference key="object" ref="153560806"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="928453364"/>
 						<string key="objectName">btn_expo</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">36</int>
 						<reference key="object" ref="736444905"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="928453364"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">37</int>
 						<reference key="object" ref="74309859"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="928453364"/>
 						<string key="objectName">btn_setup</string>
 					</object>
@@ -477,7 +484,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">77</int>
+			<int key="maxID">113</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

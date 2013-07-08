@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "kaplanEvalutionChildViewController.h"
 
+
 @interface kaplanNewsListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 {
     NSMutableArray *newsidArray;
     NSMutableArray *newsTitleArray;
     NSMutableArray *newsPreArray;
     NSMutableArray *newsImageArray;
+
 }
 
 @property (strong) id NewsListDelegate;

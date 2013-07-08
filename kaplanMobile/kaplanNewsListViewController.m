@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SVProgressHUD.h"
 #import "kaplanServerHelper.h"
+#import "UIScrollView+AH3DPullRefresh.h"
 
 @interface kaplanNewsListViewController ()
 
@@ -33,7 +34,6 @@
         self.CustomNavBar.layer.shadowOffset=CGSizeMake(0,0);
         self.CustomNavBar.layer.shadowRadius=10.0;
         self.CustomNavBar.layer.shadowOpacity=1.0;
-       
             }
    
     return self;
@@ -48,31 +48,70 @@
     newsTitleArray=[[NSMutableArray alloc] initWithCapacity:0];
     newsPreArray=[[NSMutableArray alloc]initWithCapacity:0];
     newsImageArray=[[NSMutableArray alloc] initWithCapacity:0];
+    [self.NewsTableView setPullToRefreshHandler:^{
+        NSArray *newImage=[NSArray arrayWithObject:@"blank"];
+        [self performSelector:@selector(doneLoadingTableViewData) withObject:newImage afterDelay:0.1];
+    }];
+
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:YES];
-    if ([newsTitleArray count]<=0) {
-        // [SVProgressHUD showWithStatus:@"载入中，请稍等"];
-        kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
-        NSArray *loadArray=[[NSArray alloc] initWithArray:[serverHelper LoadListAtPage:1]];
-        for (NSDictionary *newInfo in loadArray) {
-            [newsidArray addObject:[newInfo objectForKey:@"id"]];
-            [newsTitleArray addObject:[newInfo objectForKey:@"title"]];
-            if ([newInfo objectForKey:@"intro"]!=nil) {
-                [newsPreArray addObject:[newInfo objectForKey:@"intro"]]; 
-            }else
-            {NSLog(@"intro NULL");
-            [newsPreArray addObject:@"NULL"];
+     kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+    if ([serverHelper connectedToNetwork]) {
+        if ([newsTitleArray count]<=0) {
+            // [SVProgressHUD showWithStatus:@"载入中，请稍等"];
+            kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+            NSArray *loadArray=[[NSArray alloc] initWithArray:[serverHelper LoadListAtPage:1]];
+            for (NSDictionary *newInfo in loadArray) {
+                [newsidArray addObject:[newInfo objectForKey:@"id"]];
+                [newsTitleArray addObject:[newInfo objectForKey:@"title"]];
+                if ([newInfo objectForKey:@"intro"]!=nil) {
+                    [newsPreArray addObject:[newInfo objectForKey:@"intro"]];
+                }else
+                {NSLog(@"intro NULL");
+                    [newsPreArray addObject:@"NULL"];
+                }
+                [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
             }
-            [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
+            [self.NewsTableView beginUpdates];
+            [self.NewsTableView reloadData];
+            [self.NewsTableView endUpdates];
+            // [SVProgressHUD dismissWithSuccess:@"读取完成"];
         }
-        [self.NewsTableView beginUpdates];
-        [self.NewsTableView reloadData];
-        [self.NewsTableView endUpdates];
-       // [SVProgressHUD dismissWithSuccess:@"读取完成"];
     }
+
 }
+
+- (void)doneLoadingTableViewData{
+    NSLog(@"===加载完数据");
+     [self.NewsTableView refreshFinished];
+    if ([newsidArray count]>0) {
+        [newsidArray removeAllObjects];
+        [newsImageArray removeAllObjects];
+        [newsPreArray removeAllObjects];
+        [newsTitleArray removeAllObjects];
+    }
+    kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+    NSArray *loadArray=[[NSArray alloc] initWithArray:[serverHelper LoadListAtPage:1]];
+    for (NSDictionary *newInfo in loadArray) {
+        [newsidArray addObject:[newInfo objectForKey:@"id"]];
+        [newsTitleArray addObject:[newInfo objectForKey:@"title"]];
+        if ([newInfo objectForKey:@"intro"]!=nil) {
+            [newsPreArray addObject:[newInfo objectForKey:@"intro"]];
+        }else
+        {NSLog(@"intro NULL");
+            [newsPreArray addObject:@"NULL"];
+        }
+        [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
+    }
+    [self.NewsTableView beginUpdates];
+    [self.NewsTableView reloadData];
+    [self.NewsTableView endUpdates];
+}
+
+
+
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [newsTitleArray count];
@@ -172,6 +211,7 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
                        });
                    });
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

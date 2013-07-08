@@ -57,7 +57,6 @@
 		609783A617754058002D1D11 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 609783A517754058002D1D11 /* line.png */; };
 		6099A92817859F3A00B11216 /* kaplanMingXiaoBoLanViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6099A92717859F3A00B11216 /* kaplanMingXiaoBoLanViewController_4.xib */; };
 		6099A92A1785A0D600B11216 /* kaplanMingXiaoDetailPlanViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6099A9291785A0D600B11216 /* kaplanMingXiaoDetailPlanViewController_4.xib */; };
-		6099A92C1785A34600B11216 /* kaplanSereachMainViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6099A92B1785A34600B11216 /* kaplanSereachMainViewController_4.xib */; };
 		6099A92E1785A3F300B11216 /* kaplanNewsListViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6099A92D1785A3F300B11216 /* kaplanNewsListViewController_4.xib */; };
 		6099A9301785A4FB00B11216 /* kaplanEvalutionViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6099A92F1785A4FB00B11216 /* kaplanEvalutionViewController_4.xib */; };
 		6099A9321785A52200B11216 /* kaplanSettingViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6099A9311785A52200B11216 /* kaplanSettingViewController_4.xib */; };
@@ -82,6 +81,10 @@
 		609C8E2D1785873E00061ADA /* 10009.png in Resources */ = {isa = PBXBuildFile; fileRef = 609C8E211785873E00061ADA /* 10009.png */; };
 		609C8E2E1785873E00061ADA /* 10010.png in Resources */ = {isa = PBXBuildFile; fileRef = 609C8E221785873E00061ADA /* 10010.png */; };
 		609C8E2F1785873E00061ADA /* animationImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 609C8E241785873E00061ADA /* animationImageView.m */; };
+		609EDE1F178702590050D992 /* libWeChatSDK_armv7_armv7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 609EDE1C178702590050D992 /* libWeChatSDK_armv7_armv7s.a */; };
+		609EDE251787041F0050D992 /* UIMenuBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 609EDE221787041F0050D992 /* UIMenuBar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		609EDE261787041F0050D992 /* UIMenuBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 609EDE241787041F0050D992 /* UIMenuBarItem.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		609EDE28178705230050D992 /* micro_messenger.png in Resources */ = {isa = PBXBuildFile; fileRef = 609EDE27178705230050D992 /* micro_messenger.png */; };
 		609F84F91773816A006903E4 /* btn_inquiry.png in Resources */ = {isa = PBXBuildFile; fileRef = 609F84F81773816A006903E4 /* btn_inquiry.png */; };
 		609F84FC1773876F006903E4 /* rolling_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 609F84FA1773876F006903E4 /* rolling_selected.png */; };
 		609F84FD1773876F006903E4 /* rolling_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 609F84FB1773876F006903E4 /* rolling_unselected.png */; };
@@ -99,6 +102,8 @@
 		609FD56817736D24006FEB45 /* btn_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 609FD56717736D24006FEB45 /* btn_selected.png */; };
 		60A028251774ABFB006399F6 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A028221774ABFB006399F6 /* DownloadManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		60A028261774ABFB006399F6 /* NSURL+Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A028241774ABFB006399F6 /* NSURL+Download.m */; };
+		60A0C7071786D02D00520EDF /* kaplanSereachMainViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A0C7061786D02D00520EDF /* kaplanSereachMainViewController_4.xib */; };
+		60A0C7231786D84900520EDF /* UIScrollView+AH3DPullRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A0C7221786D84900520EDF /* UIScrollView+AH3DPullRefresh.m */; };
 		60A0DCA317724E7D004F6211 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A0DCA217724E7D004F6211 /* UIKit.framework */; };
 		60A0DCA517724E7D004F6211 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A0DCA417724E7D004F6211 /* Foundation.framework */; };
 		60A0DCA717724E7D004F6211 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A0DCA617724E7D004F6211 /* CoreGraphics.framework */; };
@@ -117,6 +122,8 @@
 		60A117CA17746DB200D6A2A7 /* new1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 60A117C917746DB200D6A2A7 /* new1.jpg */; };
 		60A1BBFA1778A97300BAA50B /* btn_back2.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A1BBF91778A97300BAA50B /* btn_back2.png */; };
 		60A1BBFC1778B09300BAA50B /* SanDomenico.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 60A1BBFB1778B09300BAA50B /* SanDomenico.jpg */; };
+		60A23F4E178ABA2A002F5163 /* kaplanSearchChildViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A23F4C178ABA2A002F5163 /* kaplanSearchChildViewController_4.xib */; };
+		60A23F4F178ABA2A002F5163 /* kaplanSearchDetailViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A23F4D178ABA2A002F5163 /* kaplanSearchDetailViewController_4.xib */; };
 		60A87B871773398B008EDF24 /* kaplanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A87B851773398B008EDF24 /* kaplanViewController.xib */; };
 		60A87B8D17733D8A008EDF24 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A87B8C17733D8A008EDF24 /* QuartzCore.framework */; };
 		60A87B9517734B04008EDF24 /* kaplanAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A87B9317734B04008EDF24 /* kaplanAboutViewController.m */; };
@@ -127,6 +134,7 @@
 		60A87BA017734B32008EDF24 /* kaplanSereachMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A87B9E17734B32008EDF24 /* kaplanSereachMainViewController.xib */; };
 		60A87BA517734C9D008EDF24 /* kaplanEvalutionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A87BA317734C9D008EDF24 /* kaplanEvalutionViewController.m */; };
 		60A87BA617734C9D008EDF24 /* kaplanEvalutionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A87BA417734C9D008EDF24 /* kaplanEvalutionViewController.xib */; };
+		60D1F0CB17887ADC00A0BCD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D1F0CA17887ADC00A0BCD2 /* SystemConfiguration.framework */; };
 		D68400931772BB8000DB94C1 /* bg_index.png in Resources */ = {isa = PBXBuildFile; fileRef = D684008A1772BB8000DB94C1 /* bg_index.png */; };
 		D68400941772BB8000DB94C1 /* btn_about.png in Resources */ = {isa = PBXBuildFile; fileRef = D684008B1772BB8000DB94C1 /* btn_about.png */; };
 		D68400951772BB8000DB94C1 /* btn_evalution.png in Resources */ = {isa = PBXBuildFile; fileRef = D684008C1772BB8000DB94C1 /* btn_evalution.png */; };
@@ -197,7 +205,6 @@
 		609783A517754058002D1D11 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		6099A92717859F3A00B11216 /* kaplanMingXiaoBoLanViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanMingXiaoBoLanViewController_4.xib; sourceTree = "<group>"; };
 		6099A9291785A0D600B11216 /* kaplanMingXiaoDetailPlanViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanMingXiaoDetailPlanViewController_4.xib; sourceTree = "<group>"; };
-		6099A92B1785A34600B11216 /* kaplanSereachMainViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanSereachMainViewController_4.xib; sourceTree = "<group>"; };
 		6099A92D1785A3F300B11216 /* kaplanNewsListViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanNewsListViewController_4.xib; sourceTree = "<group>"; };
 		6099A92F1785A4FB00B11216 /* kaplanEvalutionViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanEvalutionViewController_4.xib; sourceTree = "<group>"; };
 		6099A9311785A52200B11216 /* kaplanSettingViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanSettingViewController_4.xib; sourceTree = "<group>"; };
@@ -227,6 +234,14 @@
 		609C8E221785873E00061ADA /* 10010.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10010.png; sourceTree = "<group>"; };
 		609C8E231785873E00061ADA /* animationImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animationImageView.h; sourceTree = "<group>"; };
 		609C8E241785873E00061ADA /* animationImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = animationImageView.m; sourceTree = "<group>"; };
+		609EDE1C178702590050D992 /* libWeChatSDK_armv7_armv7s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK_armv7_armv7s.a; sourceTree = "<group>"; };
+		609EDE1D178702590050D992 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		609EDE1E178702590050D992 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		609EDE211787041F0050D992 /* UIMenuBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMenuBar.h; sourceTree = "<group>"; };
+		609EDE221787041F0050D992 /* UIMenuBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMenuBar.m; sourceTree = "<group>"; };
+		609EDE231787041F0050D992 /* UIMenuBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMenuBarItem.h; sourceTree = "<group>"; };
+		609EDE241787041F0050D992 /* UIMenuBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMenuBarItem.m; sourceTree = "<group>"; };
+		609EDE27178705230050D992 /* micro_messenger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = micro_messenger.png; sourceTree = "<group>"; };
 		609F84F81773816A006903E4 /* btn_inquiry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_inquiry.png; sourceTree = "<group>"; };
 		609F84FA1773876F006903E4 /* rolling_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rolling_selected.png; sourceTree = "<group>"; };
 		609F84FB1773876F006903E4 /* rolling_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rolling_unselected.png; sourceTree = "<group>"; };
@@ -247,6 +262,9 @@
 		60A028221774ABFB006399F6 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
 		60A028231774ABFB006399F6 /* NSURL+Download.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Download.h"; sourceTree = "<group>"; };
 		60A028241774ABFB006399F6 /* NSURL+Download.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Download.m"; sourceTree = "<group>"; };
+		60A0C7061786D02D00520EDF /* kaplanSereachMainViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanSereachMainViewController_4.xib; sourceTree = "<group>"; };
+		60A0C7211786D84900520EDF /* UIScrollView+AH3DPullRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+AH3DPullRefresh.h"; sourceTree = "<group>"; };
+		60A0C7221786D84900520EDF /* UIScrollView+AH3DPullRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+AH3DPullRefresh.m"; sourceTree = "<group>"; };
 		60A0DC9F17724E7D004F6211 /* kaplanMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kaplanMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60A0DCA217724E7D004F6211 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		60A0DCA417724E7D004F6211 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -270,6 +288,8 @@
 		60A117C917746DB200D6A2A7 /* new1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = new1.jpg; sourceTree = "<group>"; };
 		60A1BBF91778A97300BAA50B /* btn_back2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back2.png; sourceTree = "<group>"; };
 		60A1BBFB1778B09300BAA50B /* SanDomenico.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SanDomenico.jpg; sourceTree = "<group>"; };
+		60A23F4C178ABA2A002F5163 /* kaplanSearchChildViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanSearchChildViewController_4.xib; sourceTree = "<group>"; };
+		60A23F4D178ABA2A002F5163 /* kaplanSearchDetailViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanSearchDetailViewController_4.xib; sourceTree = "<group>"; };
 		60A87B8317733310008EDF24 /* SideBarSelectedDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideBarSelectedDelegate.h; sourceTree = "<group>"; };
 		60A87B861773398B008EDF24 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/kaplanViewController.xib; sourceTree = "<group>"; };
 		60A87B8C17733D8A008EDF24 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -285,6 +305,7 @@
 		60A87BA217734C9D008EDF24 /* kaplanEvalutionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kaplanEvalutionViewController.h; sourceTree = "<group>"; };
 		60A87BA317734C9D008EDF24 /* kaplanEvalutionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kaplanEvalutionViewController.m; sourceTree = "<group>"; };
 		60A87BA417734C9D008EDF24 /* kaplanEvalutionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanEvalutionViewController.xib; sourceTree = "<group>"; };
+		60D1F0CA17887ADC00A0BCD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D684008A1772BB8000DB94C1 /* bg_index.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_index.png; sourceTree = "<group>"; };
 		D684008B1772BB8000DB94C1 /* btn_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_about.png; sourceTree = "<group>"; };
 		D684008C1772BB8000DB94C1 /* btn_evalution.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_evalution.png; sourceTree = "<group>"; };
@@ -301,12 +322,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60D1F0CB17887ADC00A0BCD2 /* SystemConfiguration.framework in Frameworks */,
 				609AC56717851F3300E378E9 /* Social.framework in Frameworks */,
 				0FCFD8EF178290E20029FEE4 /* libsqlite3.0.dylib in Frameworks */,
 				60A87B8D17733D8A008EDF24 /* QuartzCore.framework in Frameworks */,
 				60A0DCA317724E7D004F6211 /* UIKit.framework in Frameworks */,
 				60A0DCA517724E7D004F6211 /* Foundation.framework in Frameworks */,
 				60A0DCA717724E7D004F6211 /* CoreGraphics.framework in Frameworks */,
+				609EDE1F178702590050D992 /* libWeChatSDK_armv7_armv7s.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +410,8 @@
 		6095D0921783E7E9001A0C16 /* Child */ = {
 			isa = PBXGroup;
 			children = (
+				60A23F4C178ABA2A002F5163 /* kaplanSearchChildViewController_4.xib */,
+				60A23F4D178ABA2A002F5163 /* kaplanSearchDetailViewController_4.xib */,
 				609AC561178511D400E378E9 /* kaplanSearchDetailViewController.h */,
 				609AC562178511D400E378E9 /* kaplanSearchDetailViewController.m */,
 				609AC563178511D400E378E9 /* kaplanSearchDetailViewController.xib */,
@@ -425,6 +450,30 @@
 				609C8E241785873E00061ADA /* animationImageView.m */,
 			);
 			path = animationClass;
+			sourceTree = "<group>";
+		};
+		609EDE1B178702590050D992 /* WeiXinSDK */ = {
+			isa = PBXGroup;
+			children = (
+				609EDE1C178702590050D992 /* libWeChatSDK_armv7_armv7s.a */,
+				609EDE1D178702590050D992 /* WXApi.h */,
+				609EDE1E178702590050D992 /* WXApiObject.h */,
+			);
+			name = WeiXinSDK;
+			path = ../WeiXinSDK;
+			sourceTree = "<group>";
+		};
+		609EDE20178704020050D992 /* ShareView */ = {
+			isa = PBXGroup;
+			children = (
+				609EDE1B178702590050D992 /* WeiXinSDK */,
+				609EDE27178705230050D992 /* micro_messenger.png */,
+				609EDE211787041F0050D992 /* UIMenuBar.h */,
+				609EDE221787041F0050D992 /* UIMenuBar.m */,
+				609EDE231787041F0050D992 /* UIMenuBarItem.h */,
+				609EDE241787041F0050D992 /* UIMenuBarItem.m */,
+			);
+			name = ShareView;
 			sourceTree = "<group>";
 		};
 		609FD55517735B51006FEB45 /* Child */ = {
@@ -481,9 +530,19 @@
 			path = FFViews;
 			sourceTree = "<group>";
 		};
+		60A0C7201786D82D00520EDF /* RefreshView */ = {
+			isa = PBXGroup;
+			children = (
+				60A0C7211786D84900520EDF /* UIScrollView+AH3DPullRefresh.h */,
+				60A0C7221786D84900520EDF /* UIScrollView+AH3DPullRefresh.m */,
+			);
+			name = RefreshView;
+			sourceTree = "<group>";
+		};
 		60A0DC9617724E7D004F6211 = {
 			isa = PBXGroup;
 			children = (
+				60D1F0CA17887ADC00A0BCD2 /* SystemConfiguration.framework */,
 				609AC56617851F3200E378E9 /* Social.framework */,
 				609AC5561784F2A800E378E9 /* JSONKit.h */,
 				609AC5571784F2A800E378E9 /* JSONKit.m */,
@@ -517,6 +576,8 @@
 		60A0DCA817724E7D004F6211 /* kaplanMobile */ = {
 			isa = PBXGroup;
 			children = (
+				609EDE20178704020050D992 /* ShareView */,
+				60A0C7201786D82D00520EDF /* RefreshView */,
 				0FCFD8EA17828C4A0029FEE4 /* SqliteHelper */,
 				0F020A06177A9B580009CF23 /* SVProgressHUD */,
 				609A7A2E1779232200C106F2 /* SettingView */,
@@ -575,12 +636,12 @@
 		60A0DCCE177256B4004F6211 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				6099A9351785A67000B11216 /* kaplanViewController_4.xib */,
 				609C8E181785873E00061ADA /* animationClass */,
 				D68400891772BB3E00DB94C1 /* MainViewImages */,
 				60A0DCBA17724E7D004F6211 /* kaplanViewController.h */,
 				60A0DCBB17724E7D004F6211 /* kaplanViewController.m */,
 				60A87B851773398B008EDF24 /* kaplanViewController.xib */,
+				6099A9351785A67000B11216 /* kaplanViewController_4.xib */,
 			);
 			name = MainView;
 			sourceTree = "<group>";
@@ -608,13 +669,13 @@
 		60A87B8E17734A41008EDF24 /* SereachSubjects */ = {
 			isa = PBXGroup;
 			children = (
+				60A0C7061786D02D00520EDF /* kaplanSereachMainViewController_4.xib */,
 				60934C9217841A8600F58D6F /* NIDropDown.h */,
 				60934C9317841A8600F58D6F /* NIDropDown.m */,
 				6095D0921783E7E9001A0C16 /* Child */,
 				60A87B9C17734B32008EDF24 /* kaplanSereachMainViewController.h */,
 				60A87B9D17734B32008EDF24 /* kaplanSereachMainViewController.m */,
 				60A87B9E17734B32008EDF24 /* kaplanSereachMainViewController.xib */,
-				6099A92B1785A34600B11216 /* kaplanSereachMainViewController_4.xib */,
 			);
 			name = SereachSubjects;
 			sourceTree = "<group>";
@@ -820,12 +881,15 @@
 				609C8E2E1785873E00061ADA /* 10010.png in Resources */,
 				6099A92817859F3A00B11216 /* kaplanMingXiaoBoLanViewController_4.xib in Resources */,
 				6099A92A1785A0D600B11216 /* kaplanMingXiaoDetailPlanViewController_4.xib in Resources */,
-				6099A92C1785A34600B11216 /* kaplanSereachMainViewController_4.xib in Resources */,
 				6099A92E1785A3F300B11216 /* kaplanNewsListViewController_4.xib in Resources */,
 				6099A9301785A4FB00B11216 /* kaplanEvalutionViewController_4.xib in Resources */,
 				6099A9321785A52200B11216 /* kaplanSettingViewController_4.xib in Resources */,
 				6099A9371785A67000B11216 /* kaplanViewController_4.xib in Resources */,
 				609C105F1785C75300EBD3D9 /* kaplanAboutViewController_4.xib in Resources */,
+				60A0C7071786D02D00520EDF /* kaplanSereachMainViewController_4.xib in Resources */,
+				609EDE28178705230050D992 /* micro_messenger.png in Resources */,
+				60A23F4E178ABA2A002F5163 /* kaplanSearchChildViewController_4.xib in Resources */,
+				60A23F4F178ABA2A002F5163 /* kaplanSearchDetailViewController_4.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -859,6 +923,9 @@
 				609AC55F178504D300E378E9 /* kaplanSearchChildViewController.m in Sources */,
 				609AC564178511D500E378E9 /* kaplanSearchDetailViewController.m in Sources */,
 				609C8E2F1785873E00061ADA /* animationImageView.m in Sources */,
+				60A0C7231786D84900520EDF /* UIScrollView+AH3DPullRefresh.m in Sources */,
+				609EDE251787041F0050D992 /* UIMenuBar.m in Sources */,
+				609EDE261787041F0050D992 /* UIMenuBarItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -951,13 +1018,17 @@
 		60A0DCC317724E7D004F6211 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Linchuan Wang (K677UDX3Q8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Linchuan Wang (TVQ942G9J5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kaplanMobile/kaplanMobile-Prefix.pch";
 				INFOPLIST_FILE = "kaplanMobile/kaplanMobile-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/WeiXinSDK\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0EEACB0B-6F0E-4EEE-AAED-688A3A1D7F22";
+				PROVISIONING_PROFILE = "0CFB759D-04D6-4C7C-B879-1DD166EF3880";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -965,13 +1036,17 @@
 		60A0DCC417724E7D004F6211 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Linchuan Wang (K677UDX3Q8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Linchuan Wang (TVQ942G9J5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kaplanMobile/kaplanMobile-Prefix.pch";
 				INFOPLIST_FILE = "kaplanMobile/kaplanMobile-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/WeiXinSDK\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0EEACB0B-6F0E-4EEE-AAED-688A3A1D7F22";
+				PROVISIONING_PROFILE = "0CFB759D-04D6-4C7C-B879-1DD166EF3880";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

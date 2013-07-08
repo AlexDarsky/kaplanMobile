@@ -9,6 +9,7 @@
 #import "kaplanAboutViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "JSONKit.h"
+#import "kaplanServerHelper.h"
 @interface kaplanAboutViewController ()
 
 @end
@@ -47,30 +48,34 @@ static kaplanAboutViewController *sharekaplanAboutViewController=nil;
     self.CustomNavBar.layer.shadowOffset=CGSizeMake(0,0);
     self.CustomNavBar.layer.shadowRadius=10.0;
     self.CustomNavBar.layer.shadowOpacity=1.0;
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=Detail&id=1700&app=0"];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:urlString]];
-    [request setHTTPMethod:@"GET"];
-    
-    NSHTTPURLResponse* urlResponse = nil;
-    NSError *error = [[NSError alloc] init];
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
-    NSMutableString *responseString=[[NSMutableString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-    NSString *JSONString = [responseString substringWithRange:NSMakeRange(1, responseString.length-2)];
-    NSData* jsonData = [JSONString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSDictionary *resultsDictionary = [jsonData objectFromJSONData];
-    [self.webView loadHTMLString:[resultsDictionary objectForKey:@"newsText"] baseURL:nil];
-    for (UIView *subView in [self.webView  subviews]) {
-        if ([subView isKindOfClass:[UIScrollView class]]) {
-            for (UIView *shadowView in [subView subviews]) {
-                if ([shadowView isKindOfClass:[UIImageView class]]) {
-                    shadowView.hidden = YES;
+    kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+    if ([serverHelper connectedToNetwork]) {
+        NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=Detail&id=1700&app=0"];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString:urlString]];
+        [request setHTTPMethod:@"GET"];
+        
+        NSHTTPURLResponse* urlResponse = nil;
+        NSError *error = [[NSError alloc] init];
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+        NSMutableString *responseString=[[NSMutableString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+        NSString *JSONString = [responseString substringWithRange:NSMakeRange(1, responseString.length-2)];
+        NSData* jsonData = [JSONString dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSDictionary *resultsDictionary = [jsonData objectFromJSONData];
+        [self.webView loadHTMLString:[resultsDictionary objectForKey:@"newsText"] baseURL:nil];
+        for (UIView *subView in [self.webView  subviews]) {
+            if ([subView isKindOfClass:[UIScrollView class]]) {
+                for (UIView *shadowView in [subView subviews]) {
+                    if ([shadowView isKindOfClass:[UIImageView class]]) {
+                        shadowView.hidden = YES;
+                    }
                 }
             }
         }
-    }
 
+    }
+    
 }
 - (IBAction)backToParentView:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];

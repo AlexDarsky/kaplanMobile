@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXApi.h"
 
 @class kaplanViewController;
 
-@interface kaplanAppDelegate : UIResponder <UIApplicationDelegate>
+@interface kaplanAppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) kaplanViewController *kaplanViewCon;

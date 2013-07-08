@@ -42,6 +42,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{30, 171}, {310, 289}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="825718398">
 							<int key="NSColorSpace">3</int>
@@ -10440,11 +10441,13 @@ AAEAAQABA</bytes>
 					<object class="IBObjectRecord">
 						<int key="objectID">5</int>
 						<reference key="object" ref="632615761"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="326687328"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">7</int>
 						<reference key="object" ref="708082392"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="326687328"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -10460,22 +10463,26 @@ AAEAAQABA</bytes>
 					<object class="IBObjectRecord">
 						<int key="objectID">21</int>
 						<reference key="object" ref="700146796"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="491291467"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">22</int>
 						<reference key="object" ref="774367081"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="491291467"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">23</int>
 						<reference key="object" ref="501022451"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">DisplayTableView</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">8</int>
 						<reference key="object" ref="121493328"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="326687328"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -10493,21 +10500,25 @@ AAEAAQABA</bytes>
 					<object class="IBObjectRecord">
 						<int key="objectID">44</int>
 						<reference key="object" ref="558385197"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="979711129"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">45</int>
 						<reference key="object" ref="249048877"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="979711129"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">46</int>
 						<reference key="object" ref="771887602"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="979711129"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">47</int>
 						<reference key="object" ref="1006416835"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="979711129"/>
 					</object>
 				</array>
@@ -10539,7 +10550,7 @@ AAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">54</int>
+			<int key="maxID">107</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

@@ -25,6 +25,7 @@
 @synthesize SereachDelegate;
 @synthesize SearchView,SearchView2,searchBtn1,searchBtn2,SearchTextField,DisplayTableView;
 @synthesize degreedBtn,schoolBtn,classBtn;
+@synthesize searchChildViewController;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -63,6 +64,15 @@
     schoolNameCN=[[NSMutableArray alloc] initWithCapacity:0];
     schoolNameEN=[[NSMutableArray alloc] initWithCapacity:0];
     degreeArray=[[NSMutableArray alloc] initWithCapacity:0];
+    if ([[UIScreen mainScreen] bounds].size.height>480.00)
+    {
+        searchChildViewController=[[kaplanSearchChildViewController alloc] initWithNibName:@"kaplanSearchChildViewController_4" bundle:nil];
+        
+    }
+else{
+    searchChildViewController=[[kaplanSearchChildViewController alloc] initWithNibName:@"kaplanSearchChildViewController" bundle:nil];
+}
+searchChildViewController.SearchChildDelegate=self;
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -281,20 +291,18 @@
 }
 -(IBAction)showMenu:(id)sender
 {
-    kaplanSearchChildViewController *childViewCon=[kaplanSearchChildViewController sharekaplanSearchChildViewController];
-    childViewCon.SearchChildDelegate=self;
     switch ([sender tag]) {
         case 0:
-            [self.navigationController pushViewController:childViewCon animated:YES];
-            [childViewCon loadResource:0];
+            [self.navigationController pushViewController:searchChildViewController animated:YES];
+            [searchChildViewController loadResource:0];
             break;
         case 1:
-            [self.navigationController pushViewController:childViewCon animated:YES];
-            [childViewCon loadResource:1];
+            [self.navigationController pushViewController:searchChildViewController animated:YES];
+            [searchChildViewController loadResource:1];
             break;
         case 2:
-            [self.navigationController pushViewController:childViewCon animated:YES];
-            [childViewCon loadResource:2];
+            [self.navigationController pushViewController:searchChildViewController animated:YES];
+            [searchChildViewController loadResource:2];
             break;
     }
 }

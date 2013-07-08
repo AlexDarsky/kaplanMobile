@@ -19,6 +19,7 @@
 #import "kaplanServerHelper.h"
 #import "kaplanSQLIteHelper.h"
 #import "animationImageView.h"
+
 #define kDocumentFolder					[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
 @class kaplanEvalutionViewController;
 @interface kaplanViewController ()
@@ -74,7 +75,32 @@ static kaplanViewController *kaplanRootViewCon;
     kaplanEvalutionViewController *kaplanEvalutionViewCon=nil;
     kaplanMingXiaoBoLanViewController *kaplanMingXiaoBoLanViewCon = nil;
     kaplanSettingViewCon=nil;
-
+    /*
+    kaplanSereachMainViewCon=[[kaplanSereachMainViewController alloc] initWithNibName:@"kaplanSereachMainViewController" bundle:nil];
+    kaplanSereachMainViewCon.SereachDelegate=self;
+    searchNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanSereachMainViewCon];
+    searchNavCon.navigationBarHidden=YES;
+    kaplanNewsListViewCon=[[kaplanNewsListViewController alloc] initWithNibName:@"kaplanNewsListViewController" bundle:nil];
+    kaplanNewsListViewCon.NewsListDelegate=self;
+    NewsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanNewsListViewCon];
+    NewsViewNavCon.navigationBarHidden=YES;
+    
+    kaplanEvalutionViewCon=[[kaplanEvalutionViewController alloc] initWithNibName:@"kaplanEvalutionViewController" bundle:nil];
+    kaplanEvalutionViewCon.evalutionDelgate=self;
+    
+    evalutionNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanEvalutionViewCon];
+    evalutionNavCon.navigationBarHidden=YES;
+    
+    kaplanMingXiaoBoLanViewCon = [[kaplanMingXiaoBoLanViewController alloc] initWithNibName:@"kaplanMingXiaoBoLanViewController" bundle:nil];
+    kaplanMingXiaoBoLanViewCon.MingXiaoBoLanDelegate=self;
+    
+    kaplanSettingViewCon=[[kaplanSettingViewController alloc] initWithNibName:@"kaplanSettingViewController" bundle:nil];
+    kaplanSettingViewCon.settingDelegate=self;
+    SettingViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanSettingViewCon];
+    
+    SchoolsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanMingXiaoBoLanViewCon];
+    SchoolsViewNavCon.navigationBarHidden=YES;
+    */
     if ([[UIScreen mainScreen] bounds].size.height>480.00)
     {
         kaplanSereachMainViewCon=[[kaplanSereachMainViewController alloc] initWithNibName:@"kaplanSereachMainViewController_4" bundle:nil];
@@ -159,43 +185,55 @@ static kaplanViewController *kaplanRootViewCon;
     [svBG setImage:[UIImage imageNamed:@"rolling"]];
     sv.showsHorizontalScrollIndicator=NO;
     sv.backgroundColor=[UIColor clearColor];
-       kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
-    NSMutableDictionary *initInfo=[[NSMutableDictionary alloc] initWithDictionary:[serverHelper checkForInitApp]];
-    topListArray=[[NSMutableArray alloc] initWithArray:[initInfo objectForKey:@"topList"]];
-    sv.delegate=self;
-    [self AdImg:topListArray];
-    [self setCurrentPage:page.currentPage];
-    [self.MainView addSubview:svBG];
-    //[self.MainScrollView addSubview:self.MainView];
-    [self.MainView addSubview:sv];
-    [self.MainView addSubview:page];
     [MainView layer].shadowPath =[UIBezierPath bezierPathWithRect:MainView.bounds].CGPath;
     self.MainView.layer.shadowColor=[[UIColor blackColor] CGColor];
     self.MainView.layer.shadowOffset=CGSizeMake(0,0);
     self.MainView.layer.shadowRadius=10.0;
     self.MainView.layer.shadowOpacity=1.0;
-;
-    if (![[initInfo objectForKey:@"appVersion"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]])
+    kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+    if ([serverHelper connectedToNetwork])
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"更新信息" message:@"已有新版本，是否前往更新？" delegate:nil cancelButtonTitle:@"不，谢谢" otherButtonTitles:@"好的", nil];
-        [alert show];
-    }
-    else
-    {
-        kaplanSQLIteHelper *sqliteHelper =[kaplanSQLIteHelper sharekaplanSQLIteHelper];
-        if (![[initInfo objectForKey:@"dbVerID"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"dbVerID"]]||![sqliteHelper didDBexists]) {
-        UIActionSheet* mySheet = [[UIActionSheet alloc]
-                                  initWithTitle:@"数据库版本过旧或损坏"
-                                  delegate:self
-                                  cancelButtonTitle:@"Cancel"
-                                  destructiveButtonTitle:@"更新数据库"
-                                  otherButtonTitles:nil];
-        [mySheet showInView:self.view];
-        }else
-    {
-        [kaplanSettingViewCon.checkDataBase setUserInteractionEnabled:NO];
-    }
-    }
+        NSMutableDictionary *initInfo=[[NSMutableDictionary alloc] initWithDictionary:[serverHelper checkForInitApp]];
+        topListArray=[[NSMutableArray alloc] initWithArray:[initInfo objectForKey:@"topList"]];
+        sv.delegate=self;
+        [self AdImg:topListArray];
+        [self setCurrentPage:page.currentPage];
+        [self.MainView addSubview:svBG];
+        //[self.MainScrollView addSubview:self.MainView];
+        [self.MainView addSubview:sv];
+        [self.MainView addSubview:page];
+
+        ;
+        if (![[initInfo objectForKey:@"appVersion"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]])
+        {
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"更新信息" message:@"已有新版本，是否前往更新？" delegate:nil cancelButtonTitle:@"不，谢谢" otherButtonTitles:@"好的", nil];
+            [alert show];
+        }
+        else
+        {
+            kaplanSQLIteHelper *sqliteHelper =[kaplanSQLIteHelper sharekaplanSQLIteHelper];
+            if (![[initInfo objectForKey:@"dbVerID"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"dbVerID"]]||![sqliteHelper didDBexists]) {
+                UIActionSheet* mySheet = [[UIActionSheet alloc]
+                                          initWithTitle:@"数据库版本过旧或损坏"
+                                          delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          destructiveButtonTitle:@"更新数据库"
+                                          otherButtonTitles:nil];
+                [mySheet showInView:self.view];
+            }else
+            {
+                [kaplanSettingViewCon.checkDataBase setUserInteractionEnabled:NO];
+            }
+        }
+
+        
+}else
+{
+    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"网络连接失败" message:@"检测不到可用网络，请您确认网络设置是否正常" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+    [alert show];
+    [kaplanSettingViewCon.checkDataBase setUserInteractionEnabled:NO];
+
+}
 }
 
 #pragma sv

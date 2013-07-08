@@ -55,11 +55,11 @@
     schoolIDArray=[[NSMutableArray alloc] initWithCapacity:0];
     displayCNArray=[[NSMutableArray alloc] initWithCapacity:0];
     displayENArray=[[NSMutableArray alloc] initWithCapacity:0];
-    self.SearchView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bottom_bar"]];
+    self.SearchView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bottom_bar.png"]];
     self.SearchTextField.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"input"]];
     [self.SearchTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_inside.png"]];
-    self.CustomNavBar.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"topbar"]];
+    self.CustomNavBar.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"topbar.png"]];
     [self.navigationController setNavigationBarHidden:YES];
     
     [self.CustomNavBar layer].shadowPath =[UIBezierPath bezierPathWithRect:self.CustomNavBar.bounds].CGPath;
@@ -67,53 +67,32 @@
     self.CustomNavBar.layer.shadowOffset=CGSizeMake(0,0);
     self.CustomNavBar.layer.shadowRadius=10.0;
     self.CustomNavBar.layer.shadowOpacity=1.0;
-    if ([schoolIDArray count]==0) {
-        kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
-        NSArray *tmpArray=[[NSArray alloc] initWithArray:[serverHelper getSchoolListAtPage:1]];
-        for (NSDictionary *tmpDic in tmpArray)
-        {
-            NSString *nameString=[tmpDic objectForKey:@"schoolCnName"];
-            NSArray *nameArray=[nameString componentsSeparatedByString:@"("];
-            NSLog(@"%d",[nameArray count]);
-            [schoolsArrayCH addObject:[nameArray objectAtIndex:0]];
-            [schoolIDArray addObject:[tmpDic objectForKey:@"id"]];
-            [schoolArrayEN addObject:[nameArray lastObject]];
+    kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+    if ([serverHelper connectedToNetwork]) {
+        if ([schoolIDArray count]==0) {
+            
+            NSArray *tmpArray=[[NSArray alloc] initWithArray:[serverHelper getSchoolListAtPage:1]];
+            for (NSDictionary *tmpDic in tmpArray)
+            {
+                NSString *nameString=[tmpDic objectForKey:@"schoolCnName"];
+                NSArray *nameArray=[nameString componentsSeparatedByString:@"("];
+                NSLog(@"%d",[nameArray count]);
+                [schoolsArrayCH addObject:[nameArray objectAtIndex:0]];
+                [schoolIDArray addObject:[tmpDic objectForKey:@"id"]];
+                [schoolArrayEN addObject:[nameArray lastObject]];
+            }
         }
+        displayCNArray=[schoolsArrayCH mutableCopy];
+        displayENArray=[schoolArrayEN mutableCopy];
+        [self.schoolsTableView reloadData];
     }
-    displayCNArray=[schoolsArrayCH mutableCopy];
-    displayENArray=[schoolArrayEN mutableCopy];
-    [self.schoolsTableView reloadData];
+
 }
 
 #pragma mark -tableview datasource
 
 
-- (void) textFieldDidChange:(UITextField*) TextField
-{
-    if ([self.SearchTextField.text isEqualToString:@""])
-    {
-        displayCNArray=[schoolsArrayCH mutableCopy];
-        displayENArray=[schoolArrayEN mutableCopy];
-        [self.schoolsTableView reloadData];
-    }else
-    {
-        NSLog(@"textFieldDidChange textFieldDidChange");
-        if ([displayCNArray count]>0) {
-            [displayCNArray removeAllObjects];
-            [displayENArray removeAllObjects];
-        }
-        for (int i=0; i<[schoolsArrayCH count]; i++) {
-            NSString *tmpString=[schoolsArrayCH objectAtIndex:i];
-            if ([tmpString rangeOfString:TextField.text].location !=NSNotFound) {
-                [displayCNArray addObject:[schoolsArrayCH objectAtIndex:i]];
-                [displayENArray addObject:[schoolArrayEN objectAtIndex:i]];
-            }
-        }
-        [self.schoolsTableView reloadData];
 
-    }
-    
-}
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -203,7 +182,7 @@
 {
     NSLog(@"111");
     CGRect frame = textField.frame;
-    int offset = self.view.frame.size.height-216-self.SearchView.frame.size.height+12
+    int offset = self.view.bounds.size.height-216-self.SearchView.frame.size.height+12
     ;//键盘高度216
     NSLog(@"%d",offset);
     
@@ -212,12 +191,50 @@
     [UIView setAnimationDuration:animationDuration];
     
     //将视图的Y坐标向上移动offset个单位，以使下面腾出地方用于软键盘的显示
-    if(offset > 0)
         self.SearchView.frame = CGRectMake(0.0f, offset, self.SearchView.frame.size.width, self.SearchView.frame.size.height);
     
     [UIView commitAnimations];
 }
+- (void) textFieldDidChange:(UITextField*) TextField
+{
+    if ([self.SearchTextField.text isEqualToString:@""])
+    {
+        displayCNArray=[schoolsArrayCH mutableCopy];
+        displayENArray=[schoolArrayEN mutableCopy];
+        [self.schoolsTableView reloadData];
+    }else
+    {
+        NSLog(@"textFieldDidChange");
+        if ([displayCNArray count]>0) {
+            [displayCNArray removeAllObjects];
+            [displayENArray removeAllObjects];
+        }
+        for (int i=0; i<[schoolsArrayCH count]; i++)
+        {
+            NSString *tmpString=[schoolsArrayCH objectAtIndex:i];
+            if ([tmpString rangeOfString:TextField.text].location !=NSNotFound) {
+                [displayCNArray addObject:[schoolsArrayCH objectAtIndex:i]];
+                [displayENArray addObject:[schoolArrayEN objectAtIndex:i]];
+            }
+        }
+        if ([displayCNArray count]==0) {
+            for (int i=0; i<[schoolArrayEN count]; i++)
+            {
+                NSString *tmpString=[schoolArrayEN objectAtIndex:i];
+                if ([tmpString rangeOfString:TextField.text].location !=NSNotFound) {
+                    [displayCNArray addObject:[schoolsArrayCH objectAtIndex:i]];
+                    [displayENArray addObject:[schoolArrayEN objectAtIndex:i]];
+                }
+            }
+        [self.schoolsTableView reloadData];
+            
+        }
+        else
+        [self.schoolsTableView reloadData];
 
+    }
+    
+}
 
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "kaplanAboutViewController.h"
 
 @interface kaplanSettingViewController : UIViewController
 
@@ -14,6 +15,8 @@
 @property (strong)id settingDelegate;
 @property (weak, nonatomic) IBOutlet UIButton *checkDataBase;
 @property (strong, nonatomic) IBOutlet UIButton *testButton;
+
+@property (strong,nonatomic) kaplanAboutViewController *aboutViewController;
 
 -(IBAction)pushToAboutUS:(id)sender;
 - (IBAction)updateDataBase:(id)sender;

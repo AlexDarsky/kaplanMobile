@@ -7,8 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIMenuBar.h"
+#import "WXApi.h"
+#import "WXApiObject.h"
+@protocol sendMsgToWeChatViewDelegate <NSObject>
+- (void) sendMusicContent ;
+- (void) sendVideoContent ;
+- (void) changeScene:(NSInteger)scene;
+@end
+@interface kaplanMingXiaoDetailPlanViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate,UIMenuBarDelegate,WXApiDelegate,sendMsgToWeChatViewDelegate>
+{
+    UIMenuBar *menuBar;
+    enum WXScene _scene;
 
-@interface kaplanMingXiaoDetailPlanViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate>
+}
 @property (strong, nonatomic) IBOutlet UIView *CustomNavBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *ShareView;
@@ -24,7 +36,7 @@
 @property (strong, nonatomic) NSString *employmentRate;
 @property (strong, nonatomic) NSString *webSite;
 @property (strong, nonatomic) NSString *schoolTextView;
-
+@property (nonatomic, assign) id<sendMsgToWeChatViewDelegate> delegate;
 -(void)reloadSchoolDetail:(NSString*)schoolCN withEN:(NSString*)schoolEN withDes:(NSString*)description withIcon:(UIImage*)schoolIcon;
 -(void)reloadSchoolDetail:(NSString*)schoolID;
 @end

@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "DownloadManager.h"
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <netdb.h>
 
 @interface kaplanServerHelper : NSObject
 {
         DownloadManager *download;
 }
 +(kaplanServerHelper*)sharekaplanServerHelper;
+- (BOOL) connectedToNetwork;
 -(NSDictionary*)checkForInitApp;
 -(void)updateSQLite;
 -(NSArray*)LoadListAtPage:(int)pageNum;
