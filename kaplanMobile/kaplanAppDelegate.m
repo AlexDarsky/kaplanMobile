@@ -7,11 +7,17 @@
 //
 
 #import "kaplanAppDelegate.h"
-
+#import "SinaWeibo.h"
+#import "kaplanServerHelper.h"
 #import "kaplanViewController.h"
+#import "kaplanSinaWeiBodelgate.h"
+#define kAppKey             @"617965168"
+#define kAppSecret          @"5ada0566dcd11a1ff3223e19091ec841"
+#define kAppRedirectURI     @"https://api.weibo.com/oauth2/default.html"
 
 @implementation kaplanAppDelegate
 @synthesize kaplanViewCon;
+@synthesize sinaweibo;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -38,14 +44,27 @@
     self.window.rootViewController = self.kaplanViewCon;
     [self.window makeKeyAndVisible];
     [WXApi registerApp:@"wx1c4c6e7d7a2b99a6"];
+    kaplanSinaWeiBodelgate *sinaWeiBodelgate=[kaplanSinaWeiBodelgate sharekaplanSinaWeiBodelgate];
+    sinaweibo = [[SinaWeibo alloc] initWithAppKey:kAppKey appSecret:kAppSecret appRedirectURI:kAppRedirectURI andDelegate:sinaWeiBodelgate];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *sinaweiboInfo = [defaults objectForKey:@"SinaWeiboAuthData"];
+    if ([sinaweiboInfo objectForKey:@"AccessTokenKey"] && [sinaweiboInfo objectForKey:@"ExpirationDateKey"] &&
+        [sinaweiboInfo objectForKey:@"UserIDKey"]) {
+        sinaweibo.accessToken = [sinaweiboInfo objectForKey:@"AccessTokenKey"]; sinaweibo.expirationDate = [sinaweiboInfo objectForKey:@"ExpirationDateKey"]; sinaweibo.userID = [sinaweiboInfo objectForKey:@"UserIDKey"];
+    }
+    
     return YES;
 }
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    return  [WXApi handleOpenURL:url delegate:self];
+   
 }
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    if ([sourceApplication isEqualToString:@"com.sina.weibo"]) {
+        NSLog(@"sina!!!");
+    return [self.sinaweibo handleOpenURL:url];
+    }else
     return  [WXApi handleOpenURL:url delegate:self];
 }
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -68,11 +87,13 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [self.sinaweibo applicationDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 
 @end

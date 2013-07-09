@@ -43,7 +43,6 @@
 						<string key="NSFrame">{{30, 171}, {310, 377}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="825718398">
 							<int key="NSColorSpace">3</int>
@@ -10180,7 +10179,7 @@ AAEAAQABA</bytes>
 								<reference key="IBUIFont" ref="626289488"/>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 4}, {320, 59}}</string>
+						<string key="NSFrameSize">{320, 59}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="632615761"/>
@@ -10561,6 +10560,40 @@ AAEAAQABA</bytes>
 				<object class="IBPartialClassDescription">
 					<string key="className">kaplanSereachMainViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="backToMainView:">id</string>
+						<string key="changeToMode:">id</string>
+						<string key="exitKeyboard:">id</string>
+						<string key="queryFromDB:">id</string>
+						<string key="queryFromDBBy:">id</string>
+						<string key="showMenu:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="backToMainView:">
+							<string key="name">backToMainView:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="changeToMode:">
+							<string key="name">changeToMode:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="exitKeyboard:">
+							<string key="name">exitKeyboard:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="queryFromDB:">
+							<string key="name">queryFromDB:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="queryFromDBBy:">
+							<string key="name">queryFromDBBy:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showMenu:">
+							<string key="name">showMenu:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="CustomNavBar">UIView</string>
 						<string key="DisplayTableView">UITableView</string>

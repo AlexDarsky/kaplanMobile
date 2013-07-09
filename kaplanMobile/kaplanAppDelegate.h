@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "WXApi.h"
+#import "SinaWeibo.h"
 
 @class kaplanViewController;
-
-@interface kaplanAppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate>
-
+@class SinaWeibo;
+@interface kaplanAppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate,SinaWeiboDelegate>
+{
+        SinaWeibo *sinaweibo;
+}
+@property (readonly, nonatomic) SinaWeibo *sinaweibo;
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) kaplanViewController *kaplanViewCon;
 

@@ -10,8 +10,10 @@
 #import "DownloadManager.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <netdb.h>
+#import "SinaWeibo.h"
+#import "SinaWeiboRequest.h"
 
-@interface kaplanServerHelper : NSObject
+@interface kaplanServerHelper : NSObject<SinaWeiboDelegate,SinaWeiboRequestDelegate>
 {
         DownloadManager *download;
 }

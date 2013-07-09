@@ -273,7 +273,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{149, 12}, {23, 24}}</string>
 								<reference key="NSSuperview" ref="1007066578"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -293,7 +292,7 @@
 								<reference key="IBUIFont" ref="762296962"/>
 							</object>
 						</array>
-						<string key="NSFrame">{{-1, 501}, {320, 47}}</string>
+						<string key="NSFrame">{{0, 501}, {320, 47}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="561063746"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>

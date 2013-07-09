@@ -26,6 +26,7 @@
 @synthesize SearchView,SearchView2,searchBtn1,searchBtn2,SearchTextField,DisplayTableView;
 @synthesize degreedBtn,schoolBtn,classBtn;
 @synthesize searchChildViewController;
+@synthesize searchDetailViewController;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -67,10 +68,12 @@
     if ([[UIScreen mainScreen] bounds].size.height>480.00)
     {
         searchChildViewController=[[kaplanSearchChildViewController alloc] initWithNibName:@"kaplanSearchChildViewController_4" bundle:nil];
+        searchDetailViewController=[[kaplanSearchDetailViewController alloc] initWithNibName:@"kaplanSearchDetailViewController_4" bundle:nil];
         
     }
 else{
     searchChildViewController=[[kaplanSearchChildViewController alloc] initWithNibName:@"kaplanSearchChildViewController" bundle:nil];
+    searchDetailViewController=[[kaplanSearchDetailViewController alloc] initWithNibName:@"kaplanSearchDetailViewController" bundle:nil];
 }
 searchChildViewController.SearchChildDelegate=self;
 }
@@ -166,14 +169,14 @@ searchChildViewController.SearchChildDelegate=self;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (searchMode==0) {
-        kaplanSearchDetailViewController *detailViewCon=[kaplanSearchDetailViewController sharekaplanSearchDetailViewController];
-        [self.navigationController pushViewController:detailViewCon animated:YES];
-        [detailViewCon loadSchoolAllClass:[schoolNameCN objectAtIndex:indexPath.row]];
+
+        [self.navigationController pushViewController:searchDetailViewController animated:YES];
+        [searchDetailViewController loadSchoolAllClass:[schoolNameCN objectAtIndex:indexPath.row]];
     }else
     {
-        kaplanSearchDetailViewController *detailViewCon=[kaplanSearchDetailViewController sharekaplanSearchDetailViewController];
-        [self.navigationController pushViewController:detailViewCon animated:YES];
-        [detailViewCon loadSchoolAllClass:[schoolNameEN objectAtIndex:indexPath.row]];
+
+        [self.navigationController pushViewController:searchDetailViewController animated:YES];
+        [searchDetailViewController loadSchoolAllClass:[schoolNameEN objectAtIndex:indexPath.row]];
     }
         
 }

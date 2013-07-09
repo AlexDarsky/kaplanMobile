@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "kaplanEvalutionChildViewController.h"
+#import "kaplanNewsListChildViewController.h"
 
 
 @interface kaplanNewsListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
@@ -22,6 +23,7 @@
 @property (strong) id NewsListDelegate;
 @property (strong, nonatomic) IBOutlet UIView *CustomNavBar;
 @property (strong, nonatomic) IBOutlet UITableView *NewsTableView;
+@property (strong, nonatomic) kaplanNewsListChildViewController *newsListChildViewController;
 
 
 @end

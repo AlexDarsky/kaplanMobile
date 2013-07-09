@@ -10,6 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "kaplanServerHelper.h"
 #import "animationImageView.h"
+#import "SinaWeibo.h"
+#import "kaplanSinaWeiBodelgate.h"
 
 @interface kaplanMingXiaoDetailPlanViewController ()
 
@@ -52,6 +54,7 @@
 {
     return 1;
 }
+
 -(void)reloadSchoolDetail:(NSString*)schoolCN withEN:(NSString*)schoolEN withDes:(NSString*)description withIcon:(UIImage*)schoolIcon
 {
 
@@ -384,24 +387,31 @@ void SchoolLogoFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (
 - (IBAction)shareBtn:(id)sender
 {
     UIMenuBarItem *menuItem1 = [[UIMenuBarItem alloc] initWithTitle:@"分享到微信" target:self image:[UIImage imageNamed:@"micro_messenger.png"] action:@selector(shareToWeiXin)];
+    UIMenuBarItem *menuItem2 = [[UIMenuBarItem alloc] initWithTitle:@"分享到新浪微博" target:self image:[UIImage imageNamed:@"sinaweibo"] action:@selector(shareToWeiBo)];
     NSMutableArray *items =
     //[NSMutableArray arrayWithObjects:menuItem1, menuItem2, menuItem3,nil];
     //[NSMutableArray arrayWithObjects:menuItem1, menuItem2, menuItem3,  menuItem4, menuItem5, menuItem6, nil];
-    [NSMutableArray arrayWithObjects:menuItem1,nil];
+    [NSMutableArray arrayWithObjects:menuItem1,menuItem2,nil];
 
     menuBar = [[UIMenuBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 240.0f) items:items];
     //menuBar.layer.borderWidth = 1.f;
     //menuBar.layer.borderColor = [[UIColor orangeColor] CGColor];
     //menuBar.tintColor = [UIColor orangeColor];
     menuBar.delegate = self;
-    
-    //menuBar.items = [NSMutableArray arrayWithObjects:menuItem1, menuItem2, menuItem3,nil];
-    //menuBar.items = [NSMutableArray arrayWithObjects:menuItem1, menuItem2, menuItem3,  menuItem4, menuItem5, menuItem6, nil];
-    
-    menuBar.items = [NSMutableArray arrayWithObjects:menuItem1,nil];
+    menuBar.items = [NSMutableArray arrayWithObjects:menuItem1,menuItem2,nil];
     
     [menuBar show];
 
+}
+-(void)shareToWeiBo
+{
+    NSLog(@"分享新浪微博");
+    NSString *string=[NSString stringWithFormat:@"我在Kaplan官方客户端上发现了%@，该校%@",self.schoolNameCN,schoolTextView];
+    NSDictionary *shareInfo=[[NSDictionary alloc] initWithObjectsAndKeys:string,@"title", nil];
+    kaplanSinaWeiBodelgate *sinaWeiBodelgate=[kaplanSinaWeiBodelgate sharekaplanSinaWeiBodelgate];
+    if ([sinaWeiBodelgate connectToSinaWeiBoWith:shareInfo]) {
+        [menuBar dismiss];
+    }
 }
 -(void)shareToWeiXin
 {

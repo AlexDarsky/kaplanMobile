@@ -214,7 +214,7 @@ static kaplanViewController *kaplanRootViewCon;
             kaplanSQLIteHelper *sqliteHelper =[kaplanSQLIteHelper sharekaplanSQLIteHelper];
             if (![[initInfo objectForKey:@"dbVerID"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"dbVerID"]]||![sqliteHelper didDBexists]) {
                 UIActionSheet* mySheet = [[UIActionSheet alloc]
-                                          initWithTitle:@"数据库版本过旧或损坏"
+                                          initWithTitle:@"数据库版本过旧"
                                           delegate:self
                                           cancelButtonTitle:@"Cancel"
                                           destructiveButtonTitle:@"更新数据库"

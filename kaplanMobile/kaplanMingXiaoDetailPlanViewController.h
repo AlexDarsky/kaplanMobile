@@ -10,17 +10,21 @@
 #import "UIMenuBar.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
+
 @protocol sendMsgToWeChatViewDelegate <NSObject>
 - (void) sendMusicContent ;
 - (void) sendVideoContent ;
 - (void) changeScene:(NSInteger)scene;
 @end
+
 @interface kaplanMingXiaoDetailPlanViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate,UIMenuBarDelegate,WXApiDelegate,sendMsgToWeChatViewDelegate>
 {
     UIMenuBar *menuBar;
     enum WXScene _scene;
 
+
 }
+
 @property (strong, nonatomic) IBOutlet UIView *CustomNavBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *ShareView;

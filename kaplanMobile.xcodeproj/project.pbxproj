@@ -59,7 +59,6 @@
 		6099A92A1785A0D600B11216 /* kaplanMingXiaoDetailPlanViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6099A9291785A0D600B11216 /* kaplanMingXiaoDetailPlanViewController_4.xib */; };
 		6099A92E1785A3F300B11216 /* kaplanNewsListViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6099A92D1785A3F300B11216 /* kaplanNewsListViewController_4.xib */; };
 		6099A9301785A4FB00B11216 /* kaplanEvalutionViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6099A92F1785A4FB00B11216 /* kaplanEvalutionViewController_4.xib */; };
-		6099A9321785A52200B11216 /* kaplanSettingViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6099A9311785A52200B11216 /* kaplanSettingViewController_4.xib */; };
 		6099A9371785A67000B11216 /* kaplanViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6099A9351785A67000B11216 /* kaplanViewController_4.xib */; };
 		609A7A321779233D00C106F2 /* kaplanSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 609A7A301779233D00C106F2 /* kaplanSettingViewController.m */; };
 		609A7A331779233D00C106F2 /* kaplanSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 609A7A311779233D00C106F2 /* kaplanSettingViewController.xib */; };
@@ -122,8 +121,17 @@
 		60A117CA17746DB200D6A2A7 /* new1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 60A117C917746DB200D6A2A7 /* new1.jpg */; };
 		60A1BBFA1778A97300BAA50B /* btn_back2.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A1BBF91778A97300BAA50B /* btn_back2.png */; };
 		60A1BBFC1778B09300BAA50B /* SanDomenico.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 60A1BBFB1778B09300BAA50B /* SanDomenico.jpg */; };
+		60A2012D178B7A460066B656 /* sinaweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A2012C178B7A460066B656 /* sinaweibo.png */; };
+		60A20130178B7F300066B656 /* kaplanSinaWeiBodelgate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A2012F178B7F300066B656 /* kaplanSinaWeiBodelgate.m */; };
+		60A20132178B99900066B656 /* btn_settingBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A20131178B99900066B656 /* btn_settingBtn.png */; };
+		60A20134178B9C540066B656 /* kaplanSettingViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A20133178B9C540066B656 /* kaplanSettingViewController_4.xib */; };
 		60A23F4E178ABA2A002F5163 /* kaplanSearchChildViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A23F4C178ABA2A002F5163 /* kaplanSearchChildViewController_4.xib */; };
 		60A23F4F178ABA2A002F5163 /* kaplanSearchDetailViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A23F4D178ABA2A002F5163 /* kaplanSearchDetailViewController_4.xib */; };
+		60A4EBBD178B3CFA00411D14 /* kaplanNewsListChildViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A4EBBC178B3CFA00411D14 /* kaplanNewsListChildViewController_4.xib */; };
+		60A4EBC7178B427900411D14 /* SinaWeibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 60A4EBBF178B427900411D14 /* SinaWeibo.bundle */; };
+		60A4EBC8178B427900411D14 /* SinaWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A4EBC1178B427900411D14 /* SinaWeibo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		60A4EBC9178B427900411D14 /* SinaWeiboAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A4EBC3178B427900411D14 /* SinaWeiboAuthorizeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		60A4EBCA178B427900411D14 /* SinaWeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A4EBC6178B427900411D14 /* SinaWeiboRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		60A87B871773398B008EDF24 /* kaplanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A87B851773398B008EDF24 /* kaplanViewController.xib */; };
 		60A87B8D17733D8A008EDF24 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A87B8C17733D8A008EDF24 /* QuartzCore.framework */; };
 		60A87B9517734B04008EDF24 /* kaplanAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A87B9317734B04008EDF24 /* kaplanAboutViewController.m */; };
@@ -207,7 +215,6 @@
 		6099A9291785A0D600B11216 /* kaplanMingXiaoDetailPlanViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanMingXiaoDetailPlanViewController_4.xib; sourceTree = "<group>"; };
 		6099A92D1785A3F300B11216 /* kaplanNewsListViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanNewsListViewController_4.xib; sourceTree = "<group>"; };
 		6099A92F1785A4FB00B11216 /* kaplanEvalutionViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanEvalutionViewController_4.xib; sourceTree = "<group>"; };
-		6099A9311785A52200B11216 /* kaplanSettingViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanSettingViewController_4.xib; sourceTree = "<group>"; };
 		6099A9361785A67000B11216 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/kaplanViewController_4.xib; sourceTree = "<group>"; };
 		609A7A2F1779233D00C106F2 /* kaplanSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kaplanSettingViewController.h; sourceTree = "<group>"; };
 		609A7A301779233D00C106F2 /* kaplanSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kaplanSettingViewController.m; sourceTree = "<group>"; };
@@ -288,8 +295,22 @@
 		60A117C917746DB200D6A2A7 /* new1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = new1.jpg; sourceTree = "<group>"; };
 		60A1BBF91778A97300BAA50B /* btn_back2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back2.png; sourceTree = "<group>"; };
 		60A1BBFB1778B09300BAA50B /* SanDomenico.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SanDomenico.jpg; sourceTree = "<group>"; };
+		60A2012C178B7A460066B656 /* sinaweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sinaweibo.png; sourceTree = "<group>"; };
+		60A2012E178B7F300066B656 /* kaplanSinaWeiBodelgate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaplanSinaWeiBodelgate.h; path = ../kaplanSinaWeiBodelgate.h; sourceTree = "<group>"; };
+		60A2012F178B7F300066B656 /* kaplanSinaWeiBodelgate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kaplanSinaWeiBodelgate.m; path = ../kaplanSinaWeiBodelgate.m; sourceTree = "<group>"; };
+		60A20131178B99900066B656 /* btn_settingBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_settingBtn.png; sourceTree = "<group>"; };
+		60A20133178B9C540066B656 /* kaplanSettingViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanSettingViewController_4.xib; sourceTree = "<group>"; };
 		60A23F4C178ABA2A002F5163 /* kaplanSearchChildViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanSearchChildViewController_4.xib; sourceTree = "<group>"; };
 		60A23F4D178ABA2A002F5163 /* kaplanSearchDetailViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanSearchDetailViewController_4.xib; sourceTree = "<group>"; };
+		60A4EBBC178B3CFA00411D14 /* kaplanNewsListChildViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanNewsListChildViewController_4.xib; sourceTree = "<group>"; };
+		60A4EBBF178B427900411D14 /* SinaWeibo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SinaWeibo.bundle; sourceTree = "<group>"; };
+		60A4EBC0178B427900411D14 /* SinaWeibo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeibo.h; sourceTree = "<group>"; };
+		60A4EBC1178B427900411D14 /* SinaWeibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeibo.m; sourceTree = "<group>"; };
+		60A4EBC2178B427900411D14 /* SinaWeiboAuthorizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboAuthorizeView.h; sourceTree = "<group>"; };
+		60A4EBC3178B427900411D14 /* SinaWeiboAuthorizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboAuthorizeView.m; sourceTree = "<group>"; };
+		60A4EBC4178B427900411D14 /* SinaWeiboConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboConstants.h; sourceTree = "<group>"; };
+		60A4EBC5178B427900411D14 /* SinaWeiboRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboRequest.h; sourceTree = "<group>"; };
+		60A4EBC6178B427900411D14 /* SinaWeiboRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboRequest.m; sourceTree = "<group>"; };
 		60A87B8317733310008EDF24 /* SideBarSelectedDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideBarSelectedDelegate.h; sourceTree = "<group>"; };
 		60A87B861773398B008EDF24 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/kaplanViewController.xib; sourceTree = "<group>"; };
 		60A87B8C17733D8A008EDF24 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -349,6 +370,7 @@
 		0FBAB0AC1782DF9400AF3D2B /* iosAppImages */ = {
 			isa = PBXGroup;
 			children = (
+				60A20131178B99900066B656 /* btn_settingBtn.png */,
 				0FBAB0AD1782DF9400AF3D2B /* bg_inside_s1.png */,
 				0FBAB0AE1782DF9400AF3D2B /* bottom_bar_s1.png */,
 				0FBAB0AF1782DF9400AF3D2B /* btn_about_s1.png */,
@@ -400,6 +422,7 @@
 		60064BA31774F2A400CF850F /* Child */ = {
 			isa = PBXGroup;
 			children = (
+				60A4EBBC178B3CFA00411D14 /* kaplanNewsListChildViewController_4.xib */,
 				60064BA41774F2C700CF850F /* kaplanNewsListChildViewController.h */,
 				60064BA51774F2C700CF850F /* kaplanNewsListChildViewController.m */,
 				60064BA61774F2C700CF850F /* kaplanNewsListChildViewController.xib */,
@@ -425,7 +448,7 @@
 		609A7A2E1779232200C106F2 /* SettingView */ = {
 			isa = PBXGroup;
 			children = (
-				6099A9311785A52200B11216 /* kaplanSettingViewController_4.xib */,
+				60A20133178B9C540066B656 /* kaplanSettingViewController_4.xib */,
 				609A7A2F1779233D00C106F2 /* kaplanSettingViewController.h */,
 				609A7A301779233D00C106F2 /* kaplanSettingViewController.m */,
 				609A7A311779233D00C106F2 /* kaplanSettingViewController.xib */,
@@ -466,6 +489,10 @@
 		609EDE20178704020050D992 /* ShareView */ = {
 			isa = PBXGroup;
 			children = (
+				60A2012E178B7F300066B656 /* kaplanSinaWeiBodelgate.h */,
+				60A2012F178B7F300066B656 /* kaplanSinaWeiBodelgate.m */,
+				60A2012C178B7A460066B656 /* sinaweibo.png */,
+				60A4EBBE178B427900411D14 /* SinaWeibo */,
 				609EDE1B178702590050D992 /* WeiXinSDK */,
 				609EDE27178705230050D992 /* micro_messenger.png */,
 				609EDE211787041F0050D992 /* UIMenuBar.h */,
@@ -664,6 +691,21 @@
 				60A117C917746DB200D6A2A7 /* new1.jpg */,
 			);
 			name = demoresource;
+			sourceTree = "<group>";
+		};
+		60A4EBBE178B427900411D14 /* SinaWeibo */ = {
+			isa = PBXGroup;
+			children = (
+				60A4EBBF178B427900411D14 /* SinaWeibo.bundle */,
+				60A4EBC0178B427900411D14 /* SinaWeibo.h */,
+				60A4EBC1178B427900411D14 /* SinaWeibo.m */,
+				60A4EBC2178B427900411D14 /* SinaWeiboAuthorizeView.h */,
+				60A4EBC3178B427900411D14 /* SinaWeiboAuthorizeView.m */,
+				60A4EBC4178B427900411D14 /* SinaWeiboConstants.h */,
+				60A4EBC5178B427900411D14 /* SinaWeiboRequest.h */,
+				60A4EBC6178B427900411D14 /* SinaWeiboRequest.m */,
+			);
+			path = SinaWeibo;
 			sourceTree = "<group>";
 		};
 		60A87B8E17734A41008EDF24 /* SereachSubjects */ = {
@@ -883,13 +925,17 @@
 				6099A92A1785A0D600B11216 /* kaplanMingXiaoDetailPlanViewController_4.xib in Resources */,
 				6099A92E1785A3F300B11216 /* kaplanNewsListViewController_4.xib in Resources */,
 				6099A9301785A4FB00B11216 /* kaplanEvalutionViewController_4.xib in Resources */,
-				6099A9321785A52200B11216 /* kaplanSettingViewController_4.xib in Resources */,
 				6099A9371785A67000B11216 /* kaplanViewController_4.xib in Resources */,
 				609C105F1785C75300EBD3D9 /* kaplanAboutViewController_4.xib in Resources */,
 				60A0C7071786D02D00520EDF /* kaplanSereachMainViewController_4.xib in Resources */,
 				609EDE28178705230050D992 /* micro_messenger.png in Resources */,
 				60A23F4E178ABA2A002F5163 /* kaplanSearchChildViewController_4.xib in Resources */,
 				60A23F4F178ABA2A002F5163 /* kaplanSearchDetailViewController_4.xib in Resources */,
+				60A4EBBD178B3CFA00411D14 /* kaplanNewsListChildViewController_4.xib in Resources */,
+				60A4EBC7178B427900411D14 /* SinaWeibo.bundle in Resources */,
+				60A2012D178B7A460066B656 /* sinaweibo.png in Resources */,
+				60A20132178B99900066B656 /* btn_settingBtn.png in Resources */,
+				60A20134178B9C540066B656 /* kaplanSettingViewController_4.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -926,6 +972,10 @@
 				60A0C7231786D84900520EDF /* UIScrollView+AH3DPullRefresh.m in Sources */,
 				609EDE251787041F0050D992 /* UIMenuBar.m in Sources */,
 				609EDE261787041F0050D992 /* UIMenuBarItem.m in Sources */,
+				60A4EBC8178B427900411D14 /* SinaWeibo.m in Sources */,
+				60A4EBC9178B427900411D14 /* SinaWeiboAuthorizeView.m in Sources */,
+				60A4EBCA178B427900411D14 /* SinaWeiboRequest.m in Sources */,
+				60A20130178B7F300066B656 /* kaplanSinaWeiBodelgate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

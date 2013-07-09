@@ -21,6 +21,7 @@
 @implementation kaplanNewsListViewController
 @synthesize NewsTableView,CustomNavBar;
 @synthesize NewsListDelegate;
+@synthesize newsListChildViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,6 +53,13 @@
         NSArray *newImage=[NSArray arrayWithObject:@"blank"];
         [self performSelector:@selector(doneLoadingTableViewData) withObject:newImage afterDelay:0.1];
     }];
+    if ([[UIScreen mainScreen] bounds].size.height>480.00)
+    {
+        newsListChildViewController=[[kaplanNewsListChildViewController alloc] initWithNibName:@"kaplanNewsListChildViewController_4" bundle:nil];
+    }else
+    {
+                newsListChildViewController=[[kaplanNewsListChildViewController alloc] initWithNibName:@"kaplanNewsListChildViewController" bundle:nil];
+    }
 
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -184,11 +192,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"yahoo!!");
-    kaplanNewsListChildViewController *newsChild=[kaplanNewsListChildViewController sharekaplanNewsListChildViewController];
-    [self.navigationController pushViewController:newsChild animated:YES];
+
+    
+    [self.navigationController pushViewController:newsListChildViewController animated:YES];
     //[newsChild reloadNewInfomation:[newsTitleArray objectAtIndex:indexPath.row] text:[newsPreArray objectAtIndex:indexPath.row] andImage:[newsImageArray objectAtIndex:indexPath.row]];
     //[newsChild reloadNewInfomation:[newsTitleArray objectAtIndex:indexPath.row] text:[newsPreArray objectAtIndex:indexPath.row] andImage:[newsImageArray objectAtIndex:indexPath.row]];
-    [newsChild reloadNewInfomationByID:[newsidArray objectAtIndex:indexPath.row]];
+    [newsListChildViewController reloadNewInfomationByID:[newsidArray objectAtIndex:indexPath.row]];
     
 }
 - (IBAction)bactToMainView:(id)sender

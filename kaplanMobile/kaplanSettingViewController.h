@@ -17,6 +17,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *testButton;
 
 @property (strong,nonatomic) kaplanAboutViewController *aboutViewController;
+@property (strong, nonatomic) IBOutlet UILabel *appVersion;
+@property (strong, nonatomic) IBOutlet UILabel *dbVerID;
 
 -(IBAction)pushToAboutUS:(id)sender;
 - (IBAction)updateDataBase:(id)sender;

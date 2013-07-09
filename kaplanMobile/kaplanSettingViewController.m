@@ -20,6 +20,7 @@
 @synthesize checkDataBase;
 @synthesize testButton;
 @synthesize aboutViewController;
+@synthesize appVersion,dbVerID;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -54,6 +55,9 @@
     {
         aboutViewController=[[kaplanAboutViewController alloc] initWithNibName:@"kaplanAboutViewController" bundle:nil];
     }
+    
+    self.dbVerID.text=[NSString stringWithFormat:@"当前数据库版本为：%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"dbVerID"]];
+    self.appVersion.text=[NSString stringWithFormat:@"当前客户端版本为：%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]];
     
 
 }
@@ -94,6 +98,9 @@
 - (void)viewDidUnload {
     [self setCustomNavBar:nil];
     [self setCheckDataBase:nil];
+    [self setAppVersion:nil];
+    [self setAppVersion:nil];
+    [self setDbVerID:nil];
     [super viewDidUnload];
 }
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NIDropDown.h"
 #import "kaplanSearchChildViewController.h"
+#import "kaplanSearchDetailViewController.h"
 
 
 @interface kaplanSereachMainViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
@@ -31,5 +32,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *schoolBtn;
 @property (strong, nonatomic) IBOutlet UIButton *classBtn;
 @property (strong, nonatomic) kaplanSearchChildViewController *searchChildViewController;
+@property (strong, nonatomic) kaplanSearchDetailViewController *searchDetailViewController;
 -(void)setText:(NSString*)textString For:(int)mode;
 @end
