@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SinaWeibo.h"
+#import "SinaWeiboRequest.h"
+@interface kaplanSinaWeiBodelgate : UIResponder<SinaWeiboDelegate,SinaWeiboRequestDelegate>
++(kaplanSinaWeiBodelgate*)sharekaplanSinaWeiBodelgate;
 
-@interface kaplanSinaWeiBodelgate : UIResponder
-
+@property (strong)id SinaWeiBoActionDelagete;
+-(BOOL)connectToSinaWeiBoWith:(NSDictionary*)dictionary;
 @end

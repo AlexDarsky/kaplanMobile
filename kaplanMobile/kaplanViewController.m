@@ -173,18 +173,18 @@ static kaplanViewController *kaplanRootViewCon;
     [self.NavBackView addSubview:self.backViewController.view];
     [self hideTabBar];
     [NSTimer scheduledTimerWithTimeInterval:1 target: self selector: @selector(handleTimer:)  userInfo:nil  repeats: YES];
-    page=[[UIPageControl alloc] initWithFrame:CGRectMake(240, 160, 38,36)];
+    page=[[UIPageControl alloc] initWithFrame:CGRectMake(260, 160, 38,36)];
     if ([[UIScreen mainScreen] bounds].size.height>480.00) {
        
-        sv=[[UIScrollView alloc] initWithFrame:CGRectMake(10, [[UIScreen mainScreen] bounds].size.height/10, 305, 134)];
+        sv=[[UIScrollView alloc] initWithFrame:CGRectMake(10, [[UIScreen mainScreen] bounds].size.height/10, 299, 134)];
     }
     else{
-     sv=[[UIScrollView alloc] initWithFrame:CGRectMake(10, [[UIScreen mainScreen] bounds].size.height/10+7, 305, 134)];
+     sv=[[UIScrollView alloc] initWithFrame:CGRectMake(10, [[UIScreen mainScreen] bounds].size.height/10+7, 299, 134)];
     }
-    UIImageView *svBG=[[UIImageView alloc] initWithFrame:CGRectMake(sv.frame.origin.x-5, sv.frame.origin.y-4, 311, 144)];
+    UIImageView *svBG=[[UIImageView alloc] initWithFrame:CGRectMake(7, sv.frame.origin.y-4, 308, 144)];
     [svBG setImage:[UIImage imageNamed:@"rolling"]];
     sv.showsHorizontalScrollIndicator=NO;
-    sv.backgroundColor=[UIColor clearColor];
+    sv.backgroundColor=[UIColor blackColor];
     [MainView layer].shadowPath =[UIBezierPath bezierPathWithRect:MainView.bounds].CGPath;
     self.MainView.layer.shadowColor=[[UIColor blackColor] CGColor];
     self.MainView.layer.shadowOffset=CGSizeMake(0,0);
@@ -245,19 +245,19 @@ static kaplanViewController *kaplanRootViewCon;
     
 }
 -(void)AdImg:(NSMutableArray*)arr{
-    [sv setContentSize:CGSizeMake(305*[arr count], 88)];
+    [sv setContentSize:CGSizeMake(304*[arr count], 88)];
     page.numberOfPages=[arr count];
     
     for ( int i=0; i<[arr count]; i++) {
         
         NSDictionary *tmpDictionary=[[NSDictionary alloc] initWithDictionary:[arr objectAtIndex:i]];
-        UIButton *img=[[UIButton alloc]initWithFrame:CGRectMake(315*i, 0, 300, 134)];
+        UIButton *img=[[UIButton alloc]initWithFrame:CGRectMake(312*i, 0, 308, 134)];
         [img addTarget:self action:@selector(Action) forControlEvents:UIControlEventTouchUpInside];
         [sv addSubview:img];
          NSString *url=[NSString stringWithFormat:@"http://cd.douho.net%@",[tmpDictionary objectForKey:@"picUrl"]];
          NewImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
          {
-         [img setBackgroundImage:image forState:UIControlStateNormal];
+         [img setImage:image forState:UIControlStateNormal];
          }, ^(void){
          });
     }
