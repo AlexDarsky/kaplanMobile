@@ -80,7 +80,7 @@
 		609C8E2D1785873E00061ADA /* 10009.png in Resources */ = {isa = PBXBuildFile; fileRef = 609C8E211785873E00061ADA /* 10009.png */; };
 		609C8E2E1785873E00061ADA /* 10010.png in Resources */ = {isa = PBXBuildFile; fileRef = 609C8E221785873E00061ADA /* 10010.png */; };
 		609C8E2F1785873E00061ADA /* animationImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 609C8E241785873E00061ADA /* animationImageView.m */; };
-		609EDE1F178702590050D992 /* libWeChatSDK_armv7_armv7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 609EDE1C178702590050D992 /* libWeChatSDK_armv7_armv7s.a */; };
+		609E77A7178C31C40016CBF4 /* kaplanNewsListChildViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 609E77A6178C31C40016CBF4 /* kaplanNewsListChildViewController_4.xib */; };
 		609EDE251787041F0050D992 /* UIMenuBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 609EDE221787041F0050D992 /* UIMenuBar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		609EDE261787041F0050D992 /* UIMenuBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 609EDE241787041F0050D992 /* UIMenuBarItem.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		609EDE28178705230050D992 /* micro_messenger.png in Resources */ = {isa = PBXBuildFile; fileRef = 609EDE27178705230050D992 /* micro_messenger.png */; };
@@ -127,7 +127,6 @@
 		60A20134178B9C540066B656 /* kaplanSettingViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A20133178B9C540066B656 /* kaplanSettingViewController_4.xib */; };
 		60A23F4E178ABA2A002F5163 /* kaplanSearchChildViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A23F4C178ABA2A002F5163 /* kaplanSearchChildViewController_4.xib */; };
 		60A23F4F178ABA2A002F5163 /* kaplanSearchDetailViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A23F4D178ABA2A002F5163 /* kaplanSearchDetailViewController_4.xib */; };
-		60A4EBBD178B3CFA00411D14 /* kaplanNewsListChildViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A4EBBC178B3CFA00411D14 /* kaplanNewsListChildViewController_4.xib */; };
 		60A4EBC7178B427900411D14 /* SinaWeibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 60A4EBBF178B427900411D14 /* SinaWeibo.bundle */; };
 		60A4EBC8178B427900411D14 /* SinaWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A4EBC1178B427900411D14 /* SinaWeibo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		60A4EBC9178B427900411D14 /* SinaWeiboAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A4EBC3178B427900411D14 /* SinaWeiboAuthorizeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -143,6 +142,10 @@
 		60A87BA517734C9D008EDF24 /* kaplanEvalutionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A87BA317734C9D008EDF24 /* kaplanEvalutionViewController.m */; };
 		60A87BA617734C9D008EDF24 /* kaplanEvalutionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A87BA417734C9D008EDF24 /* kaplanEvalutionViewController.xib */; };
 		60D1F0CB17887ADC00A0BCD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D1F0CA17887ADC00A0BCD2 /* SystemConfiguration.framework */; };
+		60EEA3E0178CEF430065DA5D /* kaplanChildViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60EEA3DC178CEF430065DA5D /* kaplanChildViewController_4.xib */; };
+		60EEA3E1178CEF430065DA5D /* kaplanChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60EEA3DE178CEF430065DA5D /* kaplanChildViewController.m */; };
+		60EEA3E2178CEF430065DA5D /* kaplanChildViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60EEA3DF178CEF430065DA5D /* kaplanChildViewController.xib */; };
+		60EEA3EC178D050D0065DA5D /* libWeChatSDK_armv7_armv7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60EEA3EB178D050D0065DA5D /* libWeChatSDK_armv7_armv7s.a */; };
 		D68400931772BB8000DB94C1 /* bg_index.png in Resources */ = {isa = PBXBuildFile; fileRef = D684008A1772BB8000DB94C1 /* bg_index.png */; };
 		D68400941772BB8000DB94C1 /* btn_about.png in Resources */ = {isa = PBXBuildFile; fileRef = D684008B1772BB8000DB94C1 /* btn_about.png */; };
 		D68400951772BB8000DB94C1 /* btn_evalution.png in Resources */ = {isa = PBXBuildFile; fileRef = D684008C1772BB8000DB94C1 /* btn_evalution.png */; };
@@ -241,9 +244,7 @@
 		609C8E221785873E00061ADA /* 10010.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10010.png; sourceTree = "<group>"; };
 		609C8E231785873E00061ADA /* animationImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animationImageView.h; sourceTree = "<group>"; };
 		609C8E241785873E00061ADA /* animationImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = animationImageView.m; sourceTree = "<group>"; };
-		609EDE1C178702590050D992 /* libWeChatSDK_armv7_armv7s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK_armv7_armv7s.a; sourceTree = "<group>"; };
-		609EDE1D178702590050D992 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		609EDE1E178702590050D992 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		609E77A6178C31C40016CBF4 /* kaplanNewsListChildViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanNewsListChildViewController_4.xib; sourceTree = "<group>"; };
 		609EDE211787041F0050D992 /* UIMenuBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMenuBar.h; sourceTree = "<group>"; };
 		609EDE221787041F0050D992 /* UIMenuBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMenuBar.m; sourceTree = "<group>"; };
 		609EDE231787041F0050D992 /* UIMenuBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMenuBarItem.h; sourceTree = "<group>"; };
@@ -302,7 +303,6 @@
 		60A20133178B9C540066B656 /* kaplanSettingViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanSettingViewController_4.xib; sourceTree = "<group>"; };
 		60A23F4C178ABA2A002F5163 /* kaplanSearchChildViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanSearchChildViewController_4.xib; sourceTree = "<group>"; };
 		60A23F4D178ABA2A002F5163 /* kaplanSearchDetailViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanSearchDetailViewController_4.xib; sourceTree = "<group>"; };
-		60A4EBBC178B3CFA00411D14 /* kaplanNewsListChildViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanNewsListChildViewController_4.xib; sourceTree = "<group>"; };
 		60A4EBBF178B427900411D14 /* SinaWeibo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SinaWeibo.bundle; sourceTree = "<group>"; };
 		60A4EBC0178B427900411D14 /* SinaWeibo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeibo.h; sourceTree = "<group>"; };
 		60A4EBC1178B427900411D14 /* SinaWeibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeibo.m; sourceTree = "<group>"; };
@@ -327,6 +327,13 @@
 		60A87BA317734C9D008EDF24 /* kaplanEvalutionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kaplanEvalutionViewController.m; sourceTree = "<group>"; };
 		60A87BA417734C9D008EDF24 /* kaplanEvalutionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanEvalutionViewController.xib; sourceTree = "<group>"; };
 		60D1F0CA17887ADC00A0BCD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		60EEA3DC178CEF430065DA5D /* kaplanChildViewController_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanChildViewController_4.xib; sourceTree = "<group>"; };
+		60EEA3DD178CEF430065DA5D /* kaplanChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kaplanChildViewController.h; sourceTree = "<group>"; };
+		60EEA3DE178CEF430065DA5D /* kaplanChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kaplanChildViewController.m; sourceTree = "<group>"; };
+		60EEA3DF178CEF430065DA5D /* kaplanChildViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = kaplanChildViewController.xib; sourceTree = "<group>"; };
+		60EEA3E4178CFB580065DA5D /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		60EEA3E5178CFB580065DA5D /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		60EEA3EB178D050D0065DA5D /* libWeChatSDK_armv7_armv7s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK_armv7_armv7s.a; sourceTree = "<group>"; };
 		D684008A1772BB8000DB94C1 /* bg_index.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_index.png; sourceTree = "<group>"; };
 		D684008B1772BB8000DB94C1 /* btn_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_about.png; sourceTree = "<group>"; };
 		D684008C1772BB8000DB94C1 /* btn_evalution.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_evalution.png; sourceTree = "<group>"; };
@@ -350,7 +357,7 @@
 				60A0DCA317724E7D004F6211 /* UIKit.framework in Frameworks */,
 				60A0DCA517724E7D004F6211 /* Foundation.framework in Frameworks */,
 				60A0DCA717724E7D004F6211 /* CoreGraphics.framework in Frameworks */,
-				609EDE1F178702590050D992 /* libWeChatSDK_armv7_armv7s.a in Frameworks */,
+				60EEA3EC178D050D0065DA5D /* libWeChatSDK_armv7_armv7s.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +429,7 @@
 		60064BA31774F2A400CF850F /* Child */ = {
 			isa = PBXGroup;
 			children = (
-				60A4EBBC178B3CFA00411D14 /* kaplanNewsListChildViewController_4.xib */,
+				609E77A6178C31C40016CBF4 /* kaplanNewsListChildViewController_4.xib */,
 				60064BA41774F2C700CF850F /* kaplanNewsListChildViewController.h */,
 				60064BA51774F2C700CF850F /* kaplanNewsListChildViewController.m */,
 				60064BA61774F2C700CF850F /* kaplanNewsListChildViewController.xib */,
@@ -478,9 +485,9 @@
 		609EDE1B178702590050D992 /* WeiXinSDK */ = {
 			isa = PBXGroup;
 			children = (
-				609EDE1C178702590050D992 /* libWeChatSDK_armv7_armv7s.a */,
-				609EDE1D178702590050D992 /* WXApi.h */,
-				609EDE1E178702590050D992 /* WXApiObject.h */,
+				60EEA3EB178D050D0065DA5D /* libWeChatSDK_armv7_armv7s.a */,
+				60EEA3E4178CFB580065DA5D /* WXApi.h */,
+				60EEA3E5178CFB580065DA5D /* WXApiObject.h */,
 			);
 			name = WeiXinSDK;
 			path = ../WeiXinSDK;
@@ -663,6 +670,7 @@
 		60A0DCCE177256B4004F6211 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				60EEA3DB178CEF370065DA5D /* Child */,
 				609C8E181785873E00061ADA /* animationClass */,
 				D68400891772BB3E00DB94C1 /* MainViewImages */,
 				60A0DCBA17724E7D004F6211 /* kaplanViewController.h */,
@@ -758,6 +766,17 @@
 				60A87BA417734C9D008EDF24 /* kaplanEvalutionViewController.xib */,
 			);
 			name = Evalution;
+			sourceTree = "<group>";
+		};
+		60EEA3DB178CEF370065DA5D /* Child */ = {
+			isa = PBXGroup;
+			children = (
+				60EEA3DC178CEF430065DA5D /* kaplanChildViewController_4.xib */,
+				60EEA3DD178CEF430065DA5D /* kaplanChildViewController.h */,
+				60EEA3DE178CEF430065DA5D /* kaplanChildViewController.m */,
+				60EEA3DF178CEF430065DA5D /* kaplanChildViewController.xib */,
+			);
+			name = Child;
 			sourceTree = "<group>";
 		};
 		D68400891772BB3E00DB94C1 /* MainViewImages */ = {
@@ -931,11 +950,13 @@
 				609EDE28178705230050D992 /* micro_messenger.png in Resources */,
 				60A23F4E178ABA2A002F5163 /* kaplanSearchChildViewController_4.xib in Resources */,
 				60A23F4F178ABA2A002F5163 /* kaplanSearchDetailViewController_4.xib in Resources */,
-				60A4EBBD178B3CFA00411D14 /* kaplanNewsListChildViewController_4.xib in Resources */,
 				60A4EBC7178B427900411D14 /* SinaWeibo.bundle in Resources */,
 				60A2012D178B7A460066B656 /* sinaweibo.png in Resources */,
 				60A20132178B99900066B656 /* btn_settingBtn.png in Resources */,
 				60A20134178B9C540066B656 /* kaplanSettingViewController_4.xib in Resources */,
+				609E77A7178C31C40016CBF4 /* kaplanNewsListChildViewController_4.xib in Resources */,
+				60EEA3E0178CEF430065DA5D /* kaplanChildViewController_4.xib in Resources */,
+				60EEA3E2178CEF430065DA5D /* kaplanChildViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,6 +997,7 @@
 				60A4EBC9178B427900411D14 /* SinaWeiboAuthorizeView.m in Sources */,
 				60A4EBCA178B427900411D14 /* SinaWeiboRequest.m in Sources */,
 				60A20130178B7F300066B656 /* kaplanSinaWeiBodelgate.m in Sources */,
+				60EEA3E1178CEF430065DA5D /* kaplanChildViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1068,7 +1090,7 @@
 		60A0DCC317724E7D004F6211 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Linchuan Wang (TVQ942G9J5)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Linchuan Wang (K677UDX3Q8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kaplanMobile/kaplanMobile-Prefix.pch";
 				INFOPLIST_FILE = "kaplanMobile/kaplanMobile-Info.plist";
@@ -1078,7 +1100,7 @@
 					"\"$(SRCROOT)/WeiXinSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0CFB759D-04D6-4C7C-B879-1DD166EF3880";
+				PROVISIONING_PROFILE = "0EEACB0B-6F0E-4EEE-AAED-688A3A1D7F22";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1086,7 +1108,7 @@
 		60A0DCC417724E7D004F6211 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Linchuan Wang (TVQ942G9J5)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Linchuan Wang (K677UDX3Q8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kaplanMobile/kaplanMobile-Prefix.pch";
 				INFOPLIST_FILE = "kaplanMobile/kaplanMobile-Info.plist";
@@ -1096,7 +1118,7 @@
 					"\"$(SRCROOT)/WeiXinSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0CFB759D-04D6-4C7C-B879-1DD166EF3880";
+				PROVISIONING_PROFILE = "0EEACB0B-6F0E-4EEE-AAED-688A3A1D7F22";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

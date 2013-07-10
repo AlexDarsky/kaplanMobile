@@ -80,7 +80,14 @@
                 {NSLog(@"intro NULL");
                     [newsPreArray addObject:@"NULL"];
                 }
-                [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
+                        NSLog(@"is %@",[newInfo objectForKey:@"picUrl"]);
+                if (![[newInfo objectForKey:@"picUrl"] isEqualToString:@""]) {
+                    [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
+                }else
+                {NSLog(@"picUrl NULL");
+                    [newsImageArray addObject:@"NULL"];
+                }
+                
             }
             [self.NewsTableView beginUpdates];
             [self.NewsTableView reloadData];
@@ -111,7 +118,13 @@
         {NSLog(@"intro NULL");
             [newsPreArray addObject:@"NULL"];
         }
-        [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
+
+        if (![[newInfo objectForKey:@"picUrl"] isEqualToString:@""]) {
+            [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
+        }else
+        {NSLog(@"picUrl NULL");
+            [newsImageArray addObject:@"NULL"];
+        }
     }
     [self.NewsTableView beginUpdates];
     [self.NewsTableView reloadData];
@@ -132,7 +145,15 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 98;
+    if (![[newsImageArray objectAtIndex:indexPath.row] isEqualToString:@"NULL"])
+    {
+        NSLog(@"98989898");
+        return 98;
+    }else
+    {
+        return 58;
+
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -143,15 +164,17 @@
     UIImageView *iconImg=[[UIImageView alloc] initWithFrame:CGRectMake(40, 10, 15, 15)];
     iconImg.image=[UIImage imageNamed:@"dot"];
     [cell.contentView addSubview:iconImg];
-    UILabel *newTitle=[[UILabel alloc] initWithFrame:CGRectMake(60, 10, 200, 20)];
+    UILabel *newTitle=[[UILabel alloc] initWithFrame:CGRectMake(60, 0, 240, 40)];
     newTitle.textColor=[UIColor whiteColor];
+    newTitle.font=[UIFont systemFontOfSize:14.0];
     newTitle.backgroundColor=[UIColor clearColor];
-    newTitle.text=[newsTitleArray objectAtIndex:indexPath.row];
-    [newTitle setNumberOfLines:0];
+    NSString *nameString=[NSString stringWithFormat:@"%@",[newsTitleArray objectAtIndex:indexPath.row]];
+    newTitle.text=[nameString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];    [newTitle setNumberOfLines:0];
     [cell.contentView addSubview:newTitle];
-    if (![[newsImageArray objectAtIndex:indexPath.row]isEqualToString:@""]) {
-        UIImageView *newImg=[[UIImageView alloc] initWithFrame:CGRectMake(40, 35, 66, 45)];
+    if (![[newsImageArray objectAtIndex:indexPath.row] isEqualToString:@"NULL"]) {
+        UIImageView *newImg=[[UIImageView alloc] initWithFrame:CGRectMake(40, 45, 66, 45)];
         NSString *url=[newsImageArray objectAtIndex:indexPath.row];
+        NSLog(url);
         [cell.contentView addSubview:newImg];
         UIImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
                        {
@@ -159,32 +182,34 @@
                        }, ^(void){
                        });
         UIFont *font = [UIFont fontWithName:@"Arial" size:12];
-        UILabel *newPre=[[UILabel alloc] initWithFrame:CGRectMake(120, 20, 160, 90)];
+        UILabel *newPre=[[UILabel alloc] initWithFrame:CGRectMake(120, 20, 180, 90)];
         newPre.lineBreakMode=NSLineBreakByCharWrapping;
         [newPre setNumberOfLines:2];
         [newPre setFont:font];
         newPre.textColor=[UIColor greenColor];
-        NSString *preString=[NSString stringWithFormat:@"%@",[newsPreArray objectAtIndex:indexPath.row]];
+        NSString *preString=[NSString stringWithFormat:@"%@",[newsTitleArray objectAtIndex:indexPath.row]];
         newPre.text=[preString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
         newPre.backgroundColor=[UIColor clearColor];
         [cell.contentView addSubview:newPre];
         UIImageView *customSeparator=[[UIImageView alloc] initWithFrame:CGRectMake(14, 97, 282, 1)];
+        [customSeparator setImage:[UIImage imageNamed:@"line.png"]];
         [cell.contentView addSubview:customSeparator];
         
     }else
     {
-     UIFont *font = [UIFont fontWithName:@"Arial" size:12];
-    UILabel *newPre=[[UILabel alloc] initWithFrame:CGRectMake(60, 30, 200, 60)];
+     UIFont *font = [UIFont fontWithName:@"Arial" size:11];
+    UILabel *newPre=[[UILabel alloc] initWithFrame:CGRectMake(40, 18, 240, 60)];
     newPre.lineBreakMode=NSLineBreakByCharWrapping;
-    [newPre setNumberOfLines:2];
+    [newPre setNumberOfLines:1];
     [newPre setFont:font];
     newPre.textColor=[UIColor greenColor];
-    newPre.text=[newsPreArray objectAtIndex:indexPath.row];
+    NSString *preString=[NSString stringWithFormat:@"%@",[newsTitleArray objectAtIndex:indexPath.row]];
+    newPre.text=[preString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     newPre.backgroundColor=[UIColor clearColor];
     [cell.contentView addSubview:newPre];
-        UIImageView *customSeparator=[[UIImageView alloc] initWithFrame:CGRectMake(14, 97, 282, 1)];
+    UIImageView *customSeparator=[[UIImageView alloc] initWithFrame:CGRectMake(14, 57, 282, 1)];
         customSeparator.image=[UIImage imageNamed:@"line"];
-        [cell.contentView addSubview:customSeparator];
+    [cell addSubview:customSeparator];
     }
     return cell;
     

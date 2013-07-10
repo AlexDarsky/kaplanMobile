@@ -37,7 +37,7 @@
 static kaplanViewController *kaplanRootViewCon;
 @synthesize NavBackView,MainView;
 @synthesize tabBarController;
-@synthesize searchNavCon,evalutionNavCon,SchoolsViewNavCon,NewsViewNavCon,kaplanSettingViewCon,SettingViewNavCon;
+@synthesize searchNavCon,evalutionNavCon,SchoolsViewNavCon,NewsViewNavCon,kaplanSettingViewCon,SettingViewNavCon,childViewController;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -103,6 +103,7 @@ static kaplanViewController *kaplanRootViewCon;
     */
     if ([[UIScreen mainScreen] bounds].size.height>480.00)
     {
+        childViewController=[[kaplanChildViewController alloc] initWithNibName:@"kaplanChildViewController_4" bundle:nil];
         kaplanSereachMainViewCon=[[kaplanSereachMainViewController alloc] initWithNibName:@"kaplanSereachMainViewController_4" bundle:nil];
         kaplanSereachMainViewCon.SereachDelegate=self;
         searchNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanSereachMainViewCon];
@@ -131,6 +132,7 @@ static kaplanViewController *kaplanRootViewCon;
     }
     else{
         NSLog(@"the Device size is 这是3.5寸屏");
+                childViewController=[[kaplanChildViewController alloc] initWithNibName:@"kaplanChildViewController" bundle:nil];
         kaplanSereachMainViewCon=[[kaplanSereachMainViewController alloc] initWithNibName:@"kaplanSereachMainViewController" bundle:nil];
         kaplanSereachMainViewCon.SereachDelegate=self;
         searchNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanSereachMainViewCon];
@@ -181,10 +183,10 @@ static kaplanViewController *kaplanRootViewCon;
     else{
      sv=[[UIScrollView alloc] initWithFrame:CGRectMake(10, [[UIScreen mainScreen] bounds].size.height/10+7, 299, 134)];
     }
-    UIImageView *svBG=[[UIImageView alloc] initWithFrame:CGRectMake(7, sv.frame.origin.y-4, 308, 144)];
+    UIImageView *svBG=[[UIImageView alloc] initWithFrame:CGRectMake(6, sv.frame.origin.y-4, 309, 144)];
     [svBG setImage:[UIImage imageNamed:@"rolling"]];
     sv.showsHorizontalScrollIndicator=NO;
-    sv.backgroundColor=[UIColor blackColor];
+    sv.backgroundColor=[UIColor clearColor];
     [MainView layer].shadowPath =[UIBezierPath bezierPathWithRect:MainView.bounds].CGPath;
     self.MainView.layer.shadowColor=[[UIColor blackColor] CGColor];
     self.MainView.layer.shadowOffset=CGSizeMake(0,0);
@@ -309,7 +311,19 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
     /*
     UIAlertView *alerView=[[UIAlertView alloc] initWithTitle:@"我是广告君" message:@"现在还木有广告哦" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alerView show];*/
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.douho.net"]];
+    kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+    if ([serverHelper connectedToNetwork])
+    {
+    [self presentViewController:childViewController animated:YES completion:nil];
+     NSDictionary *tmpDictionary=[[NSDictionary alloc] initWithDictionary:[topListArray objectAtIndex:page.currentPage]];
+    [childViewController reloadNewInfomationByID:[tmpDictionary objectForKey:@"id"]];
+    //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.douho.net"]];
+    }else
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"网络连接失败" message:@"检测不到可用网络，请您确认网络设置是否正常" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+        [alert show];
+
+    }
 }
 - (void) setCurrentPage:(NSInteger)secondPage {
     
@@ -397,6 +411,7 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
                 Tend=YES;
             }
         }else{
+            NSLog(@"curretn page is %d",page.currentPage);
             page.currentPage--;
             if (page.currentPage==0) {
                 Tend=NO;

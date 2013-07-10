@@ -101,7 +101,7 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
         NSLog(@"HTML CODE%@",[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "]);
         self.newsImageURL=[newDetail objectForKey:@"picUrl"];
         NSString *url=[NSString stringWithFormat:@"http://cd.douho.net%@",self.newsImageURL];
-        childNewImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
+        newImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
                         {
                             [self.newsImageView setImage:image];
                         }, ^(void){
@@ -131,7 +131,7 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
-void childNewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^errorBlock)(void) )
+void newImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^errorBlock)(void) )
 {
     dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ), ^(void)
                    {
@@ -190,10 +190,9 @@ void childNewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), voi
         message.mediaObject =appExt;
         
         SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-        req.bText = YES;
-        req.text=[NSString stringWithFormat:@"我在kaplan官方手机端上发现了 %@的消息.",newsTitle.text];
-        //req.message = message;
-        req.scene = WXSceneTimeline;
+        req.bText = NO;
+        req.message = message;
+        req.scene = _scene;
         
         [WXApi sendReq:req];
     }else{

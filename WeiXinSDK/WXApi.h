@@ -75,6 +75,18 @@
  */
 +(BOOL) isWXAppSupportApi;
 
+/*! @brief 获取当前微信的版本所支持的API最高版本
+ *
+ * @return 返回微信支持的最高API版本号。
+ */
++(NSString *) getWXAppSupportMaxApiVersion;
+
+/*! @brief 获取当前微信SDK的版本号
+ *
+ * @return 返回当前微信SDK的版本号
+ */
++(NSString *) getApiVersion;
+
 /*! @brief 获取微信的itunes安装地址
  *
  * @return 微信的安装地址字符串。
