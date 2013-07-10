@@ -16,7 +16,7 @@
 - (void) changeScene:(NSInteger)scene;
 @end
 
-@interface kaplanNewsListChildViewController : UIViewController<UIMenuBarDelegate,WXApiDelegate,sendMsgToWeChatViewDelegate>
+@interface kaplanChildViewController : UIViewController<UIMenuBarDelegate,WXApiDelegate,sendMsgToWeChatViewDelegate>
 {
     NSMutableArray *listArray;
     UIMenuBar *menuBar;
@@ -31,7 +31,7 @@
 @property (strong, nonatomic) NSString  *newsImageURL;
 @property (strong, nonatomic) IBOutlet UIView *shareView;
 @property (nonatomic, assign) id<sendMsgToWeChatViewDelegate> delegate;
-+(kaplanNewsListChildViewController*)sharekaplanNewsListChildViewController;
++(kaplanChildViewController*)sharekaplanChildViewController;
 -(void)reloadNewInfomation:(NSString*)title text:(NSString*)newText andImage:(NSString*)newsImage;
 -(void)reloadNewInfomationByID:(NSString *)newID;
 @end

@@ -144,9 +144,10 @@ static kaplanSearchDetailViewController *sharekaplanSearchDetailViewController =
         message.mediaObject =appExt;
         
         SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-        req.bText = NO;
-        req.message = message;
-        req.scene = _scene;
+        req.bText = YES;
+        req.text=[NSString stringWithFormat:@"我在kaplan官方手机端上发现了 %@.",schoolCN.text];
+        //req.message = message;
+        req.scene = WXSceneTimeline;
         
         [WXApi sendReq:req];
     }else{

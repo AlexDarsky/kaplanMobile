@@ -6,28 +6,28 @@
 //  Copyright (c) 2013年 AlexZhu. All rights reserved.
 //
 
-#import "kaplanNewsListChildViewController.h"
+#import "kaplanChildViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "kaplanServerHelper.h"
 #import "UIMenuBar.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
 #import "kaplanSinaWeiBodelgate.h"
-@interface kaplanNewsListChildViewController ()
+@interface kaplanChildViewController ()
 
 @end
 
-@implementation kaplanNewsListChildViewController
+@implementation kaplanChildViewController
 
 @synthesize CustomNavBar;
 @synthesize newsImageURL,newsWebView,newsImageView,newsTitle,shareView;
-static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController = nil;
-+(kaplanNewsListChildViewController*)sharekaplanNewsListChildViewController
+static kaplanChildViewController *sharekaplanChildViewController = nil;
++(kaplanChildViewController*)sharekaplanChildViewController;
 {
-    if (sharekaplanNewsListChildViewController == nil) {
-        sharekaplanNewsListChildViewController = [[super allocWithZone:NULL] init];
+    if (sharekaplanChildViewController == nil) {
+        sharekaplanChildViewController = [[super allocWithZone:NULL] init];
     }
-    return sharekaplanNewsListChildViewController;
+    return sharekaplanChildViewController;
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -129,7 +129,8 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
 }
 - (IBAction)backToParentView:(id)sender
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    NSLog(@"removeFromParentViewController");
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 void newImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^errorBlock)(void) )
 {
@@ -188,12 +189,11 @@ void newImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
         WXAppExtendObject *appExt=[WXAppExtendObject object];
         [appExt setExtInfo:[NSString stringWithFormat:@"我在kaplan官方手机端上发现了 %@",self.newsTitle.text]];
         message.mediaObject =appExt;
-        
         SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-        req.bText = NO;
-        req.message = message;
-        req.scene = _scene;
-        
+        req.bText = YES;
+        req.text=[NSString stringWithFormat:@"我在kaplan官方手机端上发现了 %@的消息.",newsTitle.text];
+        //req.message = message;
+        req.scene = WXSceneTimeline;
         [WXApi sendReq:req];
     }else{
         UIAlertView *alView = [[UIAlertView alloc]initWithTitle:@"" message:@"你的iPhone上还没有安装微信,无法使用此功能，使用微信可以方便的把你喜欢的作品分享给好友。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"免费下载微信", nil];

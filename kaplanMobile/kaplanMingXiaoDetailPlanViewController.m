@@ -418,19 +418,26 @@ void SchoolLogoFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (
      [menuBar dismiss];
     if ([WXApi isWXAppInstalled] && [WXApi isWXAppSupportApi]) {
         
+        /*
         WXMediaMessage *message = [WXMediaMessage message];
-        message.title = @"kaplan名校分享";
+        message.title = @"kaplan官方客户端";
         message.description =[NSString stringWithFormat:@"我在kaplan官方手机端上发现了 %@,%@",self.schoolNameCN,self.schoolTextView];
-        [message setThumbImage:[UIImage imageNamed:@"Icon"]];
+        //UIImage *img=[[UIImage alloc] initWithContentsOfFile:@"Icon.png"];
+
+        [message setThumbImage:[UIImage imageNamed:@"Icon.png"]];
         WXAppExtendObject *appExt=[WXAppExtendObject object];
-        [appExt setExtInfo:[NSString stringWithFormat:@"我在kaplan官方手机端上发现了 %@,%@",self.schoolNameCN,self.schoolTextView]];
-        
-        message.mediaObject =appExt;
-        
+        [appExt setExtInfo:[NSString stringWithFormat:@"%@",self.schoolTextView]];
+        UIImage *img = [UIImage imageNamed:@"Icon.png"];
+        NSData *dataObj = UIImageJPEGRepresentation(img, 1.0);
+        WXImageObject *imgMessage=[WXImageObject object];
+        imgMessage.imageData=dataObj;
+        message.mediaObject =imgMessage;
+        */
         SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-        req.bText = NO;
-        req.message = message;
-        req.scene = _scene;
+        req.bText = YES;
+        req.text=[NSString stringWithFormat:@"我在kaplan官方手机端上发现了 %@,%@",self.schoolNameCN,self.schoolTextView];
+        //req.message = message;
+        req.scene = WXSceneTimeline;
         
         [WXApi sendReq:req];
     }else{
