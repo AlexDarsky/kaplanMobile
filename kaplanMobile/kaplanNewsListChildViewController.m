@@ -59,7 +59,7 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
             }
         }
         self.shareView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bottom_bar"]];
-        self.newsImageView.frame=CGRectMake(0, 0, newsImageView.frame.size.width, newsImageView.frame.size.height);
+        self.newsImageView.frame=CGRectMake(5, 0, newsImageView.frame.size.width, newsImageView.frame.size.height);
         [newsWebView.scrollView addSubview:self.newsImageView];
     }
     return self;

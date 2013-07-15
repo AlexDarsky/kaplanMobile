@@ -67,7 +67,7 @@
 		609AC560178504D300E378E9 /* kaplanSearchChildViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 609AC55E178504D300E378E9 /* kaplanSearchChildViewController.xib */; };
 		609AC564178511D500E378E9 /* kaplanSearchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 609AC562178511D400E378E9 /* kaplanSearchDetailViewController.m */; };
 		609AC565178511D500E378E9 /* kaplanSearchDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 609AC563178511D400E378E9 /* kaplanSearchDetailViewController.xib */; };
-		609AC56717851F3300E378E9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609AC56617851F3200E378E9 /* Social.framework */; };
+		609AC56717851F3300E378E9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609AC56617851F3200E378E9 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		609C105F1785C75300EBD3D9 /* kaplanAboutViewController_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 609C105E1785C75300EBD3D9 /* kaplanAboutViewController_4.xib */; };
 		609C8E251785873E00061ADA /* 10001.png in Resources */ = {isa = PBXBuildFile; fileRef = 609C8E191785873E00061ADA /* 10001.png */; };
 		609C8E261785873E00061ADA /* 10002.png in Resources */ = {isa = PBXBuildFile; fileRef = 609C8E1A1785873E00061ADA /* 10002.png */; };
@@ -1091,6 +1091,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Linchuan Wang (K677UDX3Q8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Linchuan Wang (K677UDX3Q8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kaplanMobile/kaplanMobile-Prefix.pch";
 				INFOPLIST_FILE = "kaplanMobile/kaplanMobile-Info.plist";
@@ -1100,7 +1101,8 @@
 					"\"$(SRCROOT)/WeiXinSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0EEACB0B-6F0E-4EEE-AAED-688A3A1D7F22";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1109,6 +1111,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Linchuan Wang (K677UDX3Q8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Linchuan Wang (K677UDX3Q8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kaplanMobile/kaplanMobile-Prefix.pch";
 				INFOPLIST_FILE = "kaplanMobile/kaplanMobile-Info.plist";
@@ -1118,7 +1121,8 @@
 					"\"$(SRCROOT)/WeiXinSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0EEACB0B-6F0E-4EEE-AAED-688A3A1D7F22";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
