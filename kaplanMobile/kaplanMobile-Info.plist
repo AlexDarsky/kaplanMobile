@@ -14,7 +14,7 @@
 		<string>Icon@2x.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>Darsky.com.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>U8N49HTZA7.com.kaplanApp.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

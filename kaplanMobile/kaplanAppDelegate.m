@@ -52,7 +52,7 @@
         [sinaweiboInfo objectForKey:@"UserIDKey"]) {
         sinaweibo.accessToken = [sinaweiboInfo objectForKey:@"AccessTokenKey"]; sinaweibo.expirationDate = [sinaweiboInfo objectForKey:@"ExpirationDateKey"]; sinaweibo.userID = [sinaweiboInfo objectForKey:@"UserIDKey"];
     }
-    
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge)]; 
     return YES;
 }
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
@@ -94,6 +94,18 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *token = [NSString stringWithFormat:@"%@", deviceToken];
+    NSLog(@"My token is:%@", token);
+}
 
-
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSString *error_str = [NSString stringWithFormat: @"%@", error];
+    NSLog(@"Failed to get token, error:%@", error_str);
+}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"推送通知" message:@"信息" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+    [alert show];
+}
 @end

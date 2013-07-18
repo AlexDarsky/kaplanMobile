@@ -209,12 +209,14 @@ static kaplanViewController *kaplanRootViewCon;
         if (![[initInfo objectForKey:@"appVersion"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]])
         {
             UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"更新信息" message:@"已有新版本，是否前往更新？" delegate:nil cancelButtonTitle:@"不，谢谢" otherButtonTitles:@"好的", nil];
+            alert.tag=110;
             [alert show];
         }
         else
         {
             kaplanSQLIteHelper *sqliteHelper =[kaplanSQLIteHelper sharekaplanSQLIteHelper];
             if (![[initInfo objectForKey:@"dbVerID"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"dbVerID"]]||![sqliteHelper didDBexists]) {
+                /*
                 UIActionSheet* mySheet = [[UIActionSheet alloc]
                                           initWithTitle:@"数据库版本过旧"
                                           delegate:self
@@ -222,6 +224,8 @@ static kaplanViewController *kaplanRootViewCon;
                                           destructiveButtonTitle:@"更新数据库"
                                           otherButtonTitles:nil];
                 [mySheet showInView:self.view];
+                 */
+                [kaplanSettingViewCon updateDataBase:nil];
             }else
             {
                 [kaplanSettingViewCon.checkDataBase setUserInteractionEnabled:NO];
@@ -463,6 +467,15 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
     [UIView commitAnimations];
     backViewShowing=YES;
 
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if( buttonIndex != [alertView cancelButtonIndex]){
+        NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com"];
+        NSURL *url = [NSURL URLWithString:urlStr];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet
 

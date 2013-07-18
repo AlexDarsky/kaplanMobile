@@ -214,7 +214,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
     NSDictionary *initDic = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"http://cd.douho.net/%@",[initDic objectForKey:@"dbFile"]]];
-	[url downloadWithDelegate:self Title:@"下载数据库" WithToFileName:[kDocumentFolder stringByAppendingPathComponent:@"schoolDB.db3"]];
+	[url downloadWithDelegate:self Title:@"数据库下载中" WithToFileName:[kDocumentFolder stringByAppendingPathComponent:@"schoolDB.db3"]];
     [[NSUserDefaults standardUserDefaults] setObject:[initDic objectForKey:@"dbVerID"] forKey:@"dbVerID"];
 
 }
