@@ -52,13 +52,10 @@
         [sinaweiboInfo objectForKey:@"UserIDKey"]) {
         sinaweibo.accessToken = [sinaweiboInfo objectForKey:@"AccessTokenKey"]; sinaweibo.expirationDate = [sinaweiboInfo objectForKey:@"ExpirationDateKey"]; sinaweibo.userID = [sinaweiboInfo objectForKey:@"UserIDKey"];
     }
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge)]; 
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge)];
     return YES;
 }
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-   
-}
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     if ([sourceApplication isEqualToString:@"com.sina.weibo"]) {
@@ -97,15 +94,19 @@
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSString *token = [NSString stringWithFormat:@"%@", deviceToken];
     NSLog(@"My token is:%@", token);
+    kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+    [serverHelper sendDeviceTokenToServer:token];
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     NSString *error_str = [NSString stringWithFormat: @"%@", error];
     NSLog(@"Failed to get token, error:%@", error_str);
 }
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSLog(@"didReceiveRemoteNotification");
+    //NSLog(@"%@",[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]);
+   [self.kaplanViewCon dealWithRemoteNotification:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]];
     
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"推送通知" message:@"信息" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-    [alert show];
 }
 @end

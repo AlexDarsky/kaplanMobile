@@ -30,4 +30,6 @@
 -(NSArray*)getSchoolListAtPage:(int)pageNum;
 -(NSDictionary*)getSchoolDetail:(NSString*)schoolID;
 -(NSDictionary*)getNewDetailByID:(NSString*)newID;
+-(NSDictionary*)getRemotoNotification:(NSString*)title;
+-(BOOL)sendDeviceTokenToServer:(NSString*)deviceToken;
 @end

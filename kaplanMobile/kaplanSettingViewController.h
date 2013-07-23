@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIView *CustomNavBar;
 @property (strong)id settingDelegate;
 @property (weak, nonatomic) IBOutlet UIButton *checkDataBase;
+@property (weak, nonatomic) IBOutlet UIButton *updateAppBtn;
 @property (strong, nonatomic) IBOutlet UIButton *testButton;
 
 @property (strong,nonatomic) kaplanAboutViewController *aboutViewController;

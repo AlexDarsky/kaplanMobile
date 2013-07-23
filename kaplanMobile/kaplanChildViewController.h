@@ -34,4 +34,5 @@
 +(kaplanChildViewController*)sharekaplanChildViewController;
 -(void)reloadNewInfomation:(NSString*)title text:(NSString*)newText andImage:(NSString*)newsImage;
 -(void)reloadNewInfomationByID:(NSString *)newID;
+-(void)reloadRemotoNotificationByTitle:(NSString *)title;
 @end

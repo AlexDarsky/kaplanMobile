@@ -115,6 +115,27 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
     NSArray *tmpArray=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
     return tmpArray;
 }
+-(BOOL)sendDeviceTokenToServer:(NSString*)deviceToken
+{
+    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/token.aspx?action=sendTest&token=%@",deviceToken];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    
+    NSHTTPURLResponse* urlResponse = nil;
+    NSError *error = [[NSError alloc] init];
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+    NSString*jsonString = [[NSString alloc]initWithBytes:[responseData bytes]length:[responseData length]encoding:NSUTF8StringEncoding];
+    NSLog(@"send");
+    NSData* jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *resultsDictionary = [jsonData objectFromJSONData];
+    if ([[resultsDictionary objectForKey:@"success"] isEqualToString:@"true"]) {
+        NSLog(@"YES!!!!!!");
+        return YES;
+    }else
+        return NO;
+
+}
 -(NSDictionary*)getNewDetailByID:(NSString*)newID
 {
     NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=Detail&id=%@&app=0",newID];
@@ -132,6 +153,29 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
     
     NSDictionary *resultsDictionary = [jsonData objectFromJSONData];
     return resultsDictionary;
+}
+-(NSDictionary*)getRemotoNotification:(NSString*)title
+{
+   // NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=detail&title=%@",title];
+    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=detail&title=SIC中国学生在谢菲尔德大学成功毕业，并被剑桥大学录取"];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:[self getEncodedString:urlString]]];
+    [request setHTTPMethod:@"POST"];
+    
+    NSHTTPURLResponse* urlResponse = nil;
+    NSError *error = [[NSError alloc] init];
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+    if (responseData==nil) {
+        NSLog(@"Nil");
+    }
+    NSString *responseString = [[NSString alloc]initWithBytes:[responseData bytes]length:[responseData length]encoding:NSUTF8StringEncoding];
+    NSLog(@"getRemotoNotification:%@",responseString);
+    NSString *jsonString = [responseString substringWithRange:NSMakeRange(1, responseString.length-2)];
+    NSData* jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *resultsDictionary = [jsonData objectFromJSONData];
+    return resultsDictionary;
+
 }
 -(NSArray*)getCountryList
 {
@@ -222,23 +266,35 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 {
     NSLog(@"%@",jsonString);
     NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/pinggu.aspx?action=save&json=%@&app=0",jsonString];
-    NSLog(urlString);
-    NSString *demostring=@"http://cd.douho.net/ajax/pinggu.aspx?action=save&json={\"cityID\":\"1004\",\"degreeID\":\"2\",\"countryID\":\"1\",\"name\":\"tonydai\",\"email\":\"tonydaix@163.com\",\"phone\":\"13981808031\"}&app=0";
+    /*
+    NSString *urlString=@"http://cd.douho.net/ajax/pinggu.aspx?action=save&json={\"cityID\":\"1004\",\"degreeID\":\"2\",\"countryID\":\"1\",\"name\":\"tonydai\",\"email\":\"tonydaix@163.com\",\"phone\":\"13981808031\"}&app=0";
+     */
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:demostring]];
-  //  [request setHTTPMethod:@"GET"];
-    //http://cd.douho.net/ajax/pinggu.aspx?action=save&json={"cityID":"1004","degreeID":"2","countryID":"1","name":"tonydai","email":"tonydaix@163.com","phone":"13981808031"}&app=0
+    [request setURL:[NSURL URLWithString:[self getEncodedString:urlString]]];
+    [request setHTTPMethod:@"POST"];
     
     NSHTTPURLResponse* urlResponse = nil;
     NSError *error = [[NSError alloc] init];
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
-    NSMutableString *responseString=[[NSMutableString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-    NSString *string=@"true";
-    NSRange range=[responseString rangeOfString:string];
-    NSLog(@"%d",range.location);
-    if (range.location>1) {
+    NSString*jssonString = [[NSString alloc]initWithBytes:[responseData bytes]length:[responseData length]encoding:NSUTF8StringEncoding];
+    NSLog(jssonString);
+    //http://cd.douho.net/ajax/pinggu.aspx?action=save&json={"cityID":"1004","degreeID":"2","countryID":"1","name":"tonydai","email":"tonydaix@163.com","phone":"13981808031"}&app=0
+    
+    NSDictionary *resultsDictionary = [responseData objectFromJSONData];
+    if ([[resultsDictionary objectForKey:@"success"] isEqualToString:@"true"]) {
+        NSLog(@"YES!!!!!!");
         return YES;
     }else
         return NO;
+}
+-(NSString*)getEncodedString:(NSString*)urlString
+{
+    NSString *encodedString = (NSString *)
+    CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                            (CFStringRef)urlString,
+                                            (CFStringRef)@"!$&'()*+,-./:;=?@_~%#[]",
+                                            NULL,
+                                            kCFStringEncodingUTF8));
+    return encodedString;
 }
 @end

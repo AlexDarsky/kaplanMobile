@@ -21,6 +21,7 @@
 #import "animationImageView.h"
 
 #define kDocumentFolder					[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] 
+#define appId @"677567948"
 @class kaplanEvalutionViewController;
 @interface kaplanViewController ()
 {
@@ -57,6 +58,7 @@ static kaplanViewController *kaplanRootViewCon;
         [self addChildViewController:self.backViewController];
         [self.NavBackView addSubview:self.backViewController.view];
          */
+        
     }
     return self;
 }
@@ -101,6 +103,7 @@ static kaplanViewController *kaplanRootViewCon;
     SchoolsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanMingXiaoBoLanViewCon];
     SchoolsViewNavCon.navigationBarHidden=YES;
     */
+    childViewShow=NO;
     if ([[UIScreen mainScreen] bounds].size.height>480.00)
     {
         childViewController=[[kaplanChildViewController alloc] initWithNibName:@"kaplanChildViewController_4" bundle:nil];
@@ -208,12 +211,13 @@ static kaplanViewController *kaplanRootViewCon;
         ;
         if (![[initInfo objectForKey:@"appVersion"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]])
         {
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"更新信息" message:@"已有新版本，是否前往更新？" delegate:nil cancelButtonTitle:@"不，谢谢" otherButtonTitles:@"好的", nil];
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"更新信息" message:@"已有新版本，是否前往更新？" delegate:self cancelButtonTitle:@"不，谢谢" otherButtonTitles:@"好的", nil];
             alert.tag=110;
             [alert show];
         }
         else
         {
+            [kaplanSettingViewCon.updateAppBtn setUserInteractionEnabled:NO];
             kaplanSQLIteHelper *sqliteHelper =[kaplanSQLIteHelper sharekaplanSQLIteHelper];
             if (![[initInfo objectForKey:@"dbVerID"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"dbVerID"]]||![sqliteHelper didDBexists]) {
                 /*
@@ -318,6 +322,7 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
     kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
     if ([serverHelper connectedToNetwork])
     {
+    childViewShow=YES;
     [self presentViewController:childViewController animated:YES completion:nil];
      NSDictionary *tmpDictionary=[[NSDictionary alloc] initWithDictionary:[topListArray objectAtIndex:page.currentPage]];
     [childViewController reloadNewInfomationByID:[tmpDictionary objectForKey:@"id"]];
@@ -326,6 +331,16 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
     {
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"网络连接失败" message:@"检测不到可用网络，请您确认网络设置是否正常" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
         [alert show];
+
+    }
+}
+
+-(void)dealWithRemoteNotification:(NSString*)titile
+{
+    if (childViewShow==NO) {
+        childViewShow=YES;
+        [self presentViewController:childViewController animated:YES completion:nil];
+        [childViewController reloadRemotoNotificationByTitle:titile];
 
     }
 }
@@ -401,6 +416,7 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
         self.MainView.transform = CGAffineTransformMakeTranslation(translation, 0);
         [UIView commitAnimations];
         backViewShowing=NO;
+        childViewShow=NO;
     }
 
 }
@@ -477,9 +493,7 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
     }
     
 }
-- (void)actionSheet:(UIActionSheet *)actionSheet
-
-didDismissWithButtonIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 {
     
@@ -488,7 +502,20 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     }
     
 }
-
+- (void)alertView:(UIAlertView*)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if( buttonIndex != [alertView cancelButtonIndex])
+    {
+        NSLog(@"iTunes!!!!!");
+       // NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/id%@?mt=8", appId];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/appName/id(677567948)?mt=8&uo=4"]];
+        /*
+        NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/"];
+        NSURL *url = [NSURL URLWithString:urlStr];
+        [[UIApplication sharedApplication] openURL:url];
+         */
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -497,7 +524,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (void)viewDidUnload {
     [self setMainView:nil];
-   // [self setMainScrollView:nil];
+  //[self setMainScrollView:nil];
     [super viewDidUnload];
 }
 @end

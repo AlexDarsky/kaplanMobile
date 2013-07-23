@@ -127,6 +127,61 @@ static kaplanChildViewController *sharekaplanChildViewController = nil;
 
          
 }
+-(void)reloadRemotoNotificationByTitle:(NSString *)title
+{
+    kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
+    NSMutableDictionary *newDetail=[[NSMutableDictionary alloc] initWithDictionary:[serverHelper getRemotoNotification:title]];
+    NSString *newTitle=[NSString stringWithFormat:@"%@",[newDetail objectForKey:@"title"]];
+    
+    [self.newsTitle setText:[newTitle stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "]];
+    // [self.newsWebView loadHTMLString:[newDetail objectForKey:@"newsText"] baseURL:nil];
+    if (![[newDetail objectForKey:@"picUrl"] isEqualToString:@""])
+    {
+        NSLog(@"NULL");
+        //NSLog(@"%@",[newDetail objectForKey:@"newsText"]);
+        NSString *jsString = [NSString stringWithFormat:@"<html>"
+                              "<head> "
+                              "<style type=\"text/css\"> "
+                              //"p{ color:#fff｝"
+                              "img{ max-width:65px; max-height:85px; }"
+                              "body {font-size: %f;; color: %@;}"
+                              "a{color:#ccc}"
+                              "</style>"
+                              "</head>"
+                              "<body><p><br/><br/><br/><br/><br/><br/><br/><br/><br/></P>%@</body>"
+                              "</html>", 11.0, @"#fff",[newDetail objectForKey:@"newsText"]];
+        jsString=[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+        
+        [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://cd.douho.net/File"] baseURL:nil];
+        NSLog(@"HTML CODE%@",[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "]);
+        self.newsImageURL=[newDetail objectForKey:@"picUrl"];
+        NSString *url=[NSString stringWithFormat:@"http://cd.douho.net%@",self.newsImageURL];
+        newImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
+                        {
+                            [self.newsImageView setImage:image];
+                        }, ^(void){
+                        });
+    }else
+    {
+        NSLog(@"%@",[newDetail objectForKey:@"newsText"]);
+        NSString *jsString = [NSString stringWithFormat:@"<html>"
+                              "<head> "
+                              "<style type=\"text/css\"> "
+                              "body {font-size: %f;; color: %@;}"
+                              "a{color:#ccc}"
+                              "</style>"
+                              "</head>"
+                              "<body>%@</body>"
+                              "</html>", 14.0, @"#fff", [newDetail objectForKey:@"newsText"]];
+        jsString=[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+        
+        [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://cd.douho.net/File"] baseURL:nil];
+        [self.newsImageView setImage:nil];
+        //self.newsWebView.frame=CGRectMake(46, self.view., <#CGFloat width#>, <#CGFloat height#>)
+    }
+    
+}
+
 - (IBAction)backToParentView:(id)sender
 {
     NSLog(@"removeFromParentViewController");
@@ -196,7 +251,7 @@ void newImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
         req.scene = WXSceneTimeline;
         [WXApi sendReq:req];
     }else{
-        UIAlertView *alView = [[UIAlertView alloc]initWithTitle:@"" message:@"你的iPhone上还没有安装微信,无法使用此功能，使用微信可以方便的把你喜欢的作品分享给好友。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"免费下载微信", nil];
+        UIAlertView *alView = [[UIAlertView alloc]initWithTitle:@"" message:@"你的iPhone上还没有安装微信,无法使用此功能，使用微信可以方便的把你喜欢的东西分享给好友。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"免费下载微信", nil];
         [alView show];
         
     }

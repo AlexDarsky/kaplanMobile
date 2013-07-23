@@ -12,7 +12,7 @@
 #import "kaplanSettingViewController.h"
 #import "kaplanChildViewController.h"
 
-@interface kaplanViewController : UIViewController<SideBarSelectDelegate,UIScrollViewDelegate,DownloadManagerDelegate,UIActionSheetDelegate>
+@interface kaplanViewController : UIViewController<SideBarSelectDelegate,UIScrollViewDelegate,DownloadManagerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 {
     UIScrollView *sv;
     UIPageControl *page;
@@ -20,6 +20,7 @@
     int TimeNum;
     int downloadImgNumber;
     BOOL Tend;
+    BOOL childViewShow;
  
     
 }
@@ -35,4 +36,5 @@
 @property (strong,nonatomic) kaplanSettingViewController *kaplanSettingViewCon;
 @property (strong,nonatomic) kaplanChildViewController *childViewController;
 -(IBAction)showBackView:(id)sender;
+-(void)dealWithRemoteNotification:(NSString*)titile;
 @end

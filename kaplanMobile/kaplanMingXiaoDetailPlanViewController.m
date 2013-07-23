@@ -70,8 +70,12 @@
     NSDictionary *schoolDetail=[[NSDictionary alloc] initWithDictionary:[serverHelper getSchoolDetail:schoolID]];
     NSString *nameString=[schoolDetail objectForKey:@"schoolCnName"];
      NSArray *nameArray=[nameString componentsSeparatedByString:@"("];
-    [self setSchoolNameCN:[nameArray objectAtIndex:0]];
-    [self setSchoolNameEN:[nameArray lastObject]];
+    NSString *chineseName=[nameArray objectAtIndex:0];
+    NSString *englishName=[[nameArray lastObject] stringByReplacingOccurrencesOfString:@")" withString:@" "];
+
+    [self setSchoolNameCN:chineseName];
+    [self setSchoolNameEN:englishName];
+    
     if ([schoolDetail objectForKey:@"intro"]!=nil) {
         [self setSchoolTextView:[schoolDetail objectForKey:@"intro"]];
     }else

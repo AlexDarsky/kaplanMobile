@@ -76,10 +76,12 @@
             {
                 NSString *nameString=[tmpDic objectForKey:@"schoolCnName"];
                 NSArray *nameArray=[nameString componentsSeparatedByString:@"("];
+                NSString *chineseName=[nameArray objectAtIndex:0];
+                NSString *englishName=[[nameArray lastObject] stringByReplacingOccurrencesOfString:@")" withString:@" "];
                 NSLog(@"%d",[nameArray count]);
-                [schoolsArrayCH addObject:[nameArray objectAtIndex:0]];
+                [schoolsArrayCH addObject:chineseName];
                 [schoolIDArray addObject:[tmpDic objectForKey:@"id"]];
-                [schoolArrayEN addObject:[nameArray lastObject]];
+                [schoolArrayEN addObject:englishName];
             }
         }
         displayCNArray=[schoolsArrayCH mutableCopy];

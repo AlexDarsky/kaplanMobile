@@ -33,7 +33,7 @@
         self.CustomNavBar.layer.shadowOffset=CGSizeMake(0,0);
         self.CustomNavBar.layer.shadowRadius=10.0;
         self.CustomNavBar.layer.shadowOpacity=1.0;
-        testButton.hidden=YES;
+        //testButton.hidden=YES;
         
 
     }
@@ -66,6 +66,12 @@
     kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
     [serverHelper updateSQLite];
 }
+-(IBAction)updateApp:(id)sender
+{
+    NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/"];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    [[UIApplication sharedApplication] openURL:url];
+}
 - (IBAction)backToMainView:(id)sender
 {
     [settingDelegate showBackView:nil];
@@ -76,19 +82,30 @@
 }
 - (IBAction)testDemo:(id)sender
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/school.aspx?action=Detail&id=49&app=0"];
+    
+    NSLog(@"testDemoBtn");
+    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/token.aspx?action=sendTest&token=0"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
-    [request setHTTPMethod:@"GET"];
+    [request setHTTPMethod:@"POST"];
     
     NSHTTPURLResponse* urlResponse = nil;
     NSError *error = [[NSError alloc] init];
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
-    NSDictionary *tmpDic = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
-    if (tmpDic==nil) {
-        NSLog(@"!!!!!!!");
-    }
+    NSString*jsonString = [[NSString alloc]initWithBytes:[responseData bytes]length:[responseData length]encoding:NSUTF8StringEncoding];
+    NSLog(jsonString);
 }
+-(NSString*)getEncodedString:(NSString*)urlString
+{
+    NSString *encodedString = (NSString *)
+    CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                              (CFStringRef)urlString,
+                                                              (CFStringRef)@"!$&'()*+,-./:;=?@_~%#[]",
+                                                              NULL,
+                                                              kCFStringEncodingUTF8));
+    return encodedString;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
