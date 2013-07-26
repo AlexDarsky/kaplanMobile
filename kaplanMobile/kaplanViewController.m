@@ -487,7 +487,7 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if( buttonIndex != [alertView cancelButtonIndex]){
-        NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com"];
+        NSString *urlStr = [NSString stringWithFormat:@"https://itunes.apple.com/cn/app/kaplan-guan-fang-shou-ji-duan/id677567948?ls=1&mt=8"];
         NSURL *url = [NSURL URLWithString:urlStr];
         [[UIApplication sharedApplication] openURL:url];
     }
@@ -507,13 +507,9 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
     if( buttonIndex != [alertView cancelButtonIndex])
     {
         NSLog(@"iTunes!!!!!");
-       // NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/id%@?mt=8", appId];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/appName/id(677567948)?mt=8&uo=4"]];
-        /*
-        NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/"];
+        NSString *urlStr = [NSString stringWithFormat:@"https://itunes.apple.com/cn/app/kaplan-guo-ji-xue-yuan-shou/id677567948?ls=1&mt=8"];
         NSURL *url = [NSURL URLWithString:urlStr];
         [[UIApplication sharedApplication] openURL:url];
-         */
     }
 }
 - (void)didReceiveMemoryWarning

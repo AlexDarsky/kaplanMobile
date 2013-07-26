@@ -104,6 +104,12 @@
     if ([serverHelper connectedToNetwork]) {
         NSString *submitString=[NSString stringWithFormat:@"{\"cityID\":\"%d\",\"degreeID\":\"%d\",\"countryID\":\"%d\",\"name\":\"%@\",\"email\":\"%@\",\"phone\":\"%@\"}",cityID,degreeID,countryID,self.userName.text,self.userEmail.text,self.userNumber.text];
         NSDictionary *submitDic=[[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d",cityID],@"cityID",[NSString stringWithFormat:@"%d",degreeID],@"degreeID",[NSString stringWithFormat:@"%d",countryID],@"countryID",self.userName.text,@"name",self.userEmail.text,@"email",self.userNumber.text,@"phone", nil];
+        if ([self.ChoiceCityBtn.titleLabel.text isEqualToString:@"  所在地"]||[self.ChoiceEducationBtn.titleLabel.text isEqualToString:@"  现有学历"]||[self.ChoiceCountryBtn.titleLabel.text isEqualToString:@"  意向留学国家"]
+||[self.userName.text isEqualToString:@""]||self.userName.text==nil||[self.userEmail.text isEqualToString:@""]||self.userEmail.text==nil||[self.userNumber.text isEqualToString:@""]||self.userNumber.text==nil) {
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"操作未完成" message:@"请填写您的完整的信息" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
         if ([NSJSONSerialization isValidJSONObject:submitDic]) {
             
             if ([serverHelper sendEvalutionToServer:submitString]) {

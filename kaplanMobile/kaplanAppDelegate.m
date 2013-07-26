@@ -25,10 +25,10 @@
    //微信wx1c4c6e7d7a2b99a6
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"dbVerID"]==nil) {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"dbVerID"]==nil||![[[NSUserDefaults standardUserDefaults] objectForKey:@"dbVerID"]isEqualToString:@"1"]) {
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"dbVerID"];
     };
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]==nil) {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]==nil||![[[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]isEqualToString:@"1.1"]) {
         [[NSUserDefaults standardUserDefaults] setObject:@"1.1" forKey:@"appVersion"];
     };
         if ([[UIScreen mainScreen] bounds].size.height>480.00) {

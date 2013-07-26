@@ -68,7 +68,7 @@
 }
 -(IBAction)updateApp:(id)sender
 {
-    NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/"];
+    NSString *urlStr = [NSString stringWithFormat:@"https://itunes.apple.com/cn/app/kaplan-guo-ji-xue-yuan-shou/id677567948?ls=1&mt=8"];
     NSURL *url = [NSURL URLWithString:urlStr];
     [[UIApplication sharedApplication] openURL:url];
 }

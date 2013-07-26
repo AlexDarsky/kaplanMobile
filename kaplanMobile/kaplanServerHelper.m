@@ -156,8 +156,9 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 }
 -(NSDictionary*)getRemotoNotification:(NSString*)title
 {
-   // NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=detail&title=%@",title];
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=detail&title=SIC中国学生在谢菲尔德大学成功毕业，并被剑桥大学录取"];
+    
+   NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=detail&title=%@",title];
+   // NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=detail&title=SIC中国学生在谢菲尔德大学成功毕业，并被剑桥大学录取"];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:[self getEncodedString:urlString]]];
