@@ -337,6 +337,7 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
 
 -(void)dealWithRemoteNotification:(NSString*)titile
 {
+  
     if (childViewShow==NO) {
         childViewShow=YES;
         [self presentViewController:childViewController animated:YES completion:nil];

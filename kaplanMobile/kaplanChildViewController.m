@@ -130,55 +130,63 @@ static kaplanChildViewController *sharekaplanChildViewController = nil;
 -(void)reloadRemotoNotificationByTitle:(NSString *)title
 {
     kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
-    NSMutableDictionary *newDetail=[[NSMutableDictionary alloc] initWithDictionary:[serverHelper getRemotoNotification:title]];
-    NSString *newTitle=[NSString stringWithFormat:@"%@",[newDetail objectForKey:@"title"]];
-    
-    [self.newsTitle setText:[newTitle stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "]];
-    // [self.newsWebView loadHTMLString:[newDetail objectForKey:@"newsText"] baseURL:nil];
-    if (![[newDetail objectForKey:@"picUrl"] isEqualToString:@""])
-    {
-        NSLog(@"NULL");
-        //NSLog(@"%@",[newDetail objectForKey:@"newsText"]);
-        NSString *jsString = [NSString stringWithFormat:@"<html>"
-                              "<head> "
-                              "<style type=\"text/css\"> "
-                              //"p{ color:#fff｝"
-                              "img{ max-width:65px; max-height:85px; }"
-                              "body {font-size: %f;; color: %@;}"
-                              "a{color:#ccc}"
-                              "</style>"
-                              "</head>"
-                              "<body><p><br/><br/><br/><br/><br/><br/><br/><br/><br/></P>%@</body>"
-                              "</html>", 11.0, @"#fff",[newDetail objectForKey:@"newsText"]];
-        jsString=[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    if ([serverHelper connectedToNetwork]) {
+        NSMutableDictionary *newDetail=[[NSMutableDictionary alloc] initWithDictionary:[serverHelper getRemotoNotification:title]];
+        NSString *newTitle=[NSString stringWithFormat:@"%@",[newDetail objectForKey:@"title"]];
         
-        [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://cd.douho.net/File"] baseURL:nil];
-        NSLog(@"HTML CODE%@",[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "]);
-        self.newsImageURL=[newDetail objectForKey:@"picUrl"];
-        NSString *url=[NSString stringWithFormat:@"http://cd.douho.net%@",self.newsImageURL];
-        newImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
-                        {
-                            [self.newsImageView setImage:image];
-                        }, ^(void){
-                        });
-    }else
-    {
-        NSLog(@"%@",[newDetail objectForKey:@"newsText"]);
-        NSString *jsString = [NSString stringWithFormat:@"<html>"
-                              "<head> "
-                              "<style type=\"text/css\"> "
-                              "body {font-size: %f;; color: %@;}"
-                              "a{color:#ccc}"
-                              "</style>"
-                              "</head>"
-                              "<body>%@</body>"
-                              "</html>", 14.0, @"#fff", [newDetail objectForKey:@"newsText"]];
-        jsString=[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-        
-        [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://cd.douho.net/File"] baseURL:nil];
-        [self.newsImageView setImage:nil];
-        //self.newsWebView.frame=CGRectMake(46, self.view., <#CGFloat width#>, <#CGFloat height#>)
+        [self.newsTitle setText:[newTitle stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "]];
+        // [self.newsWebView loadHTMLString:[newDetail objectForKey:@"newsText"] baseURL:nil];
+        if (![[newDetail objectForKey:@"picUrl"] isEqualToString:@""])
+        {
+            NSLog(@"NULL");
+            //NSLog(@"%@",[newDetail objectForKey:@"newsText"]);
+            NSString *jsString = [NSString stringWithFormat:@"<html>"
+                                  "<head> "
+                                  "<style type=\"text/css\"> "
+                                  //"p{ color:#fff｝"
+                                  "img{ max-width:65px; max-height:85px; }"
+                                  "body {font-size: %f;; color: %@;}"
+                                  "a{color:#ccc}"
+                                  "</style>"
+                                  "</head>"
+                                  "<body><p><br/><br/><br/><br/><br/><br/><br/><br/><br/></P>%@</body>"
+                                  "</html>", 11.0, @"#fff",[newDetail objectForKey:@"newsText"]];
+            jsString=[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+            
+            [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://cd.douho.net/File"] baseURL:nil];
+            NSLog(@"HTML CODE%@",[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "]);
+            self.newsImageURL=[newDetail objectForKey:@"picUrl"];
+            NSString *url=[NSString stringWithFormat:@"http://cd.douho.net%@",self.newsImageURL];
+            newImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
+                            {
+                                [self.newsImageView setImage:image];
+                            }, ^(void){
+                            });
+        }else
+        {
+            NSLog(@"%@",[newDetail objectForKey:@"newsText"]);
+            NSString *jsString = [NSString stringWithFormat:@"<html>"
+                                  "<head> "
+                                  "<style type=\"text/css\"> "
+                                  "body {font-size: %f;; color: %@;}"
+                                  "a{color:#ccc}"
+                                  "</style>"
+                                  "</head>"
+                                  "<body>%@</body>"
+                                  "</html>", 14.0, @"#fff", [newDetail objectForKey:@"newsText"]];
+            jsString=[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+            
+            [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://cd.douho.net/File"] baseURL:nil];
+            [self.newsImageView setImage:nil];
+            //self.newsWebView.frame=CGRectMake(46, self.view., <#CGFloat width#>, <#CGFloat height#>)
+        }
     }
+    else
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"网络连接失败" message:@"检测不到可用网络，请您确认网络设置是否正常" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+        [alert show];
+    }
+
     
 }
 

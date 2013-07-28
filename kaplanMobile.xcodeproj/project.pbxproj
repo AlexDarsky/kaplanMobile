@@ -1090,8 +1090,8 @@
 		60A0DCC317724E7D004F6211 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ni Zeng (42MJ3D47YT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ni Zeng (42MJ3D47YT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kaplanMobile/kaplanMobile-Prefix.pch";
 				INFOPLIST_FILE = "kaplanMobile/kaplanMobile-Info.plist";
@@ -1101,7 +1101,8 @@
 					"\"$(SRCROOT)/WeiXinSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E5E9D211-DB99-4A79-837B-AA6F1F4CF10A";
+				PROVISIONING_PROFILE = "BB2D0566-8766-4788-9654-5E81D3C41E38";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1109,8 +1110,8 @@
 		60A0DCC417724E7D004F6211 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Aspect (Beijing) Education Information Consultation Co., Ltd (U8N49HTZA7)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Aspect (Beijing) Education Information Consultation Co., Ltd (U8N49HTZA7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kaplanMobile/kaplanMobile-Prefix.pch";
 				INFOPLIST_FILE = "kaplanMobile/kaplanMobile-Info.plist";
@@ -1120,7 +1121,8 @@
 					"\"$(SRCROOT)/WeiXinSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1489499C-0246-497F-9308-744E6F0020DA";
+				PROVISIONING_PROFILE = "92DB3F51-5396-483E-B94E-10E9D43CC2C4";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

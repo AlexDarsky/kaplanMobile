@@ -117,7 +117,10 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 }
 -(BOOL)sendDeviceTokenToServer:(NSString*)deviceToken
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/token.aspx?action=sendTest&token=%@",deviceToken];
+    deviceToken=[deviceToken stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    deviceToken=[deviceToken stringByReplacingOccurrencesOfString:@">" withString:@""];
+    deviceToken=[deviceToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/token.aspx?action=save&token=%@",deviceToken];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"POST"];
@@ -126,7 +129,6 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
     NSError *error = [[NSError alloc] init];
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
     NSString*jsonString = [[NSString alloc]initWithBytes:[responseData bytes]length:[responseData length]encoding:NSUTF8StringEncoding];
-    NSLog(@"send");
     NSData* jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *resultsDictionary = [jsonData objectFromJSONData];
     if ([[resultsDictionary objectForKey:@"success"] isEqualToString:@"true"]) {
