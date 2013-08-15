@@ -391,7 +391,7 @@ void SchoolLogoFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (
 - (IBAction)shareBtn:(id)sender
 {
     UIMenuBarItem *menuItem1 = [[UIMenuBarItem alloc] initWithTitle:@"分享到微信" target:self image:[UIImage imageNamed:@"micro_messenger.png"] action:@selector(shareToWeiXin)];
-    UIMenuBarItem *menuItem2 = [[UIMenuBarItem alloc] initWithTitle:@"分享到新浪微博" target:self image:[UIImage imageNamed:@"sinaweibo"] action:@selector(shareToWeiBo)];
+    UIMenuBarItem *menuItem2 = [[UIMenuBarItem alloc] initWithTitle:@"分享到新浪" target:self image:[UIImage imageNamed:@"sinaweibo"] action:@selector(shareToWeiBo)];
     NSMutableArray *items =
     //[NSMutableArray arrayWithObjects:menuItem1, menuItem2, menuItem3,nil];
     //[NSMutableArray arrayWithObjects:menuItem1, menuItem2, menuItem3,  menuItem4, menuItem5, menuItem6, nil];
@@ -410,7 +410,7 @@ void SchoolLogoFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (
 -(void)shareToWeiBo
 {
     NSLog(@"分享新浪微博");
-    NSString *string=[NSString stringWithFormat:@"我在Kaplan官方客户端上发现了%@，该校%@",self.schoolNameCN,schoolTextView];
+    NSString *string=[NSString stringWithFormat:@"我在Kaplan官方客户端上发现了%@，该校%@。https://itunes.apple.com/cn/app/kaplan-guan-fang-shou-ji-duan/id677567948?ls=1&mt=8",self.schoolNameCN,schoolTextView];
     NSDictionary *shareInfo=[[NSDictionary alloc] initWithObjectsAndKeys:string,@"title", nil];
     kaplanSinaWeiBodelgate *sinaWeiBodelgate=[kaplanSinaWeiBodelgate sharekaplanSinaWeiBodelgate];
     if ([sinaWeiBodelgate connectToSinaWeiBoWith:shareInfo]) {

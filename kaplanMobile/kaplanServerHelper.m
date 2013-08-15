@@ -49,9 +49,8 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 	
     
 	NSURL *testURL = [NSURL URLWithString:@"http://www.baidu.com/"];
-	NSURLRequest *testRequest = [NSURLRequest requestWithURL:testURL  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:20.0];
+	NSURLRequest *testRequest = [NSURLRequest requestWithURL:testURL  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
 	NSURLConnection *testConnection = [[NSURLConnection alloc] initWithRequest:testRequest delegate:self];
-	
     return ((isReachable && !needsConnection) || nonWiFi) ? (testConnection ? YES : NO) : NO;
 }
 
@@ -229,7 +228,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 }
 -(NSArray*)LoadListAtPage:(int)pageNum;
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=LoadList&id=0&page=%d&app=0&pageSize=99",pageNum];
+    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=LoadList&id=0&page=%d&app=0&get=0",pageNum];
    // NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/init.aspx?action=initAll&app=0"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];

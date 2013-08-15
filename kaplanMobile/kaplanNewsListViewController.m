@@ -35,6 +35,7 @@
         self.CustomNavBar.layer.shadowOffset=CGSizeMake(0,0);
         self.CustomNavBar.layer.shadowRadius=10.0;
         self.CustomNavBar.layer.shadowOpacity=1.0;
+        currentPage=1;
             }
    
     return self;
@@ -49,10 +50,13 @@
     newsTitleArray=[[NSMutableArray alloc] initWithCapacity:0];
     newsPreArray=[[NSMutableArray alloc]initWithCapacity:0];
     newsImageArray=[[NSMutableArray alloc] initWithCapacity:0];
+    currentPage=1;
+   /*
     [self.NewsTableView setPullToRefreshHandler:^{
         NSArray *newImage=[NSArray arrayWithObject:@"blank"];
         [self performSelector:@selector(doneLoadingTableViewData) withObject:newImage afterDelay:0.1];
     }];
+    */
     if ([[UIScreen mainScreen] bounds].size.height>480.00)
     {
         newsListChildViewController=[[kaplanNewsListChildViewController alloc] initWithNibName:@"kaplanNewsListChildViewController_4" bundle:nil];
@@ -61,6 +65,7 @@
                 newsListChildViewController=[[kaplanNewsListChildViewController alloc] initWithNibName:@"kaplanNewsListChildViewController" bundle:nil];
     }
 
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -70,7 +75,7 @@
         if ([newsTitleArray count]<=0) {
             // [SVProgressHUD showWithStatus:@"载入中，请稍等"];
             kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
-            NSArray *loadArray=[[NSArray alloc] initWithArray:[serverHelper LoadListAtPage:1]];
+            NSArray *loadArray=[[NSArray alloc] initWithArray:[serverHelper LoadListAtPage:currentPage]];
             for (NSDictionary *newInfo in loadArray) {
                 [newsidArray addObject:[newInfo objectForKey:@"id"]];
                 [newsTitleArray addObject:[newInfo objectForKey:@"title"]];
@@ -101,38 +106,104 @@
 - (void)doneLoadingTableViewData{
     NSLog(@"===加载完数据");
      [self.NewsTableView refreshFinished];
-    if ([newsidArray count]>0) {
-        [newsidArray removeAllObjects];
-        [newsImageArray removeAllObjects];
-        [newsPreArray removeAllObjects];
-        [newsTitleArray removeAllObjects];
-    }
+    NSLog(@"%d",currentPage);
     kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
-    NSArray *loadArray=[[NSArray alloc] initWithArray:[serverHelper LoadListAtPage:1]];
-    for (NSDictionary *newInfo in loadArray) {
-        [newsidArray addObject:[newInfo objectForKey:@"id"]];
-        [newsTitleArray addObject:[newInfo objectForKey:@"title"]];
-        if ([newInfo objectForKey:@"intro"]!=nil) {
-            [newsPreArray addObject:[newInfo objectForKey:@"intro"]];
-        }else
-        {NSLog(@"intro NULL");
-            [newsPreArray addObject:@"NULL"];
+    NSArray *loadArray=[[NSArray alloc] initWithArray:[serverHelper LoadListAtPage:currentPage+1]];
+    if ([loadArray count]>0) {
+        for (NSDictionary *newInfo in loadArray) {
+        
+             if (![newsidArray containsObject:[newInfo objectForKey:@"id"]]) {
+             [newsidArray addObject:[newInfo objectForKey:@"id"]];
+             [newsTitleArray addObject:[newInfo objectForKey:@"title"]];
+             if ([newInfo objectForKey:@"intro"]!=nil) {
+             [newsPreArray addObject:[newInfo objectForKey:@"intro"]];
+             }else
+             {NSLog(@"intro NULL");
+             [newsPreArray addObject:@"NULL"];
+             }
+             
+             if (![[newInfo objectForKey:@"picUrl"] isEqualToString:@""]) {
+             [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
+             }else
+             {NSLog(@"picUrl NULL");
+             [newsImageArray addObject:@"NULL"];
+             }
+             
+             }else
+             {
+                 
+                 NSLog(@"跳出");
+                 [SVProgressHUD dismiss];
+                 return;
+             }
+            /*
+            [newsidArray addObject:[newInfo objectForKey:@"id"]];
+            [newsTitleArray addObject:[newInfo objectForKey:@"title"]];
+            if ([newInfo objectForKey:@"intro"]!=nil) {
+                [newsPreArray addObject:[newInfo objectForKey:@"intro"]];
+            }else
+            {NSLog(@"intro NULL");
+                [newsPreArray addObject:@"NULL"];
+            }
+            
+            if (![[newInfo objectForKey:@"picUrl"] isEqualToString:@""]) {
+                [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
+            }else
+            {NSLog(@"picUrl NULL");
+                [newsImageArray addObject:@"NULL"];
+            }*/
+            
         }
+        [self.NewsTableView reloadData];
+        currentPage+=1;
+        /*
+         [self.NewsTableView beginUpdates];
+         [self.NewsTableView reloadData];
+         [self.NewsTableView endUpdates];
+         */
+        [SVProgressHUD dismiss];
+        CGPoint point=CGPointMake(0,self.NewsTableView.contentSize.height-self.NewsTableView.frame.size.height);
+        [self.NewsTableView setContentOffset:point animated:YES];
 
-        if (![[newInfo objectForKey:@"picUrl"] isEqualToString:@""]) {
-            [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
-        }else
-        {NSLog(@"picUrl NULL");
-            [newsImageArray addObject:@"NULL"];
-        }
+
+    }else
+    {
+        [SVProgressHUD dismiss];
     }
-    [self.NewsTableView beginUpdates];
-    [self.NewsTableView reloadData];
-    [self.NewsTableView endUpdates];
+        
 }
 
 
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    NSLog(@"%f %f",scrollView.contentOffset.y,scrollView.contentSize.height - scrollView.frame.size.height);
+    if(scrollView.contentOffset.y > ((scrollView.contentSize.height - scrollView.frame.size.height))&&scrollView.contentOffset.y>0)
+        
+    {
+        [self loadDataBegin];
+    }
+    
+}
+- (void) loadDataBegin
 
+{
+        
+[SVProgressHUD showWithStatus:@"正在加载"];
+        
+        
+    
+      //  [self doneLoadingTableViewData];
+    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:1.0];
+    
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section==[newsidArray count]-1) {
+        return 40;
+    }return 0;
+}
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [newsTitleArray count];
@@ -187,6 +258,7 @@
         [newPre setNumberOfLines:2];
         [newPre setFont:font];
         newPre.textColor=[UIColor greenColor];
+        //newPre.textColor=[UIColor colorWithRed:0.02 green:0.199 blue:0.108 alpha:1.0];
         NSString *preString=[NSString stringWithFormat:@"%@",[newsTitleArray objectAtIndex:indexPath.row]];
         newPre.text=[preString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
         newPre.backgroundColor=[UIColor clearColor];

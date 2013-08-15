@@ -274,8 +274,6 @@ searchChildViewController.SearchChildDelegate=self;
                 UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"错误" message:@"查询不要您所要查询的内容" delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
                 [alert show];
             }
-            
-
         }else
         {
             UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"警告" message:@"本地数据库损坏或丢失，请前往\"设置\"重新下载" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];

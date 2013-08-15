@@ -85,18 +85,19 @@ static kaplanSQLIteHelper *sharekaplanSQLIteHelper = nil;
             sqlite3_close(db);
             return tmpArray;
         }
-        
     }
 }
 -(NSMutableArray*)querySchoolsFromDB:(NSString*)queryString
 {
     if ([self didDBexists]) {
         [self openDB];
-        NSString *sqlQuery =[NSString stringWithFormat:@"SELECT * FROM schools WHERE majors = ?"];
+        NSString *sqlQuery =[NSString stringWithFormat:@"SELECT * FROM schools WHERE majors like ?"];
+       // NSString *sqlQuery =[NSString stringWithFormat:@"SELECT * FROM schools WHERE majors = ? "];
         sqlite3_stmt * statement;
         NSMutableArray *tmpArray=[[NSMutableArray alloc] initWithCapacity:0];
         if (sqlite3_prepare_v2(db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK) {
-            sqlite3_bind_text(statement, 1, [queryString UTF8String], -1, SQLITE_TRANSIENT);
+          //  sqlite3_bind_text(statement, 1, [queryString UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 1, [[NSString stringWithFormat:@"%%%@%%",queryString] UTF8String], -1, SQLITE_TRANSIENT);
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 //int _id=sqlite3_column_int(statement, 0);
                 NSString *name1=[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, 0) encoding:NSUTF8StringEncoding];

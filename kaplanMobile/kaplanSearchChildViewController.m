@@ -43,7 +43,15 @@ static kaplanSearchChildViewController *sharekaplanSearchChildViewController = n
     
     degreeList=[NSMutableArray arrayWithObjects:@"清空选择",@"本科预科",@"硕士预科",@"大一快捷课程",nil];
 
-    specialitiesList=[NSMutableArray arrayWithObjects:@"清空选择",@"Art&Design",
+    specialitiesList=[NSMutableArray arrayWithObjects:@"清空选择",
+                      @"Art&Design",
+                      @"Business & Management",
+                      @"Biological Sciences & Life Sciences",
+                      @"Law Journalism Media Social Sciences",
+                      @"Sciences & Engineering",nil];
+    /*
+    specialitiesList=[NSMutableArray arrayWithObjects:@"清空选择",
+                      @"Art&Design",
                       @"Business Management",
                       @"Business",
                       @"Biological Sciences & Life Sciences",
@@ -52,7 +60,20 @@ static kaplanSearchChildViewController *sharekaplanSearchChildViewController = n
                       @"Business Pathway",
                       @"Business with Mathematics Pathway",
                       @"Business, Law and Social Science, Business and Mathematics",
-                      @"Finance",@"International Year One in Business: Business pathway",@"International Year One in Engineering",@"Law & Journalism Media & Social Sciences",@"Law and Social Sciences",@"Law and Social Sciences pathway",@"Law Journalism Media Social Sciences",@"Management",@"Maths and Social Science/ Science and Engineering",@"Physics and Engineering",@"Physics and Engineering,  Chemistry and Chemical Engineering",@"Sciences & Engineering",@"Science and Engineering",@"Social Science",nil];
+                      @"Finance",
+                      @"International Year One in Business: Business pathway",@"International Year One in Engineering",
+                      @"Law & Journalism Media & Social Sciences",
+                      @"Law and Social Sciences",
+                      @"Law and Social Sciences pathway",
+                      @"Law Journalism Media Social Sciences",
+                      @"Management",
+                      @"Maths and Social Science/ Science and Engineering",
+                      @"Physics and Engineering",
+                      @"Physics and Engineering,  Chemistry and Chemical Engineering",
+                      @"Sciences & Engineering",
+                      @"Science and Engineering",
+                      @"Social Science",nil];
+    */
     loadResource=0;
     self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_inside.png"]];
     self.CustonNavBar.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"topbar"]];

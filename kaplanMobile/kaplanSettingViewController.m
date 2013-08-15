@@ -33,7 +33,7 @@
         self.CustomNavBar.layer.shadowOffset=CGSizeMake(0,0);
         self.CustomNavBar.layer.shadowRadius=10.0;
         self.CustomNavBar.layer.shadowOpacity=1.0;
-        //testButton.hidden=YES;
+        testButton.hidden=YES;
         
 
     }

@@ -17,6 +17,7 @@
     NSMutableArray *newsTitleArray;
     NSMutableArray *newsPreArray;
     NSMutableArray *newsImageArray;
+    int currentPage;
 
 }
 

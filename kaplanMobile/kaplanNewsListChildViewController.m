@@ -49,6 +49,7 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
         newsWebView.scrollView.scrollEnabled=YES;
         [newsWebView.scrollView setShowsVerticalScrollIndicator:NO];
         [newsWebView.scrollView setShowsHorizontalScrollIndicator:NO];
+        //隐藏WebView自带的阴影
         for (UIView *subView in [self.newsWebView  subviews]) {
             if ([subView isKindOfClass:[UIScrollView class]]) {
                 for (UIView *shadowView in [subView subviews]) {
@@ -150,7 +151,7 @@ void childNewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), voi
 - (IBAction)shareBtn:(id)sender
 {
     UIMenuBarItem *menuItem1 = [[UIMenuBarItem alloc] initWithTitle:@"分享到微信" target:self image:[UIImage imageNamed:@"micro_messenger.png"] action:@selector(shareToWeiXin)];
-    UIMenuBarItem *menuItem2 = [[UIMenuBarItem alloc] initWithTitle:@"分享到新浪微博" target:self image:[UIImage imageNamed:@"sinaweibo"] action:@selector(shareToWeiBo)];
+    UIMenuBarItem *menuItem2 = [[UIMenuBarItem alloc] initWithTitle:@"分享到新浪" target:self image:[UIImage imageNamed:@"sinaweibo"] action:@selector(shareToWeiBo)];
     NSMutableArray *items =
     //[NSMutableArray arrayWithObjects:menuItem1, menuItem2, menuItem3,nil];
     //[NSMutableArray arrayWithObjects:menuItem1, menuItem2, menuItem3,  menuItem4, menuItem5, menuItem6, nil];
@@ -169,7 +170,7 @@ void childNewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), voi
 -(void)shareToWeiBo
 {
     NSLog(@"分享新浪微博");
-    NSString *string=[NSString stringWithFormat:@"我在Kaplan官方客户端上发现了%@",self.newsTitle.text];
+   NSString *string=[NSString stringWithFormat:@"我在Kaplan官方客户端上发现了%@,https://itunes.apple.com/cn/app/kaplan-guan-fang-shou-ji-duan/id677567948?ls=1&mt=8",self.newsTitle.text];
     NSDictionary *shareInfo=[[NSDictionary alloc] initWithObjectsAndKeys:string,@"title", nil];
     kaplanSinaWeiBodelgate *sinaWeiBodelgate=[kaplanSinaWeiBodelgate sharekaplanSinaWeiBodelgate];
     if ([sinaWeiBodelgate connectToSinaWeiBoWith:shareInfo]) {
