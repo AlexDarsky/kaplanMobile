@@ -146,7 +146,7 @@
         case 0:
         {
             UILabel *txtlCH=[[UILabel alloc] init];
-            txtlCH.frame=CGRectMake(50, 1, cell.contentView.frame.size.width, cell.contentView.frame.size.height);
+            txtlCH.frame=CGRectMake(45, 1, cell.contentView.frame.size.width, cell.contentView.frame.size.height);
             txtlCH.backgroundColor=[UIColor clearColor];
             txtlCH.font=[UIFont fontWithName:@"Arial Hebrew" size:16];
             txtlCH.textColor=[UIColor whiteColor];
@@ -154,26 +154,26 @@
             [cell addSubview:txtlCH];
             
             UILabel *txtlEN=[[UILabel alloc] init];
-            txtlEN.frame=CGRectMake(50, 20, cell.contentView.frame.size.width, cell.contentView.frame.size.height);
+            txtlEN.frame=CGRectMake(45, 20, cell.contentView.frame.size.width, cell.contentView.frame.size.height);
             txtlEN.backgroundColor=[UIColor clearColor];
             txtlEN.font=[UIFont fontWithName:@"Arial Hebrew" size:12];
             txtlEN.textColor=[UIColor greenColor];
             [txtlEN setText:schoolNameEN];
             [cell addSubview:txtlEN];
-            UIImageView *dotView=[[UIImageView alloc] initWithFrame:CGRectMake(30, 20, 15, 15)];
+            UIImageView *dotView=[[UIImageView alloc] initWithFrame:CGRectMake(25, 20, 15, 15)];
             [dotView setImage:[UIImage imageNamed:@"dot.png"]];
             [cell addSubview:dotView];
         }
             break;
         case 1:
         {
-            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(25, 0, 50, 20)];
+            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(20, 0, 50, 20)];
             rowName.text=@"地区 :";
             rowName.textColor=[UIColor whiteColor];
             rowName.font=[UIFont systemFontOfSize:13.0];
             rowName.backgroundColor=[UIColor clearColor];
             [cell addSubview:rowName];
-            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(65, 0, 60, 20)];
+            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(60, 0, 60, 20)];
             rowValue.text=self.areaName;
             rowValue.textColor=[UIColor lightGrayColor];
             rowValue.font=[UIFont systemFontOfSize:12.0];
@@ -183,13 +183,13 @@
             break;
         case 2:
         {
-            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(25, 0, 50, 20)];
+            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(20, 0, 50, 20)];
             rowName.text=@"城市 :";
             rowName.textColor=[UIColor whiteColor];
             rowName.font=[UIFont systemFontOfSize:13.0];
             rowName.backgroundColor=[UIColor clearColor];
             [cell addSubview:rowName];
-            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(65, 0, 100, 20)];
+            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(60, 0, 100, 20)];
             rowValue.text=self.cityName;
             rowValue.textColor=[UIColor lightGrayColor];
             rowValue.font=[UIFont systemFontOfSize:12.0];
@@ -199,13 +199,13 @@
             break;
         case 3:
         {
-            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(25, 0, 80, 20)];
+            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(20, 0, 80, 20)];
             rowName.text=@"创建时间 :";
             rowName.textColor=[UIColor whiteColor];
             rowName.font=[UIFont systemFontOfSize:13.0];
             rowName.backgroundColor=[UIColor clearColor];
             [cell addSubview:rowName];
-            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(80, 0, 100, 20)];
+            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(75, 0, 100, 20)];
             rowValue.text=self.createYear;
             rowValue.textColor=[UIColor lightGrayColor];
             rowValue.font=[UIFont systemFontOfSize:12.0];
@@ -215,13 +215,13 @@
             break;
         case 4:
         {
-            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(25, 0, 50, 20)];
+            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(20, 0, 50, 20)];
             rowName.text=@"排名 :";
             rowName.textColor=[UIColor whiteColor];
             rowName.font=[UIFont systemFontOfSize:13.0];
             rowName.backgroundColor=[UIColor clearColor];
             [cell addSubview:rowName];
-            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(65, 0, 100, 20)];
+            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(60, 0, 100, 20)];
             rowValue.text=self.timeRankNo;
             rowValue.textColor=[UIColor lightGrayColor];
             rowValue.font=[UIFont systemFontOfSize:12.0];
@@ -231,13 +231,13 @@
             break;
         case 5:
         {
-            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(25, 0, 80, 20)];
+            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(20, 0, 80, 20)];
             rowName.text=@"其他排名 :";
             rowName.textColor=[UIColor whiteColor];
             rowName.font=[UIFont systemFontOfSize:13.0];
             rowName.backgroundColor=[UIColor clearColor];
             [cell addSubview:rowName];
-            UITextView *rowValue=[[UITextView alloc] initWithFrame:CGRectMake(80, -5, 200, 50)];
+            UITextView *rowValue=[[UITextView alloc] initWithFrame:CGRectMake(75, -5, 200, 50)];
             rowValue.backgroundColor=[UIColor clearColor];
             NSString *rowString=[self.rankInfo stringByReplacingOccurrencesOfString:@"<br/>" withString:@","];
             [rowValue setText:rowString];
@@ -249,13 +249,13 @@
             break;
         case 6:
         {
-            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(25, 0, 80, 20)];
+            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(20, 0, 80, 20)];
             rowName.text=@"学校地址 :";
             rowName.textColor=[UIColor whiteColor];
             rowName.font=[UIFont systemFontOfSize:13.0];
             rowName.backgroundColor=[UIColor clearColor];
             [cell addSubview:rowName];
-            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(90, 0, 200, 20)];
+            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(85, 0, 200, 20)];
             rowValue.text=self.address;
             rowValue.adjustsFontSizeToFitWidth=YES;
             rowValue.textColor=[UIColor lightGrayColor];
@@ -267,13 +267,13 @@
             break;
         case 7:
         {
-            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(25, 0, 50, 20)];
+            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(20, 0, 50, 20)];
             rowName.text=@"邮编 :";
             rowName.textColor=[UIColor whiteColor];
             rowName.font=[UIFont systemFontOfSize:13.0];
             rowName.backgroundColor=[UIColor clearColor];
             [cell addSubview:rowName];
-            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(65, 0, 200, 20)];
+            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(60, 0, 200, 20)];
             rowValue.text=self.poseCode;
             rowValue.textColor=[UIColor lightGrayColor];
             rowValue.font=[UIFont systemFontOfSize:12.0];
@@ -284,13 +284,13 @@
             break;
         case 8:
         {
-            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(25, 0, 65, 20)];
+            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(20, 0, 65, 20)];
             rowName.text=@"升学率 :";
             rowName.textColor=[UIColor whiteColor];
             rowName.font=[UIFont systemFontOfSize:13.0];
             rowName.backgroundColor=[UIColor clearColor];
             [cell addSubview:rowName];
-            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(75, 0, 200, 20)];
+            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(70, 0, 200, 20)];
             rowValue.text=self.employmentRate;
             rowValue.textColor=[UIColor lightGrayColor];
             rowValue.font=[UIFont systemFontOfSize:12.0];
@@ -300,13 +300,13 @@
             break;
         case 9:
         {
-            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(25, 0, 80, 20)];
+            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(20, 0, 80, 20)];
             rowName.text=@"学校网址 :";
             rowName.textColor=[UIColor whiteColor];
             rowName.font=[UIFont systemFontOfSize:13.0];
             rowName.backgroundColor=[UIColor clearColor];
             [cell addSubview:rowName];
-            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(90, 0, 200, 20)];
+            UILabel *rowValue=[[UILabel alloc] initWithFrame:CGRectMake(85, 0, 200, 20)];
             rowValue.text=self.webSite;
             rowValue.textColor=[UIColor blueColor];
             rowValue.font=[UIFont systemFontOfSize:12.0];
@@ -316,14 +316,14 @@
             break;
         case 10:
         {
-            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(25, 0, 80, 20)];
+            UILabel *rowName=[[UILabel alloc] initWithFrame:CGRectMake(20, 0, 80, 20)];
             rowName.text=@"学校简介 :";
             rowName.textColor=[UIColor whiteColor];
             rowName.font=[UIFont systemFontOfSize:13.0];
             rowName.backgroundColor=[UIColor clearColor];
             [cell addSubview:rowName];
 
-            UITextView *schoolDescriptionTV=[[UITextView alloc] initWithFrame:CGRectMake(80, -5, 200, 50)];
+            UITextView *schoolDescriptionTV=[[UITextView alloc] initWithFrame:CGRectMake(75, -5, 200, 50)];
             schoolDescriptionTV.backgroundColor=[UIColor clearColor];
             [schoolDescriptionTV setText:self.schoolTextView];
             [schoolDescriptionTV setTextColor:[UIColor lightGrayColor]];
@@ -336,7 +336,7 @@
             break;
         case 11:
         {
-            UIButton *backBtn=[[UIButton alloc]initWithFrame:CGRectMake(40, 0, 239, 31)];
+            UIButton *backBtn=[[UIButton alloc]initWithFrame:CGRectMake(35, 0, 239, 31)];
             [backBtn addTarget:self action:@selector(backToParentView:) forControlEvents:UIControlEventTouchUpInside];
             [backBtn setImage:[UIImage imageNamed:@"btn_back1_s1"] forState:UIControlStateNormal];
             [cell.contentView addSubview:backBtn];

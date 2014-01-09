@@ -43,23 +43,7 @@ static kaplanViewController *kaplanRootViewCon;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        /*
-        kaplanMingXiaoBoLanViewController *kaplanMingXiaoBoLanViewCon = [[kaplanMingXiaoBoLanViewController alloc] initWithNibName:@"kaplanMingXiaoBoLanViewController" bundle:nil];
-        kaplanAboutViewController *kaplanAboutViewCon=[[kaplanAboutViewController alloc] initWithNibName:@"kaplanAboutViewController" bundle:nil];
-        self.tabBarController=[[UITabBarController alloc] init];
-        self.tabBarController.viewControllers=[NSArray arrayWithObjects:kaplanAboutViewCon,kaplanMingXiaoBoLanViewCon,nil];
-        if (kaplanRootViewCon) {
-            kaplanRootViewCon=nil;
         }
-        kaplanRootViewCon=self;
-        backViewShowing=NO;
-        self.backViewController=tabBarController;
-        [self.MainView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_index" ]]];
-        [self addChildViewController:self.backViewController];
-        [self.NavBackView addSubview:self.backViewController.view];
-         */
-        
-    }
     return self;
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -77,32 +61,6 @@ static kaplanViewController *kaplanRootViewCon;
     kaplanEvalutionViewController *kaplanEvalutionViewCon=nil;
     kaplanMingXiaoBoLanViewController *kaplanMingXiaoBoLanViewCon = nil;
     kaplanSettingViewCon=nil;
-    /*
-    kaplanSereachMainViewCon=[[kaplanSereachMainViewController alloc] initWithNibName:@"kaplanSereachMainViewController" bundle:nil];
-    kaplanSereachMainViewCon.SereachDelegate=self;
-    searchNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanSereachMainViewCon];
-    searchNavCon.navigationBarHidden=YES;
-    kaplanNewsListViewCon=[[kaplanNewsListViewController alloc] initWithNibName:@"kaplanNewsListViewController" bundle:nil];
-    kaplanNewsListViewCon.NewsListDelegate=self;
-    NewsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanNewsListViewCon];
-    NewsViewNavCon.navigationBarHidden=YES;
-    
-    kaplanEvalutionViewCon=[[kaplanEvalutionViewController alloc] initWithNibName:@"kaplanEvalutionViewController" bundle:nil];
-    kaplanEvalutionViewCon.evalutionDelgate=self;
-    
-    evalutionNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanEvalutionViewCon];
-    evalutionNavCon.navigationBarHidden=YES;
-    
-    kaplanMingXiaoBoLanViewCon = [[kaplanMingXiaoBoLanViewController alloc] initWithNibName:@"kaplanMingXiaoBoLanViewController" bundle:nil];
-    kaplanMingXiaoBoLanViewCon.MingXiaoBoLanDelegate=self;
-    
-    kaplanSettingViewCon=[[kaplanSettingViewController alloc] initWithNibName:@"kaplanSettingViewController" bundle:nil];
-    kaplanSettingViewCon.settingDelegate=self;
-    SettingViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanSettingViewCon];
-    
-    SchoolsViewNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanMingXiaoBoLanViewCon];
-    SchoolsViewNavCon.navigationBarHidden=YES;
-    */
     childViewShow=NO;
     if ([[UIScreen mainScreen] bounds].size.height>480.00)
     {
@@ -147,7 +105,7 @@ static kaplanViewController *kaplanRootViewCon;
         
         kaplanEvalutionViewCon=[[kaplanEvalutionViewController alloc] initWithNibName:@"kaplanEvalutionViewController" bundle:nil];
         kaplanEvalutionViewCon.evalutionDelgate=self;
-        
+
         evalutionNavCon=[[UINavigationController alloc] initWithRootViewController:kaplanEvalutionViewCon];
         evalutionNavCon.navigationBarHidden=YES;
         
@@ -190,15 +148,12 @@ static kaplanViewController *kaplanRootViewCon;
     [svBG setImage:[UIImage imageNamed:@"rolling"]];
     sv.showsHorizontalScrollIndicator=NO;
     sv.backgroundColor=[UIColor clearColor];
-    [MainView layer].shadowPath =[UIBezierPath bezierPathWithRect:MainView.bounds].CGPath;
-    self.MainView.layer.shadowColor=[[UIColor blackColor] CGColor];
-    self.MainView.layer.shadowOffset=CGSizeMake(0,0);
-    self.MainView.layer.shadowRadius=10.0;
-    self.MainView.layer.shadowOpacity=1.0;
     kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
     if ([serverHelper connectedToNetwork])
     {
+        NSLog(@"Internet OK");
         NSMutableDictionary *initInfo=[[NSMutableDictionary alloc] initWithDictionary:[serverHelper checkForInitApp]];
+        
         topListArray=[[NSMutableArray alloc] initWithArray:[initInfo objectForKey:@"topList"]];
         sv.delegate=self;
         [self AdImg:topListArray];
@@ -207,10 +162,10 @@ static kaplanViewController *kaplanRootViewCon;
         //[self.MainScrollView addSubview:self.MainView];
         [self.MainView addSubview:sv];
         [self.MainView addSubview:page];
-
-        ;
-        if (![[initInfo objectForKey:@"appVersion"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]])
+        NSString *initInfoVersion=[NSString stringWithFormat:@"%@",[initInfo objectForKey:@"appVersion"]];
+        if ([[NSUserDefaults standardUserDefaults] floatForKey:@"Version"]<[initInfoVersion floatValue])
         {
+
             UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"更新信息" message:@"已有新版本，是否前往更新？" delegate:self cancelButtonTitle:@"不，谢谢" otherButtonTitles:@"好的", nil];
             alert.tag=110;
             [alert show];
@@ -264,7 +219,7 @@ static kaplanViewController *kaplanRootViewCon;
         UIButton *img=[[UIButton alloc]initWithFrame:CGRectMake(312*i, 0, 308, 134)];
         [img addTarget:self action:@selector(Action) forControlEvents:UIControlEventTouchUpInside];
         [sv addSubview:img];
-         NSString *url=[NSString stringWithFormat:@"http://cd.douho.net%@",[tmpDictionary objectForKey:@"picUrl"]];
+         NSString *url=[NSString stringWithFormat:@"http://kaplan.douho.net%@",[tmpDictionary objectForKey:@"picUrl"]];
          NewImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
          {
          [img setImage:image forState:UIControlStateNormal];
@@ -398,7 +353,7 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
         }
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
-        CGFloat translation = -305;
+        CGFloat translation = -320;
         self.MainView.transform = CGAffineTransformMakeTranslation(translation, 0);
         [UIView commitAnimations];
         backViewShowing=YES;
@@ -426,13 +381,11 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
     if (TimeNum % 3 == 0 ) {
         //Tend 默认值为No
         if (!Tend) {
-            NSLog(@"curretn page is %d",page.currentPage);
             page.currentPage++;
             if (page.currentPage==page.numberOfPages-1) {
                 Tend=YES;
             }
         }else{
-            NSLog(@"curretn page is %d",page.currentPage);
             page.currentPage--;
             if (page.currentPage==0) {
                 Tend=NO;
@@ -443,8 +396,6 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
                          animations:^{//修改坐标
                              sv.contentOffset = CGPointMake(page.currentPage*320,0);
                          }];
-        
-        
     }
     TimeNum ++;
 }
@@ -479,7 +430,7 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
     self.tabBarController.selectedIndex=1;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5];
-    CGFloat translation = -305;
+    CGFloat translation = -320;
     self.MainView.transform = CGAffineTransformMakeTranslation(translation, 0);
     [UIView commitAnimations];
     backViewShowing=YES;
@@ -492,7 +443,6 @@ void NewImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^e
         NSURL *url = [NSURL URLWithString:urlStr];
         [[UIApplication sharedApplication] openURL:url];
     }
-    
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 

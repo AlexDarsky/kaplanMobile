@@ -50,7 +50,7 @@ static kaplanAboutViewController *sharekaplanAboutViewController=nil;
     self.CustomNavBar.layer.shadowOpacity=1.0;
     kaplanServerHelper *serverHelper=[kaplanServerHelper sharekaplanServerHelper];
     if ([serverHelper connectedToNetwork]) {
-        NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=Detail&id=1700&app=0"];
+        NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/Info.aspx?action=Detail&id=1700&app=0"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setURL:[NSURL URLWithString:urlString]];
         [request setHTTPMethod:@"GET"];

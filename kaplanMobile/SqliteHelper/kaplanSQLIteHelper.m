@@ -87,12 +87,14 @@ static kaplanSQLIteHelper *sharekaplanSQLIteHelper = nil;
         }
     }
 }
+
+//按专业差院校
 -(NSMutableArray*)querySchoolsFromDB:(NSString*)queryString
 {
     if ([self didDBexists]) {
+        NSLog(@"存在数据库");
         [self openDB];
         NSString *sqlQuery =[NSString stringWithFormat:@"SELECT * FROM schools WHERE majors like ?"];
-       // NSString *sqlQuery =[NSString stringWithFormat:@"SELECT * FROM schools WHERE majors = ? "];
         sqlite3_stmt * statement;
         NSMutableArray *tmpArray=[[NSMutableArray alloc] initWithCapacity:0];
         if (sqlite3_prepare_v2(db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK) {
@@ -102,15 +104,14 @@ static kaplanSQLIteHelper *sharekaplanSQLIteHelper = nil;
                 //int _id=sqlite3_column_int(statement, 0);
                 NSString *name1=[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, 0) encoding:NSUTF8StringEncoding];
                 NSString *name2=[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, 1) encoding:NSUTF8StringEncoding];
-                NSString *name3=[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, 2) encoding:NSUTF8StringEncoding];
-                NSDictionary *tmpDic=[[NSDictionary alloc] initWithObjectsAndKeys:name1,@"c1",name2,@"c2",name3,@"c3", nil];
+                NSString *name3=[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, 3) encoding:NSUTF8StringEncoding];
+                NSDictionary *tmpDic=[[NSDictionary alloc] initWithObjectsAndKeys:name1,@"c1",name2,@"c2",name3,@"c4", nil];
                 [tmpArray addObject:tmpDic];
                 NSLog(@"OKOKO");
             }
             sqlite3_close(db);
-            return tmpArray;
         }
-
+        return tmpArray;
     }else
     {
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"警告" message:@"本地数据库损坏或丢失，请前往\"设置\"重新下载" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
@@ -182,6 +183,7 @@ static kaplanSQLIteHelper *sharekaplanSQLIteHelper = nil;
     }
    
 }
+//按院校查专业
 -(NSMutableArray*)querySchoolsFromDBBy:(NSString*)parameter1 :(NSString*)parameter2 :(NSString*)parameter3 forMode:(int)mode
 {
     if ([self didDBexists]) {

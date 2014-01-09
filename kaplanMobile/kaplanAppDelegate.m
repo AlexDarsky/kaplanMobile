@@ -26,11 +26,15 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"dbVerID"]==nil) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"dbVerID"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"dbVerID"];
     };
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]==nil) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"1.2" forKey:@"appVersion"];
-    };
+    if ([[NSUserDefaults standardUserDefaults] floatForKey:@"Version"]<1.27||[[NSUserDefaults standardUserDefaults] floatForKey:@"Version"]==NSNotFound)
+    {
+        [[NSUserDefaults standardUserDefaults] setFloat:1.27 forKey:@"Version"];
+    }
+//    if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]isEqualToString:@"1.27"]||[[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]==nil) {
+//        [[NSUserDefaults standardUserDefaults] setObject:@"1.27" forKey:@"appVersion"];
+//    };
         if ([[UIScreen mainScreen] bounds].size.height>480.00) {
         NSLog(@"the Device size is 这是四寸屏");
        kaplanViewCon = [[kaplanViewController alloc] initWithNibName:@"kaplanViewController_4" bundle:nil];

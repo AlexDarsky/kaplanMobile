@@ -87,7 +87,6 @@ static kaplanChildViewController *sharekaplanChildViewController = nil;
         NSString *jsString = [NSString stringWithFormat:@"<html>"
                               "<head> "
                               "<style type=\"text/css\"> "
-                              //"p{ color:#fff｝"
                               "img{ max-width:65px; max-height:85px; }"
                               "body {font-size: %f;; color: %@;}"
                               "a{color:#ccc}"
@@ -97,10 +96,10 @@ static kaplanChildViewController *sharekaplanChildViewController = nil;
                               "</html>", 11.0, @"#fff",[newDetail objectForKey:@"newsText"]];
         jsString=[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
         
-        [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://cd.douho.net/File"] baseURL:nil];
+        [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://kaplan.douho.net/File"] baseURL:nil];
         NSLog(@"HTML CODE%@",[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "]);
         self.newsImageURL=[newDetail objectForKey:@"picUrl"];
-        NSString *url=[NSString stringWithFormat:@"http://cd.douho.net%@",self.newsImageURL];
+        NSString *url=[NSString stringWithFormat:@"http://kaplan.douho.net%@",self.newsImageURL];
         newImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
                         {
                             [self.newsImageView setImage:image];
@@ -120,7 +119,7 @@ static kaplanChildViewController *sharekaplanChildViewController = nil;
                               "</html>", 14.0, @"#fff", [newDetail objectForKey:@"newsText"]];
         jsString=[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
         
-        [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://cd.douho.net/File"] baseURL:nil];
+        [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://kaplan.douho.net/File"] baseURL:nil];
         [self.newsImageView setImage:nil];
         //self.newsWebView.frame=CGRectMake(46, self.view., <#CGFloat width#>, <#CGFloat height#>)
     }
@@ -153,10 +152,10 @@ static kaplanChildViewController *sharekaplanChildViewController = nil;
                                   "</html>", 11.0, @"#fff",[newDetail objectForKey:@"newsText"]];
             jsString=[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             
-            [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://cd.douho.net/File"] baseURL:nil];
+            [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://kaplan.douho.net/File"] baseURL:nil];
             NSLog(@"HTML CODE%@",[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "]);
             self.newsImageURL=[newDetail objectForKey:@"picUrl"];
-            NSString *url=[NSString stringWithFormat:@"http://cd.douho.net%@",self.newsImageURL];
+            NSString *url=[NSString stringWithFormat:@"http://kaplan.douho.net%@",self.newsImageURL];
             newImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
                             {
                                 [self.newsImageView setImage:image];
@@ -176,7 +175,7 @@ static kaplanChildViewController *sharekaplanChildViewController = nil;
                                   "</html>", 14.0, @"#fff", [newDetail objectForKey:@"newsText"]];
             jsString=[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             
-            [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://cd.douho.net/File"] baseURL:nil];
+            [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://kaplan.douho.net/File"] baseURL:nil];
             [self.newsImageView setImage:nil];
             //self.newsWebView.frame=CGRectMake(46, self.view., <#CGFloat width#>, <#CGFloat height#>)
         }

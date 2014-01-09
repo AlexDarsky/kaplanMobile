@@ -64,6 +64,7 @@
     SearchView.hidden=NO;
     schoolNameCN=[[NSMutableArray alloc] initWithCapacity:0];
     schoolNameEN=[[NSMutableArray alloc] initWithCapacity:0];
+    schoolsArray=[[NSMutableArray alloc] initWithCapacity:0];
     degreeArray=[[NSMutableArray alloc] initWithCapacity:0];
     if ([[UIScreen mainScreen] bounds].size.height>480.00)
     {
@@ -89,25 +90,39 @@ searchChildViewController.SearchChildDelegate=self;
         case 0:
         {
             if (searchBtn1.selected!=YES) {
+                
                 searchBtn1.selected=YES;
                 searchBtn2.selected=NO;
                 SearchTextField.placeholder=@"  请输入您要查询的专业";
                 SearchView.hidden=NO;
                 SearchView2.hidden=YES;
                 searchMode=0;
-                self.DisplayTableView.frame=CGRectMake(30, 171, self.DisplayTableView.frame.size.width, self.DisplayTableView.frame.size.height);
+                self.DisplayTableView.frame=CGRectMake(5, 171, self.DisplayTableView.frame.size.width, self.DisplayTableView.frame.size.height);
+                if ([schoolNameCN count]>0)
+                {
+                    [schoolNameCN removeAllObjects];
+                    [schoolNameEN removeAllObjects];
+                    [degreeArray removeAllObjects];
+                    [schoolsArray removeAllObjects];
+                }
+                [self.DisplayTableView reloadData];
             }
         }
             break;
         case 1:
         {
-            if (searchBtn2.selected!=YES) {
+            if (searchBtn2.selected!=YES)
+            {
                 searchBtn2.selected=YES;
                 searchBtn1.selected=NO;
                 SearchView.hidden=YES;
                 SearchView2.hidden=NO;
                 searchMode=1;
-                self.DisplayTableView.frame=CGRectMake(30, 202, self.DisplayTableView.frame.size.width, self.DisplayTableView.frame.size.height);
+                self.DisplayTableView.frame=CGRectMake(5, 202, self.DisplayTableView.frame.size.width, self.DisplayTableView.frame.size.height);
+                if ([schoolsArray count]>0) {
+                    [schoolsArray removeAllObjects];
+                    [self.DisplayTableView reloadData];
+                }
             }
         }
             break;
@@ -115,16 +130,30 @@ searchChildViewController.SearchChildDelegate=self;
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (searchMode==0) {
+        NSDictionary *schoolItem=[NSDictionary dictionaryWithDictionary:[schoolsArray objectAtIndex:section]];
+        NSMutableArray *tmpArray=[NSMutableArray arrayWithArray:[schoolItem objectForKey:@"degress"]];
+        return [tmpArray count]+1;
+    }else
     return [schoolNameCN count];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (searchMode==0) {
+        return [schoolsArray count];
+    }else
     return 1;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (searchMode==0) {
+        if (indexPath.row==0) {
+            return 50;
+        }else
+            return 22;
+    }else
     return 50;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -132,38 +161,93 @@ searchChildViewController.SearchChildDelegate=self;
 
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame=CGRectMake(28, 10, 27, 27);
-    [button setBackgroundImage:[UIImage imageNamed:@"numberbox_s1"] forState:UIControlStateNormal];
-    if (indexPath.row>98)
-    {
-        button.titleLabel.font= [UIFont systemFontOfSize: 12.0];
-        [button setTitle:[NSString stringWithFormat:@"%d",indexPath.row+1] forState:UIControlStateNormal];
-    }else
-    {
-        [button setTitle:[NSString stringWithFormat:@"%d",indexPath.row+1] forState:UIControlStateNormal];
+    switch (searchMode) {
+        case 0:
+        {
+            NSDictionary *schoolItem=[NSDictionary dictionaryWithDictionary:[schoolsArray objectAtIndex:indexPath.section]];
+            NSMutableArray *degress=[NSMutableArray arrayWithArray:[schoolItem objectForKey:@"degress"]];
+            if (indexPath.row==0) {
+                UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
+                button.frame=CGRectMake(43, 10, 27, 27);
+                [button setBackgroundImage:[UIImage imageNamed:@"numberbox_s1"] forState:UIControlStateNormal];
+                if (indexPath.row>98)
+                {
+                    button.titleLabel.font= [UIFont systemFontOfSize: 12.0];
+                    [button setTitle:[NSString stringWithFormat:@"%d",indexPath.section+1] forState:UIControlStateNormal];
+                }else
+                {
+                    [button setTitle:[NSString stringWithFormat:@"%d",indexPath.section+1] forState:UIControlStateNormal];
+                    
+                }
+                [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                button.userInteractionEnabled=NO;
+                [cell addSubview:button];
+                UILabel *nameCN=[[UILabel alloc] initWithFrame:CGRectMake(84, 10,200, 18)];
+                //nameCN.textColor=[UIColor colorWithRed:25 green:186 blue:106 alpha:1.0];
+                nameCN.textColor=[UIColor whiteColor];
+                nameCN.backgroundColor=[UIColor clearColor];
+                nameCN.text=[NSString stringWithFormat:@"%@",[schoolItem objectForKey:@"schoolName"]];
+                nameCN.adjustsFontSizeToFitWidth=YES;
+                [cell.contentView addSubview:nameCN];
+                UILabel *nameEN=[[UILabel alloc] initWithFrame:CGRectMake(85, 30, 215, 18)];
+                nameEN.textColor=[UIColor greenColor];
+                nameEN.text=@"点击了解详情";
+                nameEN.font=[UIFont fontWithName:@"Arial Hebrew" size:12];
+                nameEN.backgroundColor=[UIColor clearColor];
+                nameEN.adjustsFontSizeToFitWidth=YES;
+                [cell.contentView addSubview:nameEN];
 
-    }
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    button.userInteractionEnabled=NO;
-    [cell addSubview:button];
-    UILabel *nameCN=[[UILabel alloc] initWithFrame:CGRectMake(69, 10,200, 18)];
+            }else
+            {
+                UILabel *nameEN=[[UILabel alloc] initWithFrame:CGRectMake(85,0, 215, 18)];
+                nameEN.textColor=[UIColor whiteColor];
+                nameEN.text=[NSString stringWithFormat:@"☸ %@",[degress objectAtIndex:indexPath.row-1]];
+                nameEN.font=[UIFont fontWithName:@"Arial Hebrew" size:12];
+                nameEN.backgroundColor=[UIColor clearColor];
+                nameEN.numberOfLines=0;
+                [cell.contentView addSubview:nameEN];
+            }
+        }
+            break;
+        default:
+        {
+            UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame=CGRectMake(43, 10, 27, 27);
+            [button setBackgroundImage:[UIImage imageNamed:@"numberbox_s1"] forState:UIControlStateNormal];
+            if (indexPath.row>98)
+            {
+                button.titleLabel.font= [UIFont systemFontOfSize: 12.0];
+                [button setTitle:[NSString stringWithFormat:@"%d",indexPath.row+1] forState:UIControlStateNormal];
+            }else
+            {
+                [button setTitle:[NSString stringWithFormat:@"%d",indexPath.row+1] forState:UIControlStateNormal];
+                
+            }
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            button.userInteractionEnabled=NO;
+            [cell addSubview:button];
+            UILabel *nameCN=[[UILabel alloc] initWithFrame:CGRectMake(84, 10,200, 18)];
             //nameCN.textColor=[UIColor colorWithRed:25 green:186 blue:106 alpha:1.0];
-    nameCN.textColor=[UIColor whiteColor];
-    nameCN.backgroundColor=[UIColor clearColor];
-    nameCN.text=[schoolNameCN objectAtIndex:indexPath.row];
-    nameCN.adjustsFontSizeToFitWidth=YES;
-    [cell.contentView addSubview:nameCN];
-    UILabel *nameEN=[[UILabel alloc] initWithFrame:CGRectMake(70, 30, 200, 18)];
-    nameEN.textColor=[UIColor greenColor];
-    nameEN.text=[schoolNameEN objectAtIndex:indexPath.row];
-    nameEN.font=[UIFont fontWithName:@"Arial Hebrew" size:12];
-    nameEN.backgroundColor=[UIColor clearColor];
+            nameCN.textColor=[UIColor whiteColor];
+            nameCN.backgroundColor=[UIColor clearColor];
+            nameCN.text=[schoolNameCN objectAtIndex:indexPath.row];
+            nameCN.adjustsFontSizeToFitWidth=YES;
+            [cell.contentView addSubview:nameCN];
+            UILabel *nameEN=[[UILabel alloc] initWithFrame:CGRectMake(85, 30, 215, 18)];
+            nameEN.textColor=[UIColor greenColor];
+            nameEN.text=[schoolNameEN objectAtIndex:indexPath.row];
+            nameEN.font=[UIFont fontWithName:@"Arial Hebrew" size:12];
+            nameEN.backgroundColor=[UIColor clearColor];
+            nameEN.adjustsFontSizeToFitWidth=YES;
             [cell.contentView addSubview:nameEN];
-    UIImageView *customSeparator=[[UIImageView alloc] initWithFrame:CGRectMake(14, 49, 282, 1)];
-    customSeparator.image=[UIImage imageNamed:@"line"];
-    [cell.contentView addSubview:customSeparator];
-    return cell;
+            UIImageView *customSeparator=[[UIImageView alloc] initWithFrame:CGRectMake(14, 49, 282, 1)];
+            customSeparator.image=[UIImage imageNamed:@"line"];
+            [cell.contentView addSubview:customSeparator];
+
+        }
+            break;
+    }
+        return cell;
 
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -171,7 +255,8 @@ searchChildViewController.SearchChildDelegate=self;
     if (searchMode==0) {
 
         [self.navigationController pushViewController:searchDetailViewController animated:YES];
-        [searchDetailViewController loadSchoolAllClass:[schoolNameCN objectAtIndex:indexPath.row]];
+        NSDictionary *schoolItem=[NSDictionary dictionaryWithDictionary:[schoolsArray objectAtIndex:indexPath.section]];
+        [searchDetailViewController loadSchoolAllClass:[schoolItem objectForKey:@"schoolName"]];
     }else
     {
 
@@ -235,6 +320,7 @@ searchChildViewController.SearchChildDelegate=self;
 }
 - (IBAction)queryFromDB:(id)sender
 {
+    [self.SearchTextField resignFirstResponder];
     if(SearchView.hidden==NO)
     {
     if ([self.SearchTextField.text isEqualToString:@""]) {
@@ -251,23 +337,39 @@ searchChildViewController.SearchChildDelegate=self;
                 [schoolNameCN removeAllObjects];
                 [schoolNameEN removeAllObjects];
                 [degreeArray removeAllObjects];
-                NSLog(@"%d",[tmpArray count]);
+                [schoolsArray removeAllObjects];
+                NSMutableArray *arrayCN=[[NSMutableArray alloc] initWithCapacity:0];
+                NSMutableArray *arrayEN=[[NSMutableArray alloc] initWithCapacity:0];
+                NSMutableArray *arraySelecting=[[NSMutableArray alloc] initWithCapacity:0];
                 for (NSDictionary *tmpDic in tmpArray)
                 {
                     if (tmpDic!=nil) {
-                        if (![schoolNameCN containsObject:[tmpDic objectForKey:@"c2"]]) {
-                            [schoolNameCN addObject:[tmpDic objectForKey:@"c2"]];
+                            [arrayCN addObject:[tmpDic objectForKey:@"c2"]];
                             NSLog(@"CN2");
-                            [schoolNameEN addObject:[tmpDic objectForKey:@"c2"]];
+                            [arrayEN addObject:[tmpDic objectForKey:@"c4"]];
                             NSLog(@"EN2");
                             [degreeArray addObject:[tmpDic objectForKey:@"c1"]];
-                            NSLog(@"addOK");
-                            
-                        }
+                           NSLog(@"addOK");
                     }else
                         NSLog(@"fall");
+                }
+                for (NSString *NameCNString in arrayCN) {
+                    if (![arraySelecting containsObject:NameCNString]) {
+                        [arraySelecting addObject:NameCNString];
+                    }
+                }
+                for (int a=0; a<[arraySelecting count]; a++) {
+                    NSMutableArray *degreesArray=[[NSMutableArray alloc] initWithCapacity:0];
+                    for (int b=0; b<[arrayCN count]; b++) {
+                        if ([[arraySelecting objectAtIndex:a] isEqualToString:[arrayCN objectAtIndex:b]]) {
+                            [degreesArray addObject:[arrayEN objectAtIndex:b]];
+                        }
+                    }
+                    NSDictionary *schoolItem=[NSDictionary dictionaryWithObjectsAndKeys:[arraySelecting objectAtIndex:a],@"schoolName",degreesArray,@"degress", nil];
+                    [schoolsArray addObject:schoolItem];
                     
                 }
+                NSLog(@"schoolsArray count is%@",schoolsArray);
                 [self.DisplayTableView reloadData];
             }else
             {
@@ -282,6 +384,7 @@ searchChildViewController.SearchChildDelegate=self;
     }
     }
 }
+
 - (IBAction)exitKeyboard:(id)sender {
     [sender resignFirstResponder];
 }

@@ -87,7 +87,7 @@
                 }
                         NSLog(@"is %@",[newInfo objectForKey:@"picUrl"]);
                 if (![[newInfo objectForKey:@"picUrl"] isEqualToString:@""]) {
-                    [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
+                    [newsImageArray addObject:[NSString stringWithFormat:@"http://kaplan.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
                 }else
                 {NSLog(@"picUrl NULL");
                     [newsImageArray addObject:@"NULL"];
@@ -123,7 +123,7 @@
              }
              
              if (![[newInfo objectForKey:@"picUrl"] isEqualToString:@""]) {
-             [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
+             [newsImageArray addObject:[NSString stringWithFormat:@"http://kaplan.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
              }else
              {NSLog(@"picUrl NULL");
              [newsImageArray addObject:@"NULL"];
@@ -147,7 +147,7 @@
             }
             
             if (![[newInfo objectForKey:@"picUrl"] isEqualToString:@""]) {
-                [newsImageArray addObject:[NSString stringWithFormat:@"http://cd.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
+                [newsImageArray addObject:[NSString stringWithFormat:@"http://kaplan.douho.net%@",[newInfo objectForKey:@"picUrl"]]];
             }else
             {NSLog(@"picUrl NULL");
                 [newsImageArray addObject:@"NULL"];
@@ -232,10 +232,10 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    UIImageView *iconImg=[[UIImageView alloc] initWithFrame:CGRectMake(40, 10, 15, 15)];
+    UIImageView *iconImg=[[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 15, 15)];
     iconImg.image=[UIImage imageNamed:@"dot"];
     [cell.contentView addSubview:iconImg];
-    UILabel *newTitle=[[UILabel alloc] initWithFrame:CGRectMake(60, 0, 240, 40)];
+    UILabel *newTitle=[[UILabel alloc] initWithFrame:CGRectMake(35, 0, 240, 40)];
     newTitle.textColor=[UIColor whiteColor];
     newTitle.font=[UIFont systemFontOfSize:14.0];
     newTitle.backgroundColor=[UIColor clearColor];
@@ -243,7 +243,7 @@
     newTitle.text=[nameString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];    [newTitle setNumberOfLines:0];
     [cell.contentView addSubview:newTitle];
     if (![[newsImageArray objectAtIndex:indexPath.row] isEqualToString:@"NULL"]) {
-        UIImageView *newImg=[[UIImageView alloc] initWithFrame:CGRectMake(40, 45, 66, 45)];
+        UIImageView *newImg=[[UIImageView alloc] initWithFrame:CGRectMake(15, 45, 66, 45)];
         NSString *url=[newsImageArray objectAtIndex:indexPath.row];
         NSLog(url);
         [cell.contentView addSubview:newImg];
@@ -253,7 +253,7 @@
                        }, ^(void){
                        });
         UIFont *font = [UIFont fontWithName:@"Arial" size:12];
-        UILabel *newPre=[[UILabel alloc] initWithFrame:CGRectMake(120, 20, 180, 90)];
+        UILabel *newPre=[[UILabel alloc] initWithFrame:CGRectMake(95, 20, 180, 90)];
         newPre.lineBreakMode=NSLineBreakByCharWrapping;
         [newPre setNumberOfLines:2];
         [newPre setFont:font];

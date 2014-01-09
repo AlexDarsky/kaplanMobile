@@ -56,7 +56,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 
 -(NSDictionary*)checkForInitApp
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/init.aspx?action=initAll&app=0"];
+    NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/init.aspx?action=initAll&app=0"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
@@ -74,7 +74,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 }
 -(NSArray*)getCityLoadList
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/city.aspx?action=loadList"];
+    NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/city.aspx?action=loadList"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
@@ -88,7 +88,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 }
 -(NSArray*)getCityChildLoadList:(NSString*)subID
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/city.aspx?action=loadList&id=%@",subID];
+    NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/city.aspx?action=loadList&id=%@",subID];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
@@ -102,7 +102,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 }
 -(NSArray*)getClassLoadList
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/allClass.aspx?action=loadlist&id=238"];
+    NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/allClass.aspx?action=loadlist&id=238"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
@@ -119,7 +119,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
     deviceToken=[deviceToken stringByReplacingOccurrencesOfString:@"<" withString:@""];
     deviceToken=[deviceToken stringByReplacingOccurrencesOfString:@">" withString:@""];
     deviceToken=[deviceToken stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/token.aspx?action=save&token=%@",deviceToken];
+    NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/token.aspx?action=save&token=%@",deviceToken];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"POST"];
@@ -139,7 +139,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 }
 -(NSDictionary*)getNewDetailByID:(NSString*)newID
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=Detail&id=%@&app=0",newID];
+    NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/Info.aspx?action=Detail&id=%@&app=0",newID];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
@@ -158,7 +158,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 -(NSDictionary*)getRemotoNotification:(NSString*)title
 {
     
-   NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=detail&title=%@",title];
+   NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/Info.aspx?action=detail&title=%@",title];
    // NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=detail&title=SIC中国学生在谢菲尔德大学成功毕业，并被剑桥大学录取"];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -181,7 +181,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 }
 -(NSArray*)getCountryList
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/allClass.aspx?action=loadlist&id=239"];
+    NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/allClass.aspx?action=loadlist&id=239"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
@@ -195,7 +195,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 }
 -(NSArray*)getSchoolListAtPage:(int)pageNum
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/school.aspx?action=loadlist&id=239&pageSize=99"];
+    NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/school.aspx?action=loadlist&id=239&pageSize=99"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
@@ -209,7 +209,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 }
 -(NSDictionary*)getSchoolDetail:(NSString*)schoolID
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/school.aspx?action=Detail&id=%@&app=0",schoolID];
+    NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/school.aspx?action=Detail&id=%@&app=0",schoolID];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
@@ -228,7 +228,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 }
 -(NSArray*)LoadListAtPage:(int)pageNum;
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/Info.aspx?action=LoadList&id=0&page=%d&app=0&get=0",pageNum];
+    NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/Info.aspx?action=LoadList&id=0&page=%d&app=0&get=0",pageNum];
    // NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/init.aspx?action=initAll&app=0"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
@@ -250,7 +250,7 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
 }
 -(void)updateSQLite
 {
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/init.aspx?action=init&app=0"];
+    NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/init.aspx?action=init&app=0"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
@@ -259,15 +259,35 @@ static kaplanServerHelper *sharekaplanServerHelper = nil;
     NSError *error = [[NSError alloc] init];
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
     NSDictionary *initDic = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"http://cd.douho.net/%@",[initDic objectForKey:@"dbFile"]]];
+    NSLog(@"http://kaplan.douho.net%@",[initDic objectForKey:@"dbFile"]);
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"http://kaplan.douho.net%@",[initDic objectForKey:@"dbFile"]]];
 	[url downloadWithDelegate:self Title:@"数据库下载中" WithToFileName:[kDocumentFolder stringByAppendingPathComponent:@"schoolDB.db3"]];
+    /*
+    NSURLRequest *downloadrequest = [NSURLRequest requestWithURL:url];
+    NSError *downloaderror = nil;
+    NSData   *data = [NSURLConnection sendSynchronousRequest:downloadrequest
+                                           returningResponse:nil
+                                                       error:&downloaderror];
+    if (data != nil){
+        NSLog(@"下载成功");
+        if ([data writeToFile:@"schoolDB.db3" atomically:YES]) {
+            NSLog(@"保存成功.");
+        }
+        else
+        {
+            NSLog(@"保存失败.");
+        }
+    } else {
+        NSLog(@"%@", error);
+    }
+     */
     [[NSUserDefaults standardUserDefaults] setObject:[initDic objectForKey:@"dbVerID"] forKey:@"dbVerID"];
 
 }
 -(BOOL)sendEvalutionToServer:(NSString*)jsonString
 {
     NSLog(@"%@",jsonString);
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/pinggu.aspx?action=save&json=%@&app=0",jsonString];
+    NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/pinggu.aspx?action=save&json=%@&app=0",jsonString];
     /*
     NSString *urlString=@"http://cd.douho.net/ajax/pinggu.aspx?action=save&json={\"cityID\":\"1004\",\"degreeID\":\"2\",\"countryID\":\"1\",\"name\":\"tonydai\",\"email\":\"tonydaix@163.com\",\"phone\":\"13981808031\"}&app=0";
      */

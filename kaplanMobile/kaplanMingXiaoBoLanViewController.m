@@ -120,16 +120,16 @@
        
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
    
-    UIImageView *dotView=[[UIImageView alloc] initWithFrame:CGRectMake(45, 15, 15, 15)];
+    UIImageView *dotView=[[UIImageView alloc] initWithFrame:CGRectMake(40, 15, 15, 15)];
     [dotView setImage:[UIImage imageNamed:@"dot.png"]];
     
-    UIImageView *lineView=[[UIImageView alloc] initWithFrame:CGRectMake(20, 50,280 , 1)];
+    UIImageView *lineView=[[UIImageView alloc] initWithFrame:CGRectMake(15, 50,280 , 1)];
     [lineView setImage:[UIImage imageNamed:@"line.png"]];
     [cell addSubview:lineView];
     [cell addSubview:dotView];
     
     UILabel *txtlCH=[[UILabel alloc] init];
-    txtlCH.frame=CGRectMake(70, 1, cell.contentView.frame.size.width, cell.contentView.frame.size.height);
+    txtlCH.frame=CGRectMake(65, 1, cell.contentView.frame.size.width, cell.contentView.frame.size.height);
     txtlCH.backgroundColor=[UIColor clearColor];
     txtlCH.font=[UIFont fontWithName:@"Arial Hebrew" size:19];
     txtlCH.textColor=[UIColor whiteColor];
@@ -137,7 +137,7 @@
     [cell addSubview:txtlCH];
     
     UILabel *txtlEN=[[UILabel alloc] init];
-    txtlEN.frame=CGRectMake(70, 18, cell.contentView.frame.size.width, cell.contentView.frame.size.height);
+    txtlEN.frame=CGRectMake(65, 18, cell.contentView.frame.size.width, cell.contentView.frame.size.height);
     txtlEN.backgroundColor=[UIColor clearColor];
     txtlEN.font=[UIFont fontWithName:@"Arial Hebrew" size:12];
     txtlEN.textColor=[UIColor greenColor];
@@ -250,7 +250,8 @@
 {
     NSLog(@"didEndEditing");
     self.SearchView.frame =CGRectMake(0, self.view.frame.size.height-self.SearchView.frame.size.height/2, self.SearchView.frame.size.width, self.SearchView.frame.size.height);
-}- (void)didReceiveMemoryWarning
+}
+- (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

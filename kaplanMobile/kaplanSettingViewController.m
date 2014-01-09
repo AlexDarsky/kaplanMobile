@@ -57,7 +57,8 @@
     }
     
     self.dbVerID.text=[NSString stringWithFormat:@"当前数据库版本为：%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"dbVerID"]];
-    self.appVersion.text=[NSString stringWithFormat:@"当前客户端版本为：%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"appVersion"]];
+    self.appVersion.text=[NSString stringWithFormat:@"当前客户端版本为：%.2f",[[NSUserDefaults standardUserDefaults] floatForKey:@"Version"]];
+
     
 
 }
@@ -84,7 +85,7 @@
 {
     
     NSLog(@"testDemoBtn");
-    NSString *urlString =[NSString stringWithFormat:@"http://cd.douho.net/ajax/token.aspx?action=sendTest&token=0"];
+    NSString *urlString =[NSString stringWithFormat:@"http://kaplan.douho.net/ajax/token.aspx?action=sendTest&token=0"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"POST"];

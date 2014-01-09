@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIView *MainView;
 //@property (strong, nonatomic) IBOutlet UIView *MainView;
 @property (strong, nonatomic) IBOutlet UIView *NavBackView;
+
 @property (strong,nonatomic) UITabBarController *tabBarController;
 @property (strong,nonatomic) UINavigationController *searchNavCon;
 @property (strong,nonatomic) UINavigationController *evalutionNavCon;

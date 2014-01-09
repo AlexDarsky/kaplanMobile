@@ -98,10 +98,10 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
                               "</html>", 11.0, @"#fff",[newDetail objectForKey:@"newsText"]];
         jsString=[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
         
-        [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://cd.douho.net/File"] baseURL:nil];
+        [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://kaplan.douho.net/File"] baseURL:nil];
         NSLog(@"HTML CODE%@",[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "]);
         self.newsImageURL=[newDetail objectForKey:@"picUrl"];
-        NSString *url=[NSString stringWithFormat:@"http://cd.douho.net%@",self.newsImageURL];
+        NSString *url=[NSString stringWithFormat:@"http://kaplan.douho.net%@",self.newsImageURL];
         childNewImageFromURL( [NSURL URLWithString:url], ^( UIImage * image )
                         {
                             [self.newsImageView setImage:image];
@@ -121,7 +121,7 @@ static kaplanNewsListChildViewController *sharekaplanNewsListChildViewController
                               "</html>", 14.0, @"#fff", [newDetail objectForKey:@"newsText"]];
         jsString=[jsString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
         
-        [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://cd.douho.net/File"] baseURL:nil];
+        [newsWebView loadHTMLString:[jsString stringByReplacingOccurrencesOfString:@"/File" withString:@"http://kaplan.douho.net/File"] baseURL:nil];
         [self.newsImageView setImage:nil];
         //self.newsWebView.frame=CGRectMake(46, self.view., <#CGFloat width#>, <#CGFloat height#>)
     }

@@ -34,7 +34,6 @@ static kaplanSinaWeiBodelgate *sharekaplanSinaWeiBodelgate = nil;
         return YES;
     }else
     {
-
         [sinaweibo logIn];
         return NO;
     }

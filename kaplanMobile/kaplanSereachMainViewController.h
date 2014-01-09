@@ -16,6 +16,7 @@
 {
     NSMutableArray *schoolNameCN;
     NSMutableArray *schoolNameEN;
+    NSMutableArray *schoolsArray;
     NSMutableArray *degreeArray;
     int searchMode;
 }
